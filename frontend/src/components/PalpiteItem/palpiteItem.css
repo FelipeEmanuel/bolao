@@ -1,0 +1,44 @@
+.palpite {
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+    padding: 20px;
+    justify-content: center;
+}
+
+.times {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.time1 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-basis: 45%;
+    justify-content: flex-end;
+}
+
+.time2 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-basis: 47%;
+    justify-content: flex-start;
+}
+
+.placar {
+    width: 35px;
+    height: 35px;
+}
+
+.h2test {
+    flex-basis: 6%;
+}
+
