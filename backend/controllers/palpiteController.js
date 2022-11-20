@@ -5,8 +5,8 @@ const { getDate } = require('../util/index')
 
 const getPartidas = asyncHandler(async (req, res) => {
     jogosDisponiveis = getDate()
-    //const listaJogos = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
-    const listaJogos = await Game.find()
+    const listaJogos = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
+    //const listaJogos = await Game.find()
     res.status(200).json(listaJogos)
 })
 

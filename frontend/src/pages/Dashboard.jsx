@@ -7,6 +7,7 @@ import {getJogos} from '../features/jogos/jogosSlice'
 import { getPalpites } from '../features/palpites/palpiteSlice'
 import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
+import '../components/PalpiteItem/palpiteItem.css'
 import ReactCountryFlag from 'react-country-flag'
 
 
