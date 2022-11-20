@@ -9,6 +9,7 @@ import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
 import '../components/PalpiteItem/palpiteItem.css'
 import ReactCountryFlag from 'react-country-flag'
+import { toast } from 'react-toastify'
 
 
 function Dashboard() {
@@ -84,6 +85,16 @@ function Dashboard() {
                       width: '2em',
                       height: '2em',
                     }}/>
+                    <>
+                    {palpite.palpitePontos === '5' ? 
+                    (<h2 className='palpiteG'>+{palpite.palpitePontos}</h2>) : 
+                    (palpite.palpitePontos === '4' ? (<h2 className='palpiteB'>+{palpite.palpitePontos}</h2>) : 
+                    (palpite.palpitePontos === '3' ? (<h2 className='palpiteY'>+{palpite.palpitePontos}</h2>) : 
+                    (palpite.palpitePontos === '1' ? (<h2 className='palpiteC'>+{palpite.palpitePontos}</h2>) : 
+                    (palpite.palpitePontos === ''? (<h2 className='palpiteR'>{palpite.palpitePontos}</h2>) : 
+                    (<h2 className='palpiteR'>+{palpite.palpitePontos}</h2>)))))}
+                    
+                    </>
                   </div>
                 </div>
                 </>

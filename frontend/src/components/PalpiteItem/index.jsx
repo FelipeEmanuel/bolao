@@ -4,6 +4,7 @@ import './palpiteItem.css'
 import {doPalpite} from '../../features/palpites/palpiteSlice'
 import { useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import { toast } from 'react-toastify'
 
 
 function PalpiteItem({jogo}) {
@@ -21,7 +22,12 @@ function PalpiteItem({jogo}) {
             palpite2, 
         }
         
-        dispatch(doPalpite(body))
+        if(!palpite1 || !palpite2) {
+            toast.error("Não é possível fazer um palpite vazio")
+        } else {
+            dispatch(doPalpite(body))
+        }
+        
     })
 
     /*useEffect(() => {

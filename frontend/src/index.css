@@ -147,6 +147,26 @@ h3 {
   background-color: #CD7F32;
 }
 
+.palpiteG {
+  color: green;
+}
+
+.palpiteB {
+  color: #009999;
+}
+
+.palpiteY {
+  color: orange;
+}
+
+.palpiteC {
+  color: #999966;
+}
+
+.palpiteR {
+  color: red;
+}
+
 .linha {
   color: #777;
   width: 100%;
