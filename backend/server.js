@@ -20,11 +20,11 @@ app.use('/api/ranking', require('./routes/rankingRoutes'))
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    app.use(express.static(path.join(resolvedDirectory, '../frontend/build')));
   
     app.get('*', (req, res) =>
       res.sendFile(
-        path.resolve('frontend', 'build', 'index.html')
+        path.resolve(resolvedDirectory, 'frontend', 'build', 'index.html')
       )
     );
   } else {
