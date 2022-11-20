@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getRanking } from '../features/ranking/rankingSlice'
+import {reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
 function Ranking() {
@@ -11,12 +12,16 @@ function Ranking() {
 
   const {user} = useSelector((state) => state.auth)
   const {ranking: data, isLoading, isError, message} = useSelector((state) => state.ranking)
-  console.log(data);
+
   useEffect(() => {
     if(!user) {
       navigate('/login')
     }else {
       dispatch(getRanking())
+    }
+
+    return () => {
+      dispatch(reset())
     }
   }, [user, navigate])
 
