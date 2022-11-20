@@ -55,6 +55,7 @@ function Ranking() {
       <h2 className='regras'>Regras de Pontuação</h2>
       <p className='texto'>Acertar o placar em cheio: <b>5 pontos</b></p>
       <p className='texto'>Acertar que foi empate/o vencedor do jogo: <b>3 pontos</b></p>
+      <p className='texto'>Errar o placar mas acertar o número de gols de um dos times: <b>1 ponto</b></p>
       <p className='texto'>Errar completamente o placar: <b>0 pontos</b></p>
     </>
   )
