@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux'
 import './palpiteItem.css'
 import {doPalpite} from '../../features/palpites/palpiteSlice'
 import { useEffect } from 'react'
+import ReactCountryFlag from 'react-country-flag'
 
 
-function PalpiteItem({jogo, palpites}) {
+function PalpiteItem({jogo}) {
 
     const [palpite1, setPalpite1] = useState('')
     const [palpite2, setPalpite2] = useState('')
@@ -21,11 +22,9 @@ function PalpiteItem({jogo, palpites}) {
         }
         
         dispatch(doPalpite(body))
-        console.log(palpite1)
-        console.log(palpite2)
     })
 
-    useEffect(() => {
+    /*useEffect(() => {
         palpites.forEach(palpite => {
             if(jogo._id === palpite.jogo._id) {
                 setPalpite1(palpite.palpite1)
@@ -33,16 +32,26 @@ function PalpiteItem({jogo, palpites}) {
             }
         })
         
-    }, [jogo, palpites])
+    }, [jogo, palpites])*/
+
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
 
     return (
         <form onSubmit={aoPalpitar}>
             <div className='palpite'>
                 <div>
-                    {jogo.dataLimite}
+                    <h3>{jogo.infoGroup}</h3>
+                    {jogo.infoJogo}
                 </div>
                     <div className='times'>
                         <div className='time1'>
+                            <ReactCountryFlag countryCode={jogo.isocodetime1} svg style={{
+                                width: '2em',
+                                height: '2em',
+                            }}/>
                             <h2>{jogo.time1}</h2>
                             <input type="text" className="placar" id="palpite1" 
                             name="palpite1" value={palpite1} onChange={(e) => setPalpite1(e.target.value)}/>
@@ -52,10 +61,14 @@ function PalpiteItem({jogo, palpites}) {
                             <input type="text" className="placar" id="palpite2" 
                             name="palpite2" value={palpite2} onChange={(e) => setPalpite2(e.target.value)}/>
                             <h2>{jogo.time2}</h2>
+                            <ReactCountryFlag countryCode={jogo.isocodetime2} svg style={{
+                                width: '2em',
+                                height: '2em',
+                            }}/>
                         </div>
                     </div>
             
-                <button className=''>Confirmar palpite</button>
+                <button className='btn btn-block2' onClick={refreshPage}>Confirmar palpite</button>
             </div>
         </form>
         

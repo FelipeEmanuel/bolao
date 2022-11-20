@@ -8,7 +8,7 @@ const getGames = asyncHandler(async (req, res) => {
 })
 
 const setGames = asyncHandler(async (req, res) => {
-    const {time1, time2, dataLimite} = req.body
+    const {time1, time2, dataLimite, isocodetime1, isocodetime2, infoJogo, infoGroup} = req.body
 
     if (!time1 || !time2) {
         res.status(400)
@@ -16,7 +16,8 @@ const setGames = asyncHandler(async (req, res) => {
     }
 
     const game = await Game.create({
-        user: req.user.id, time1, time2, dataLimite
+        user: req.user.id, time1, time2, 
+        dataLimite, isocodetime1, isocodetime2, infoJogo, infoGroup
     })
 
     res.status(200).json(game)

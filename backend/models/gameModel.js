@@ -6,7 +6,11 @@ const gameSchema = mongoose.Schema({
     time2: {type:String, required: [true, 'Informe o nome do segundo time']},
     placar1: {type:String, default: 'x'},
     placar2: {type:String, default: 'x'},
-    dataLimite: {type:Date, required: true}
+    dataLimite: {type:Date, required: true},
+    isocodetime1: {type:String, required: true},
+    isocodetime2: {type:String, required: true},
+    infoJogo: {type:String, required: true},
+    infoGroup: {type:String, required: true}
 },{
     timestamps: true
 })

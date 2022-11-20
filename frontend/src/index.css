@@ -37,7 +37,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1700px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
@@ -92,9 +92,22 @@ h3 {
   gap: 10px;
 }
 
+.palpitesgrid {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.contentpalpites {
+  width: 70%;
+  margin: 0 auto;
+}
+
+
 .palpites {
   display: flex;
   flex-direction: column;
+  flex-basis: 50%;
 }
 
 /*.palpite {
@@ -104,14 +117,51 @@ h3 {
   position: relative;
 }*/
 
-.ranking div{
+.ranking-top {
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.ranking div {
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 1.5px;
 }
 
 .ranking span {
-  color: red;
+  color: black;
+}
+
+.pos:nth-child(3) {
+  background-color: #FFD700;
+} 
+
+.pos:nth-child(4) {
+  background-color: #C0C0C0;
+}
+
+.pos:nth-child(5) {
+  background-color: #CD7F32;
+}
+
+.linha {
+  color: #777;
+  width: 100%;
+  height: 2px;
+  border: 0;
+  border-top: 1px solid;
+}
+
+.regras {
+  margin-top: 30px;
+}
+
+.texto {
+  text-align: left;
+  font-size: 19px;
 }
 
 .goal {
@@ -184,6 +234,13 @@ h3 {
 
 .btn-block {
   width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn-block2 {
+  color: white;
+  background-color: green;
+  width: 50%;
   margin-bottom: 20px;
 }
 

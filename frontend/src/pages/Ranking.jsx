@@ -26,17 +26,18 @@ function Ranking() {
 
   return (
     <>
-      <div>Ranking</div>
+      <div className='ranking-top'>Ranking</div>
       <section className='ranking'>
         <div>
           <span>Posição</span>
           <span>Nome</span>
           <span>Pontuação</span>
         </div>
+        <p className='linha'>-</p>
         {
           data.map((d, key) => {
             return (
-              <div key={key} >
+              <div className='pos' key={key}>
                 <div>{ key + 1 }</div>
                 <div>{ d.name }</div>
                 <div>{ d.pontuacao }</div>
@@ -45,6 +46,11 @@ function Ranking() {
           })
         }
       </section>
+      <p className='linha'>-</p>
+      <h2 className='regras'>Regras de Pontuação</h2>
+      <p className='texto'>Acertar o placar em cheio: <b>5 pontos</b></p>
+      <p className='texto'>Acertar que foi empate/o vencedor do jogo: <b>3 pontos</b></p>
+      <p className='texto'>Errar completamente o placar: <b>0 pontos</b></p>
     </>
   )
 }

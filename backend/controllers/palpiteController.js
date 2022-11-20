@@ -21,19 +21,14 @@ const setPalpite = asyncHandler(async (req, res) => {
     }   
 
     let palpiteEncontrado = await Palpite.findOne({jogo: palpite.jogo_id, user: req.user.id})
-    console.log(palpiteEncontrado)
     let obj = {user: req.user.id, jogo: palpite.jogo_id, palpite1: palpite.palpite1, palpite2: palpite.palpite2}
-    if(palpiteEncontrado) {
-        console.log(1)
-        if(user === palpiteEncontrado.user.toString()){
-            console.log(2)
+    if(palpiteEncontrado) {   
+        if(user === palpiteEncontrado.user.toString()){ 
             await Palpite.findByIdAndUpdate(palpiteEncontrado.id, obj)
-        } else {
-            console.log(3)
+        } else {    
             await Palpite.create(obj)
         }    
-    } else {
-        console.log(4)
+    } else { 
         await Palpite.create(obj)
     }
     /*jogos.forEach(async (jogo) => {
@@ -55,7 +50,6 @@ const setPalpite = asyncHandler(async (req, res) => {
         })
     })*/
     
-    console.log(5)
     res.status(200).json('ok')
     
 })
