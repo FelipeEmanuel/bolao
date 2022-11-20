@@ -22,7 +22,7 @@ app.use('/api/ranking', require('./routes/rankingRoutes'))
 // Serve frontend
 const __dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(_dirname, '../frontend/build')));
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
   
     app.get('*', (req, res) =>
       res.sendFile(
