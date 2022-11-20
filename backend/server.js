@@ -6,6 +6,7 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
 
+dotenv.config()
 connectDB()
 
 const app = express();
@@ -19,12 +20,13 @@ app.use('/api/palpites', require('./routes/palpiteRoutes'))
 app.use('/api/ranking', require('./routes/rankingRoutes'))
 
 // Serve frontend
+const __dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(resolvedDirectory, '../frontend/build')));
+    app.use(express.static(path.join(_dirname, '../frontend/build')));
   
     app.get('*', (req, res) =>
       res.sendFile(
-        path.resolve(resolvedDirectory, 'frontend', 'build', 'index.html')
+        path.resolve(__dirname, 'frontend', 'build', 'index.html')
       )
     );
   } else {
