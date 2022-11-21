@@ -48,8 +48,13 @@ function Dashboard() {
       <section>
         <h1>Bem-vindo, {user && user.name}</h1>
         <br/>
+        
+        <h3>Você pode palpitar até 15 minutos antes do início do jogo!</h3>
+        <h3 className='alerta'>INSTRUÇÕES:</h3>
+        <h3 className='alerta'>- É necessário palpitar em um jogo por vez, a página atualizará quando você realizar um palpite!</h3>
+        <h3 className='alerta'>- Os jogos em que você realizou um palpite aparecem na lateral, se algum jogo não estiver lá, você ainda não palpitou nele!</h3>
+        <h3 className='alerta'>- É possível trocar seu palpite, é só enviar o palpite novamente, como se fosse a primeira vez, o seu palpite atualizado aparecerá na lateral!</h3>
         <h2>Jogos</h2>
-        <h3>Você pode palpitar até 30 minutos antes do início do jogo!</h3>
       </section>
       <div className='palpitesgrid'>
         <section className='contentpalpites'>

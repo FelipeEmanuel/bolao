@@ -52,6 +52,7 @@ function Ranking() {
         }
       </section>
       <p className='linha'>-</p>
+      <h3 className='regras'>O ranking sempre será atualizado alguns minutos após o último jogo do dia!</h3>
       <h2 className='regras'>Regras de Pontuação</h2>
       <p className='texto'>Acertar o placar em cheio: <b>5 pontos</b></p>
       <p className='texto'>Acertar que foi empate/o vencedor do jogo: <b>3 pontos</b></p>

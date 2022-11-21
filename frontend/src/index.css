@@ -92,6 +92,25 @@ h3 {
   gap: 10px;
 }
 
+@media (max-width: 600px) {
+  .palpitesgrid {
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .contentpalpites {
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  
+  .palpites {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+  }
+}
+
 .palpitesgrid {
   display: flex;
   flex-direction: row;
@@ -172,7 +191,11 @@ h3 {
   width: 100%;
   height: 2px;
   border: 0;
-  border-top: 1px solid;
+  //border-top: 1px solid;
+}
+
+.alerta {
+  color: red;
 }
 
 .regras {
