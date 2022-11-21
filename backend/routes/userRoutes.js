@@ -3,12 +3,14 @@ const router = express.Router()
 const {
   registerUser,
   loginUser,
-  getMe
+  getMe,
+  changePassword
 } = require('../controllers/userController')
-const { protect } = require('../middleware/authMiddleware')
+const { protect, isAdmin } = require('../middleware/authMiddleware')
 
 router.post('/', registerUser)
 router.post('/login', loginUser)
 router.get('/me', protect, getMe)
+router.put('/:id', changePassword)
 
 module.exports = router

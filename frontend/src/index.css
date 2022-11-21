@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+
 * {
   margin: 0;
   padding: 0;
@@ -90,25 +91,6 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-}
-
-@media (max-width: 600px) {
-  .palpitesgrid {
-    flex-direction: column;
-    gap: 25px;
-  }
-  
-  .contentpalpites {
-    width: 70%;
-    margin: 0 auto;
-  }
-  
-  
-  .palpites {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 50%;
-  }
 }
 
 .palpitesgrid {
@@ -313,6 +295,7 @@ h3 {
   animation: spin 1.2s linear infinite;
 }
 
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -322,7 +305,12 @@ h3 {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .palpitesgrid {
+    flex-direction: column;
+    gap: 25px;
+  }
+
   .form {
     width: 90%;
   }

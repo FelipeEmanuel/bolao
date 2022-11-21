@@ -33,6 +33,7 @@ const protect = asyncHandler(async (req, res, next) => {
 })
 
 const isAdmin = asyncHandler(async(req, res, next) => {
+    console.log(req.user)
     if(req.user.role === "user") {
         res.status(401)
         throw new Error('Access denied, you must be admin')

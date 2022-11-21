@@ -48,7 +48,6 @@ function Dashboard() {
       <section>
         <h1>Bem-vindo, {user && user.name}</h1>
         <br/>
-        
         <h3>Você pode palpitar até 15 minutos antes do início do jogo!</h3>
         <h3 className='alerta'>INSTRUÇÕES:</h3>
         <h3 className='alerta'>- É necessário palpitar em um jogo por vez, a página atualizará quando você realizar um palpite!</h3>
@@ -60,7 +59,8 @@ function Dashboard() {
         <section className='contentpalpites'>
           {jogos?.length > 0 ? 
           (<div className='palpites'>
-              {jogos?.map((jogo) =>(
+              {!isLoading && !isLoadingP &&
+              jogos?.map((jogo) =>(
                 <PalpiteItem key={jogo._id} jogo={jogo} />
               ))}
           </div>

@@ -66,6 +66,30 @@ const getMe = asyncHandler(async(req, res) => {
     res.status(200).json(req.user)
 })
 
+const forgotPassword = asyncHandler(async (req, res) => {
+    
+})
+
+const changePassword = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.body.user_id)
+    const newSenha = req.body.password
+    console.log(user.password)
+    if(!user) {
+        res.status(400)
+        throw new Error('User not found')
+    }
+
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(newSenha, salt)
+
+    const updatedUser = await User.findByIdAndUpdate(user._id, {password: hashedPassword}, {
+        new: true,
+    })
+
+    console.log(updatedUser.password)
+    res.status(200).json(updatedUser)
+})
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
@@ -73,5 +97,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    registerUser, loginUser, getMe
+    registerUser, loginUser, getMe, changePassword
 }
