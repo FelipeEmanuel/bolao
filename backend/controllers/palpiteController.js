@@ -6,21 +6,16 @@ const moment = require('moment-timezone');
 
 const getPartidas = asyncHandler(async (req, res) => {
 
-    const aaa = moment.tz(Date.now(), "America/Sao_Paulo");
-
-    // console.log(aaa);
-
-
-    // jogosDisponiveis = getDate()
-    // console.log(jogosDisponiveis)
-    const listaJogos = await Game.find({dataLimite: {$gte: aaa}})
-    //const listaJogos = await Game.find({placar1: "x"})
+    const jogosDisponiveis = getDate()
+    console.log(moment().add(24, 'hours').toDate().getTime())
+    console.log(moment().toDate().getTime())
+    
+    const listaJogos = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
     res.status(200).json(listaJogos)
 })
 
 const setPalpite = asyncHandler(async (req, res) => {
 
-    const jogos = await Game.find()
     let palpite = req.body
     let user = req.user.id
 
@@ -40,24 +35,6 @@ const setPalpite = asyncHandler(async (req, res) => {
     } else { 
         await Palpite.create(obj)
     }
-    /*jogos.forEach(async (jogo) => {
-        palpites.forEach(async (palpite) => {
-            if(jogo.id === palpite.jogo_id) {
-                let palpiteEncontrado = await Palpite.findOne({jogo: jogo._id, user: req.user.id})
-                let obj = {user: req.user.id, jogo: jogo, palpite1: palpite.palpite1, palpite2: palpite.palpite2}
-                if(palpiteEncontrado) {
-                    if(user === palpiteEncontrado.user.toString()){
-                        await Palpite.findByIdAndUpdate(palpiteEncontrado.id, obj)
-                    } else {
-                        await Palpite.create(obj)
-                    }    
-                } else {
-                    await Palpite.create(obj)
-                }
-                
-            }
-        })
-    })*/
     
     res.status(200).json('ok')
     

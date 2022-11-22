@@ -44,6 +44,11 @@ function PalpiteItem({jogo}) {
         window.location.reload(false);
     }
 
+    function onKeyPress1(event) {
+            if (!/[0-9]/.test(event.key)) {
+              event.preventDefault();          
+          }}   
+
 
     return (
         <form onSubmit={aoPalpitar}>
@@ -60,12 +65,15 @@ function PalpiteItem({jogo}) {
                             }}/>
                             <h2>{jogo.time1}</h2>
                             <input type="text" className="placar" id="palpite1" 
-                            name="palpite1" value={palpite1} onChange={(e) => setPalpite1(e.target.value)}/>
+                                name="palpite1" value={palpite1} onChange={(e) => setPalpite1(e.target.value)}
+                                onKeyPress={(e) => onKeyPress1(e)}
+                            />
                         </div>
                             <h2 className='h2test'>x</h2>
                         <div className='time2'>
                             <input type="text" className="placar" id="palpite2" 
-                            name="palpite2" value={palpite2} onChange={(e) => setPalpite2(e.target.value)}/>
+                                name="palpite2" value={palpite2} onChange={(e) => setPalpite2(e.target.value)}
+                                onKeyPress={(e) => onKeyPress1(e)}/>
                             <h2>{jogo.time2}</h2>
                             <ReactCountryFlag countryCode={jogo.isocodetime2} svg style={{
                                 width: '2em',

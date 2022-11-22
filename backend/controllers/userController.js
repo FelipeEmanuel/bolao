@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
+const nodemailer = require('nodemailer');
 
 const registerUser = asyncHandler(async(req, res) => {
     const {name, email, password, role} = req.body
@@ -67,7 +68,43 @@ const getMe = asyncHandler(async(req, res) => {
 })
 
 const forgotPassword = asyncHandler(async (req, res) => {
+
+    const {email} = req.body
+
+    const user = await User.findOne({ email })
     
+    if(!user) {
+        res.status(400)
+        throw new Error('Email não existe')
+    }
+    
+    const client = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.SENHA
+        }
+    });
+
+    const moment24hours = moment().add(24, 'hours').toDate().getTime()
+
+    const salt = await bcrypt.genSalt(10)
+    const hashResetSenha = await bcrypt.hash(user.email + moment24hours, salt)
+    
+    const link = `${process.env.BASE_URL}/resetarSenha/${hashResetSenha}` 
+
+    client.sendMail(
+        {
+            from: "Bolaodacopa2022",
+            to: user.email,
+            subject: "Resetar Senha",
+            html: `<h1>Link para você resetar sua senha</h1>
+            <br/>
+            <a href='${link}'>Resetar senha</a>`
+        }
+    )
+    //client.verify().then(console.log).catch(console.error);
+    res.status(200).json('ok')
 })
 
 const changePassword = asyncHandler(async (req, res) => {
@@ -97,5 +134,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    registerUser, loginUser, getMe, changePassword
+    registerUser, loginUser, getMe, changePassword, forgotPassword
 }
