@@ -2,10 +2,18 @@ const asyncHandler = require('express-async-handler')
 const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const { getDate } = require('../util/index')
+const moment = require('moment-timezone');
 
 const getPartidas = asyncHandler(async (req, res) => {
-    jogosDisponiveis = getDate().replace(",", "")
-    const listaJogos = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
+
+    const aaa = moment.tz(Date.now(), "America/Sao_Paulo");
+
+    // console.log(aaa);
+
+
+    // jogosDisponiveis = getDate()
+    // console.log(jogosDisponiveis)
+    const listaJogos = await Game.find({dataLimite: {$gte: aaa}})
     //const listaJogos = await Game.find({placar1: "x"})
     res.status(200).json(listaJogos)
 })
