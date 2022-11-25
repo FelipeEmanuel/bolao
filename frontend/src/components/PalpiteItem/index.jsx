@@ -45,9 +45,9 @@ function PalpiteItem({jogo}) {
     }
 
     function onKeyPress1(event) {
-            if (!/[0-9]/.test(event.key)) {
-              event.preventDefault();          
-          }}   
+        if (!/[0-9]/.test(event.key)) {
+            event.preventDefault();          
+        }}   
 
 
     return (

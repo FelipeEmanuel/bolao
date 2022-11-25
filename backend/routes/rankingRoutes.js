@@ -5,4 +5,5 @@ const { protect } = require('../middleware/authMiddleware')
 
 router.route('/').get(protect, getRanking)
 
+
 module.exports = router
