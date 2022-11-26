@@ -5,7 +5,6 @@ const palpiteSchema = mongoose.Schema({
     jogo: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Game'},
     palpite1: {type:String, required: [true, 'Informe o numero de gols do primeiro time']},
     palpite2: {type:String, required: [true, 'Informe o numero de gols do segundo time']},
-    palpitePontos: {type:String, default:""}
 },{
     timestamps: true
 })
