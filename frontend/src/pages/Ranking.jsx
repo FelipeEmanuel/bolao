@@ -6,8 +6,6 @@ import useApi from '../hooks/useApi'
 import { useState } from 'react'
 import {ordenarRanking} from '../components/utils'
 
-
-
 function Ranking() {
 
   const {data, error, isFetching} = useApi("/api/ranking")
@@ -72,7 +70,7 @@ function Ranking() {
           <span>Nome</span>
           <span>Pontuação</span>
         </div>
-        <p className='linha'>-</p>
+        <p className='linha'></p>
         {
           users?.map((u, key) => {
             return (
@@ -85,7 +83,7 @@ function Ranking() {
           })
         }
       </section>
-      <p className='linha'>-</p>
+      <p className='linha'></p>
       <h3 className='regras'>O ranking sempre será atualizado alguns minutos após o último jogo do dia!</h3>
       <h2 className='regras'>Regras de Pontuação</h2>
       <p className='texto'>Acertar o placar em cheio: <b>5 pontos</b></p>

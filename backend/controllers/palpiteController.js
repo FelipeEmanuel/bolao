@@ -1,15 +1,47 @@
 const asyncHandler = require('express-async-handler')
 const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
-const { getDate } = require('../util/index')
+const User = require('../models/userModel')
+const { getDate, parseObjectId } = require('../util/index')
 
 
 const getPartidas = asyncHandler(async (req, res) => {
 
+    const user = await User.aggregate( [
+        {
+            $match:
+            {
+                _id: parseObjectId(req?.user?.id)
+            }
+        },
+        {
+            $lookup:
+            {
+                from: "palpites",
+                localField: "_id",
+                foreignField: "user",
+                as: "palpites"
+            }
+
+        },
+        { 
+            $project : { 
+                name: 1, 
+                palpites : {
+                    palpite1: 1, 
+                    palpite2: 1,
+                    jogo: 1  
+                } 
+            } 
+        }
+    ]);
+
     const jogosDisponiveis = getDate()
     
-    const listaJogos = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
-    res.status(200).json(listaJogos)
+    const gamesDisponiveis = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
+
+    const gamesTodos = await Game.find()
+    res.status(200).json({ gamesDisponiveis, gamesTodos, user });
 })
 
 const setPalpite = asyncHandler(async (req, res) => {

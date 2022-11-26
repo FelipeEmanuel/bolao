@@ -44,6 +44,17 @@
     flex-basis: 6%;
 }
 
+.alert-success {
+    background-color: #D1E7DD;
+    border: 1px solid #BADBCC;
+    border-radius: 5px;
+    color: #0F5132;
+    margin: 10px 0;
+    padding: 10px 25px;
+    text-align: center;
+    width: 100%;
+}
+
 @media (max-width: 700px) {
     .times, .time1, .time2 { 
         flex-direction: column;

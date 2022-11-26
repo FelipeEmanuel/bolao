@@ -1,17 +1,22 @@
 import {useState} from 'react'
-import { useDispatch } from 'react-redux'
 import './palpiteItem.css'
-import {doPalpite} from '../../features/palpites/palpiteSlice'
 import { useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { toast } from 'react-toastify'
+import {post} from '../../api/'
 
 
-function PalpiteItem({jogo}) {
+function PalpiteItem({jogo, palpitou}) {
 
-    const [palpite1, setPalpite1] = useState('')
-    const [palpite2, setPalpite2] = useState('')
-    const dispatch = useDispatch()
+    const [palpite1, setPalpite1] = useState(jogo?.palpite1)
+    const [palpite2, setPalpite2] = useState(jogo?.palpite2)
+    const [palpiteRealizado, setPalpiteRealizado] = useState(false)
+    
+    useEffect (() => {
+        if(jogo?.palpite1 && jogo?.palpite2) {
+            setPalpiteRealizado(true)
+        }
+    })
 
     const aoPalpitar = ((e) => {
         e.preventDefault()
@@ -25,24 +30,11 @@ function PalpiteItem({jogo}) {
         if(!palpite1 || !palpite2) {
             toast.error("Não é possível fazer um palpite vazio")
         } else {
-            dispatch(doPalpite(body))
+            post('api/palpites', body, palpitou)
+            setPalpiteRealizado(true)
         }
         
     })
-
-    /*useEffect(() => {
-        palpites.forEach(palpite => {
-            if(jogo._id === palpite.jogo._id) {
-                setPalpite1(palpite.palpite1)
-                setPalpite2(palpite.palpite2)
-            }
-        })
-        
-    }, [jogo, palpites])*/
-
-    function refreshPage() {
-        window.location.reload(false);
-    }
 
     function onKeyPress1(event) {
         if (!/[0-9]/.test(event.key)) {
@@ -82,7 +74,11 @@ function PalpiteItem({jogo}) {
                         </div>
                     </div>
             
-                <button className='btn btn-block2' onClick={refreshPage}>Confirmar palpite</button>
+                <button className='btn btn-block2'>Confirmar palpite</button>
+                {palpiteRealizado &&
+                <div>
+                    <span className='alert-success'>Palpite Realizado!</span>
+                </div>}
             </div>
         </form>
         

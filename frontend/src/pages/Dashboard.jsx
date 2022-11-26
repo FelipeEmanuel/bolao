@@ -1,52 +1,91 @@
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 import Spinner from '../components/Spinner'
-import {reset} from '../features/auth/authSlice'
-import {getJogos} from '../features/jogos/jogosSlice'
-import { getPalpites } from '../features/palpites/palpiteSlice'
 import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
 import '../components/PalpiteItem/palpiteItem.css'
 import ReactCountryFlag from 'react-country-flag'
-import { toast } from 'react-toastify'
+import { get } from '../api'
 
 
 function Dashboard() {
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
   const {user} = useSelector((state) => state.auth)
-  const {jogos, isLoading, isError, message} = useSelector((state) => state.jogos)
-  const {palpites, isLoadingP, isErrorP, messageP} = useSelector((state) => state.palpites)
+  const navigate = useNavigate()
+  
   useEffect(() => {
-    if(isError) {
-      console.log(message)
-    }
-
     if(!user) {
       navigate('/login')
-    } else {
-      dispatch(getJogos())
-      dispatch(getPalpites())
     }
 
-    return () => {
-      dispatch(reset())
+  }, [user, navigate])
+
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+  const [isFetching, setIsFetching] = useState(false)
+  const [usuario, setUsuario] = useState(null)
+  const [games, setGames] = useState(null)
+  const [palpitou, setPalpitou] = useState(null)
+
+  useEffect(() => {
+    get("api/palpites", setData, setError, setIsFetching)
+  }, [palpitou])
+
+  useEffect(() => { 
+    if(data) {
+      data?.user?.forEach(u => {   
+          u.palpites.forEach(p => {
+            p.pontuacao = 0;
+            data?.gamesTodos?.forEach(g => {
+              if(p.jogo === g._id) {
+                p.jogoObj = g;
+                if(p.palpite1 === g.placar1 && p.palpite2 === g.placar2){
+                  p.pontuacao = p.pontuacao + 5;
+                } else if((p.palpite1 > p.palpite2 && g.placar1 > g.placar2) || (p.palpite1 < p.palpite2 && g.placar1 < g.placar2)) {  
+                  p.pontuacao = p.pontuacao + 3;
+                  if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
+                    p.pontuacao = p.pontuacao + 1;             
+                  } 
+                } else if(g.placar1 !== "" && g.placar2 !== "" && p.palpite1 === p.palpite2 && g.placar1 === g.placar2) {
+                  p.pontuacao = p.pontuacao + 3; 
+                } else if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
+                  p.pontuacao = p.pontuacao + 1;
+                } else {
+                  p.pontuacao = p.pontuacao + 0;
+                }
+              }  
+              
+            });
+          });
+      });
+
+      
+      data?.user?.forEach(u => {
+        u.palpites.forEach(p => {
+          data?.gamesDisponiveis?.forEach(g => {
+            if(p.jogo === g._id) {
+              g.palpite1 = p.palpite1;
+              g.palpite2 = p.palpite2;
+            }
+          })
+        })
+      })          
+      
+      setUsuario(data?.user[0])
+      setGames(data?.gamesDisponiveis)
+
     }
-    
-  }, [user, navigate, isError, message, dispatch])
+  }, [data])
 
-
-  if(isLoading && isLoadingP) {
+  if(isFetching) {
     return <Spinner/>
   } 
 
   return (
     <>
       <section>
-        <h1>Bem-vindo, {user && user.name}</h1>
+       <h1>Bem-vindo, {user && user.name}</h1>
         <br/>
         <h3>Você pode palpitar até 15 minutos antes do início do jogo!</h3>
         <h3 className='alerta'>INSTRUÇÕES:</h3>
@@ -57,58 +96,63 @@ function Dashboard() {
       </section>
       <div className='palpitesgrid'>
         <section className='contentpalpites'>
-          {jogos?.length > 0 ? 
-          (<div className='palpites'>
-              {!isLoading && !isLoadingP &&
-              jogos?.map((jogo) =>(
-                <PalpiteItem key={jogo._id} jogo={jogo} />
-              ))}
-          </div>
-            ) : 
-          (<h3>Não há jogos cadastrados</h3>)}
+          { 
+            games?.length > 0 && 
+            <div className='palpites'>
+                { 
+                  games?.map((jogo) => (
+                    <PalpiteItem key={jogo._id} jogo={jogo} palpitou={setPalpitou}/>
+                  ))
+                }
+            </div>
+          }
+          {
+            games?.length === 0 && <h3>Não há jogos cadastrados</h3>
+          }     
         </section>
         <section className='contentpalpites'>
           <h2>Seus palpites</h2>
-          {palpites?.length > 0 ? 
-          (<div className='palpite'>
-              {palpites?.map((palpite) =>(
-                <>{palpite.jogo.infoJogo}
+          {usuario?.palpites?.length > 0 && 
+            <div className='palpite'>
+              {usuario?.palpites?.map((palpite) =>(
+                <>{palpite.jogoObj.infoJogo}
                 <div className='times'>
                   <div className='time1'>
-                  <ReactCountryFlag countryCode={palpite.jogo.isocodetime1} svg style={{
+                  <ReactCountryFlag countryCode={palpite.jogoObj.isocodetime1} svg style={{
                     width: '2em',
                     height: '2em',
                   }}/>
-                  <h2>{palpite.jogo.time1}</h2>
+                  <h2>{palpite.jogoObj.time1}</h2>
                   <h2>{palpite.palpite1}</h2>
                   </div>
                   <h2>x</h2>
                   <div className='time2'>
                     <h2>{palpite.palpite2}</h2>
-                    <h2>{palpite.jogo.time2}</h2>
-                    <ReactCountryFlag countryCode={palpite.jogo.isocodetime2} svg style={{
+                    <h2>{palpite.jogoObj.time2}</h2>
+                    <ReactCountryFlag countryCode={palpite.jogoObj.isocodetime2} svg style={{
                       width: '2em',
                       height: '2em',
                     }}/>
-                    <>
-                    {palpite.palpitePontos === '5' ? 
-                    (<h2 className='palpiteG'>+{palpite.palpitePontos}</h2>) : 
-                    (palpite.palpitePontos === '4' ? (<h2 className='palpiteB'>+{palpite.palpitePontos}</h2>) : 
-                    (palpite.palpitePontos === '3' ? (<h2 className='palpiteY'>+{palpite.palpitePontos}</h2>) : 
-                    (palpite.palpitePontos === '1' ? (<h2 className='palpiteC'>+{palpite.palpitePontos}</h2>) : 
-                    (palpite.palpitePontos === ''? (<h2 className='palpiteR'>{palpite.palpitePontos}</h2>) : 
-                    (<h2 className='palpiteR'>+{palpite.palpitePontos}</h2>)))))}
-                    
+                    <>{palpite.pontuacao === 5 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
+                    {palpite.pontuacao === 4 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
+                    {palpite.pontuacao === 3 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
+                    {palpite.pontuacao === 1 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.placar1 !== "" && palpite.jogoObj.placar2 !== "" && palpite.pontuacao === 0 && <h2 className='palpiteR'>+{palpite.pontuacao}</h2>}
+                           
                     </>
                   </div>
                 </div>
                 </>
               ))}
           </div>
-            ) : 
-          (<h3>Você ainda não fez palpites.</h3>)}
+          }
+          {
+            usuario?.palpites?.length === 0 &&
+            <h3>Você ainda não fez palpites.</h3>
+          }   
+          
         </section>
-      </div>         
+      </div>          
 
     </>
   )
