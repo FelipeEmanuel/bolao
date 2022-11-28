@@ -7,6 +7,7 @@ import { useState } from 'react'
 import '../components/PalpiteItem/palpiteItem.css'
 import ReactCountryFlag from 'react-country-flag'
 import { get } from '../api'
+import {ordenarJogos} from '../components/utils'
 
 
 function Dashboard() {
@@ -116,7 +117,7 @@ function Dashboard() {
           <h2>Seus palpites</h2>
           {usuario?.palpites?.length > 0 && 
             <div className='palpite'>
-              {usuario?.palpites?.map((palpite) =>(
+              {usuario?.palpites?.sort(ordenarJogos).reverse().map((palpite) =>(
                 <>{palpite.jogoObj.infoJogo}
                 <div className='times'>
                   <div className='time1'>
