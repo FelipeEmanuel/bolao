@@ -10,7 +10,8 @@ const gameSchema = mongoose.Schema({
     isocodetime1: {type:String, required: true},
     isocodetime2: {type:String, required: true},
     infoJogo: {type:String, required: true},
-    infoGroup: {type:String, required: true}
+    infoGroup: {type:String, required: true},
+    gameType: {type: Number, required: true}
 },{
     timestamps: true
 })

@@ -42,16 +42,36 @@ function Dashboard() {
               if(p.jogo === g._id) {
                 p.jogoObj = g;
                 if(p.palpite1 === g.placar1 && p.palpite2 === g.placar2){
-                  p.pontuacao = p.pontuacao + 5;
+                  if(g.gameType === 2) {
+                    p.pontuacao = p.pontuacao + 10;
+                  } else {
+                    p.pontuacao = p.pontuacao + 5;
+                  }   
                 } else if((p.palpite1 > p.palpite2 && g.placar1 > g.placar2) || (p.palpite1 < p.palpite2 && g.placar1 < g.placar2)) {  
-                  p.pontuacao = p.pontuacao + 3;
+                  if(g.gameType === 2) {
+                    p.pontuacao = p.pontuacao + 6;
+                  } else {
+                    p.pontuacao = p.pontuacao + 3;
+                  }
                   if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
-                    p.pontuacao = p.pontuacao + 1;             
+                    if(g.gameType === 2) {
+                      p.pontuacao = p.pontuacao + 2;
+                    } else {
+                      p.pontuacao = p.pontuacao + 1;
+                    }              
                   } 
                 } else if(g.placar1 !== "" && g.placar2 !== "" && p.palpite1 === p.palpite2 && g.placar1 === g.placar2) {
-                  p.pontuacao = p.pontuacao + 3; 
+                  if(g.gameType === 2) {
+                    p.pontuacao = p.pontuacao + 6;
+                  } else {
+                    p.pontuacao = p.pontuacao + 3;
+                  }
                 } else if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
-                  p.pontuacao = p.pontuacao + 1;
+                  if(g.gameType === 2) {
+                    p.pontuacao = p.pontuacao + 2;
+                  } else {
+                    p.pontuacao = p.pontuacao + 1;
+                  }  
                 } else {
                   p.pontuacao = p.pontuacao + 0;
                 }
@@ -136,10 +156,14 @@ function Dashboard() {
                       width: '2em',
                       height: '2em',
                     }}/>
-                    <>{palpite.pontuacao === 5 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
-                    {palpite.pontuacao === 4 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
-                    {palpite.pontuacao === 3 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
-                    {palpite.pontuacao === 1 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
+                    <>{palpite.jogoObj.gameType === 1 && palpite.pontuacao === 5 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 4 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 3 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 1 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 10 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 7 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 5 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 2 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
                     {palpite.jogoObj.placar1 !== "" && palpite.jogoObj.placar2 !== "" && palpite.pontuacao === 0 && <h2 className='palpiteR'>+{palpite.pontuacao}</h2>}
                            
                     </>

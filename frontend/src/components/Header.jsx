@@ -16,40 +16,79 @@ function Header() {
     }
 
     return (
-        <header className='header'>
-          <div className='logo'>
-            <Link to='/'>Palpites</Link>
-          </div>
-          <ul>
+          <>
             {user ? (
                 <>
-                    <li>
+                {user.role === 'user' ? (<header className='header'>
+                    <div className='logo'>
+                      <Link to='/'>Palpites</Link>
+                    </div>
+                    <ul>
+                      <li>
                         <Link to='/ranking'>
                             <FaListOl /> Ranking
                         </Link>
-                    </li>
-                    <li>
+                      </li>
+                      <li>
                         <button className='btn' onClick={onLogout}>
                         <FaSignOutAlt /> Sair
                         </button>
+                      </li>
+                    </ul>
+                  </header>) 
+                  : (<header className='header'>
+                  <div className='logo'>
+                    <ul>
+                      <li>
+                        <Link to='/'>Palpites</Link>
+                      </li>
+                      <li>
+                        <Link to='/admin'>Jogos</Link>
+                      </li>
+                    </ul>
+                    
+                  </div>
+                  <div>
+                    
+                  </div>
+                  
+                  <ul>
+                    <li>
+                      <Link to='/ranking'>
+                          <FaListOl /> Ranking
+                      </Link>
                     </li>
+                    <li>
+                      <button className='btn' onClick={onLogout}>
+                      <FaSignOutAlt /> Sair
+                      </button>
+                    </li>
+                  </ul>
+                </header>)}
+                  
                 </>
             ) : (
               <>
-                <li>
-                  <Link to='/login'>
-                    <FaSignInAlt /> Login
-                  </Link>
-                </li>
-                <li>
-                  <Link to='/cadastrar'>
-                    <FaUser /> Cadastrar
-                  </Link>
-                </li>
+              <header className='header'>
+                <div className='logo'>
+                </div>
+                <ul>
+                  <li>
+                    <Link to='/login'>
+                      <FaSignInAlt /> Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to='/cadastrar'>
+                      <FaUser /> Cadastrar
+                    </Link>
+                  </li>
+                </ul>
+              </header>
               </>
             )}
-          </ul>
-        </header>
+          
+          </>
       )
 }
 

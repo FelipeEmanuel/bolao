@@ -76,6 +76,12 @@ h3 {
   margin-right: 5px;
 }
 
+.logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .heading {
   font-size: 2rem;
   font-weight: 700;
