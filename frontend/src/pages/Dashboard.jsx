@@ -161,8 +161,8 @@ function Dashboard() {
                     {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 3 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
                     {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 1 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
                     {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 10 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 7 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 5 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 8 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
+                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 6 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
                     {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 2 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
                     {palpite.jogoObj.placar1 !== "" && palpite.jogoObj.placar2 !== "" && palpite.pontuacao === 0 && <h2 className='palpiteR'>+{palpite.pontuacao}</h2>}
                            
