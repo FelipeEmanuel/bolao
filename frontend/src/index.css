@@ -117,13 +117,6 @@ h3 {
   flex-basis: 50%;
 }
 
-/*.palpite {
-  background-color: #f4f4f4;
-  margin: 10px 0;
-  padding: 20px 0 10px;
-  position: relative;
-}*/
-
 .ranking-top {
   margin-bottom: 20px;
   font-size: 40px;
@@ -272,6 +265,20 @@ h3 {
   background-color: green;
   width: 50%;
   margin-bottom: 20px;
+}
+
+.div1 {
+  display: flex; 
+  justify-content:center;
+}
+
+.btn-block3 {
+  color: white;
+  background-color: green;
+  margin: 0px 0;
+  padding: 4px 20px 4px;
+  display: flex;
+  justify-content: center;
 }
 
 .btn:hover {
