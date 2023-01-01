@@ -1,16 +1,15 @@
-## Bolão da Copa do Mundo 2022
 
-Bolão da Copa do Mundo 2022! Criado para amigos brincarem palpitando nos jogos da Copa!
 
-## Uso/Tecnologias
+<h1 align="center"> Bolão da Copa do Mundo 2022 </h1>
 
-Desenvolvido usando MongoDB, Express, React e Node.js!  
-Bolão criado para a copa do mundo 2022, permite palpitar em jogos e acompanhar sua pontuação.
+<p align="center">
+<img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
+</p>
 
-## Motivação
+## Descrição do Projeto
 
-A copa do mundo tava chegando e eu queria estudar, juntei o útil ao agradável!
-
+Projeto em desenvolvimento para estudo pessoal do autor, um Bolão da Copa do Mundo 2022! Permite palpitar em jogos e acompanhar sua pontuação. Usuários administradores podem criar, editar e excluir jogos também. 
+ 
 ## Funcionalidades
 
 ### Para usuários comuns
@@ -28,6 +27,17 @@ A copa do mundo tava chegando e eu queria estudar, juntei o útil ao agradável!
 * Criar um novo jogo;
 * Editar um jogo;
 * Deletar um jogo;
+
+## Ferramentas utilizadas
+
+Desenvolvido usando MongoDB, Express, React e Node.js! 
+
+## Acesso ao projeto
+
+* Baixar o projeto aqui no github e abrir a pasta no vscode;
+* No diretório principal (bolaodacopa2022) instalar as dependências com npm install;
+* No diretório frontend instalar as dependências com npm install;
+* No diretório principal rodar "npm run dev" para subir front e back end;
 
 ## Demo
 
