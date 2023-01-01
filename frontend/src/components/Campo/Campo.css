@@ -1,0 +1,37 @@
+.campo {
+    margin: 20px 0;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 24px;
+}
+
+.campo input {
+    background-color: #FFF;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    border-radius: 0px;
+    width: 100%;
+    border: none;
+    font-size: 22px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.side-input {
+    display: flex;
+}
+
+.campo-size-input1 input {
+    width: 90%;
+}
+
+.campo-sizeLimit label {
+    display: flexbox;
+}
+
+.campo-sizeLimit input {
+    display: flexbox;
+    width: 90%;
+}

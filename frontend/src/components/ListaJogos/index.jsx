@@ -1,5 +1,3 @@
-import {useState} from 'react'
-import { useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import './ListaJogos.css'
 import {MdOutlineDelete, MdEdit} from 'react-icons/md'

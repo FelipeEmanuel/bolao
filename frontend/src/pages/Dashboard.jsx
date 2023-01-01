@@ -1,13 +1,14 @@
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner/Spinner.jsx'
 import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
 import '../components/PalpiteItem/palpiteItem.css'
-import ReactCountryFlag from 'react-country-flag'
+
 import { get } from '../api'
 import {ordenarJogos} from '../components/utils'
+import ListaPalpites from '../components/ListaPalpites/index.jsx'
 
 
 function Dashboard() {
@@ -138,40 +139,9 @@ function Dashboard() {
           {usuario?.palpites?.length > 0 && 
             <div className='palpite'>
               {usuario?.palpites?.sort(ordenarJogos).reverse().map((palpite) =>(
-                <>{palpite.jogoObj.infoJogo}
-                <div className='times'>
-                  <div className='time1'>
-                  <ReactCountryFlag countryCode={palpite.jogoObj.isocodetime1} svg style={{
-                    width: '2em',
-                    height: '2em',
-                  }}/>
-                  <h2>{palpite.jogoObj.time1}</h2>
-                  <h2>{palpite.palpite1}</h2>
-                  </div>
-                  <h2>x</h2>
-                  <div className='time2'>
-                    <h2>{palpite.palpite2}</h2>
-                    <h2>{palpite.jogoObj.time2}</h2>
-                    <ReactCountryFlag countryCode={palpite.jogoObj.isocodetime2} svg style={{
-                      width: '2em',
-                      height: '2em',
-                    }}/>
-                    <>{palpite.jogoObj.gameType === 1 && palpite.pontuacao === 5 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 4 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 3 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 1 && palpite.pontuacao === 1 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 10 && <h2 className='palpiteG'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 8 && <h2 className='palpiteB'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 6 && <h2 className='palpiteY'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.gameType === 2 && palpite.pontuacao === 2 && <h2 className='palpiteC'>+{palpite.pontuacao}</h2>}
-                    {palpite.jogoObj.placar1 !== "" && palpite.jogoObj.placar2 !== "" && palpite.pontuacao === 0 && <h2 className='palpiteR'>+{palpite.pontuacao}</h2>}
-                           
-                    </>
-                  </div>
-                </div>
-                </>
+                <ListaPalpites key={palpite._id} palpite={palpite}/>
               ))}
-          </div>
+            </div>
           }
           {
             usuario?.palpites?.length === 0 &&

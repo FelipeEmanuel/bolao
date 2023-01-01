@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner/Spinner'
 import useApi from '../hooks/useApi'
 import { useState } from 'react'
 import {ordenarRanking} from '../components/utils'

@@ -45,4 +45,3 @@ export const get = (url, setData, setError, setIsFetching) => {
             setIsFetching(false);
         });
 }
-

@@ -6,7 +6,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Ranking from './pages/Ranking'
 import Admin from './pages/Admin'
-import Header from './components/Header'
+import Header from './components/Header/Header'
+import NovoJogo from './pages/NovoJogo'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/cadastrar' element={<Register/>}/>
             <Route path='/ranking' element={<Ranking/>}/>
             <Route path='/admin' element={<Admin/>}/>
+            <Route path='/novojogo' element={<NovoJogo/>} />
           </Routes>
         </div>
       </Router>

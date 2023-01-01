@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Spinner from '../components/Spinner'
+import { Link, useNavigate } from 'react-router-dom'
+import Spinner from '../components/Spinner/Spinner'
 import useApi from '../hooks/useApi'
 import ListaJogos from '../components/ListaJogos'
 
@@ -10,7 +10,6 @@ function Admin() {
 
     const {data, error, isFetching} = useApi("/api/palpites")
     const navigate = useNavigate()
-    const [users, setUsers] = useState(null)
     const {user} = useSelector((state) => state.auth)
     const [games, setGames] = useState(null)
 
@@ -33,7 +32,10 @@ function Admin() {
         <>
         <section>
             <div className='div1'>
-                <button className='btn btn-block3'>Adicionar novo jogo</button>
+                <Link to='/novojogo'>
+                    <button className='btn btn-block3'>Adicionar novo jogo</button>
+                </Link>
+
             </div>   
             {   
                 games?.length > 0 && 
@@ -49,12 +51,6 @@ function Admin() {
                 games?.length === 0 && <h3>Não há jogos cadastrados</h3>
             }
             
-        </section>
-        <section>
-            <div>Editar jogos</div>
-        </section>
-        <section>
-            <div>Deletar jogos</div>
         </section>
         </>
     )
