@@ -38,7 +38,10 @@ Projeto em desenvolvimento para estudo pessoal do autor, um Bolão da Copa do Mu
 
 ## Ferramentas utilizadas
 
-Desenvolvido usando MongoDB, Express, React e Node.js! 
+* MongoDB
+* Express
+* React
+* Node.js! 
 
 ## Acesso ao projeto
 
