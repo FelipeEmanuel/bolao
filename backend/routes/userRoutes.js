@@ -4,7 +4,8 @@ const {
   registerUser,
   loginUser,
   getMe,
-  changePassword,
+  updateUser,
+  deleteUser,
   forgotPassword
 } = require('../controllers/userController')
 const { protect, isAdmin } = require('../middleware/authMiddleware')
@@ -12,7 +13,8 @@ const { protect, isAdmin } = require('../middleware/authMiddleware')
 router.post('/', registerUser)
 router.post('/login', loginUser)
 router.get('/me', protect, getMe)
-router.put('/:id', changePassword)
+router.put('/:id', updateUser)
+router.delete('/:id', deleteUser)
 router.post('/novasenha', forgotPassword)
 
 module.exports = router
