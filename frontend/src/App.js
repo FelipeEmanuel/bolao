@@ -8,8 +8,14 @@ import Ranking from './pages/Ranking'
 import Admin from './pages/Admin'
 import Header from './components/Header/Header'
 import NovoJogo from './pages/NovoJogo'
+import Perfil from './pages/Perfil'
 
 function App() {
+
+  /*const isAuth = () => {
+    return localStorage.getItem('token')
+  }*/
+ 
   return (
     <>
       <Router>
@@ -22,6 +28,7 @@ function App() {
             <Route path='/ranking' element={<Ranking/>}/>
             <Route path='/admin' element={<Admin/>}/>
             <Route path='/novojogo' element={<NovoJogo/>} />
+            <Route path='/user' element={<Perfil />}/>
           </Routes>
         </div>
       </Router>

@@ -1,4 +1,5 @@
 import {FaSignInAlt, FaSignOutAlt, FaUser, FaListOl} from 'react-icons/fa'
+import { AiOutlineUser } from 'react-icons/ai'
 import {Link, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {logout, reset} from '../../features/auth/authSlice'
@@ -24,6 +25,11 @@ function Header() {
                       <Link to='/'>Palpites</Link>
                     </div>
                     <ul>
+                      <li>
+                        <Link to='/user'>
+                          <AiOutlineUser /> Perfil
+                        </Link>
+                      </li>
                       <li>
                         <Link to='/ranking'>
                             <FaListOl /> Ranking

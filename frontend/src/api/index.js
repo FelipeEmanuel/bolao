@@ -45,3 +45,26 @@ export const get = (url, setData, setError, setIsFetching) => {
             setIsFetching(false);
         });
 }
+
+export const put = (url, body, setData) => {
+    api.put(url, body)
+        .then(response => {
+            setData(response?.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+export const remove = (url, setData, setError, setIsFetching) => {
+    api.delete(url)
+        .then(response => {
+            setData(response.data);
+        })
+        .catch((err) => {
+            setError(err);
+        })
+        .finally(() => {
+            setIsFetching(false);
+        });
+}
