@@ -11,10 +11,6 @@ import NovoJogo from './pages/NovoJogo'
 import Perfil from './pages/Perfil'
 
 function App() {
-
-  /*const isAuth = () => {
-    return localStorage.getItem('token')
-  }*/
  
   return (
     <>

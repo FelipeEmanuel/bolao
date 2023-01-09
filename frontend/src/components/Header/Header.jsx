@@ -1,18 +1,15 @@
 import {FaSignInAlt, FaSignOutAlt, FaUser, FaListOl} from 'react-icons/fa'
 import { AiOutlineUser } from 'react-icons/ai'
 import {Link, useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import {logout, reset} from '../../features/auth/authSlice'
+import { logout } from '../../features/auth/authService'
 
 function Header() {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {user} = useSelector((state) => state.auth) 
+    const user = JSON.parse(localStorage.getItem('user'))
 
     const onLogout = () => {
-        dispatch(logout())
-        dispatch(reset())
+        logout()
         navigate('/')
     }
 

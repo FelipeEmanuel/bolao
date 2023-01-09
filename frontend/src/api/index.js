@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 const api = axios.create({
     baseURL: process.env.BASE_URL_API,

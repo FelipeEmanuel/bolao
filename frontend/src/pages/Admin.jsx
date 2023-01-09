@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner/Spinner'
 import useApi from '../hooks/useApi'
@@ -12,7 +11,7 @@ function Admin() {
 
     const {data, isFetching} = useApi("/api/palpites")
     const navigate = useNavigate()
-    const {user} = useSelector((state) => state.auth)
+    const user = JSON.parse(localStorage.getItem('user'))
     const [games, setGames] = useState(null)
     const [currentPage, setCurrentPage] = useState(1);
     const [gamesPerPage] = useState(15);

@@ -1,6 +1,5 @@
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useSelector} from 'react-redux'
 import Spinner from '../components/Spinner/Spinner.jsx'
 import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
@@ -13,7 +12,7 @@ import ListaPalpites from '../components/ListaPalpites/index.jsx'
 
 function Dashboard() {
 
-  const {user} = useSelector((state) => state.auth)
+  const user = JSON.parse(localStorage.getItem('user'))
   const navigate = useNavigate()
   
   useEffect(() => {

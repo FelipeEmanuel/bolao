@@ -1,6 +1,5 @@
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useSelector} from 'react-redux'
 import Spinner from '../components/Spinner/Spinner'
 import useApi from '../hooks/useApi'
 import { useState } from 'react'
@@ -14,9 +13,8 @@ function Ranking() {
 
   const [users, setUsers] = useState(null)
 
-  const {user} = useSelector((state) => state.auth)
+  const user = JSON.parse(localStorage.getItem('user'))
   
-
   useEffect(() => {
     if(!user) {
       navigate('/login')
