@@ -8,6 +8,7 @@ import '../components/PalpiteItem/palpiteItem.css'
 import { get } from '../api'
 import {ordenarJogos} from '../components/utils'
 import ListaPalpites from '../components/ListaPalpites/index.jsx'
+import Header from '../components/Header/Header.jsx'
 
 
 function Dashboard() {
@@ -105,6 +106,7 @@ function Dashboard() {
 
   return (
     <>
+      <Header />
       <section>
        <h1>Bem-vindo, {user && user.name}</h1>
         <br/>

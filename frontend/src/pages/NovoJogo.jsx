@@ -2,6 +2,7 @@ import Formulario from "../components/Formulario"
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Header from "../components/Header/Header"
 
 function NovoJogo() {
 
@@ -23,6 +24,7 @@ function NovoJogo() {
 
     return (
         <div>
+            <Header />
             <Formulario />
         </div>
     )

@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import Header from "../components/Header/Header"
 
 function Perfil() {
 
     const navigate = useNavigate()
-    const {user} = useSelector((state) => state.auth)
+    const user = JSON.parse(localStorage.getItem('user'))
 
     useEffect(() => {
         if(!user) {
@@ -15,10 +15,14 @@ function Perfil() {
     }, [user, navigate])
 
     return (
-
-
-
-        <div>Perfil do usuário</div>
+        <>
+            <Header/>
+            <section>
+                <h1>Olá, {user.name}! Estes são seus dados!</h1>
+                <h3>Email: {user.email}</h3>
+            </section>
+        </>
+        
     )
 }
 

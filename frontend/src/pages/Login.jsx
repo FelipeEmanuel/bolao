@@ -3,6 +3,7 @@ import { FaSignInAlt } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../features/auth/authService'
 import Spinner from '../components/Spinner/Spinner'
+import Header from '../components/Header/Header'
 
 function Login() {
 
@@ -49,6 +50,7 @@ function Login() {
 
   return (
     <>
+      <Header />
       <section className='heading'>
         <h1>
           <FaSignInAlt /> Login

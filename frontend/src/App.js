@@ -9,6 +9,7 @@ import Admin from './pages/Admin'
 import Header from './components/Header/Header'
 import NovoJogo from './pages/NovoJogo'
 import Perfil from './pages/Perfil'
+import PageNotFound from './pages/PageNotFound'
 
 function App() {
  
@@ -16,7 +17,6 @@ function App() {
     <>
       <Router>
         <div className='container'>
-          <Header />
           <Routes>
             <Route path='/' element={<Dashboard/>}/>
             <Route path='/login' element={<Login/>}/>
@@ -24,7 +24,8 @@ function App() {
             <Route path='/ranking' element={<Ranking/>}/>
             <Route path='/admin' element={<Admin/>}/>
             <Route path='/novojogo' element={<NovoJogo/>} />
-            <Route path='/user' element={<Perfil />}/>
+            <Route path='/perfil' element={<Perfil />}/>
+            <Route path='*' element={<PageNotFound/>}/>
           </Routes>
         </div>
       </Router>

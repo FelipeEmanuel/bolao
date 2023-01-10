@@ -23,7 +23,7 @@ function Header() {
                     </div>
                     <ul>
                       <li>
-                        <Link to='/user'>
+                        <Link to='/perfil'>
                           <AiOutlineUser /> Perfil
                         </Link>
                       </li>
@@ -56,6 +56,11 @@ function Header() {
                   </div>
                   
                   <ul>
+                    <li>
+                      <Link to='/perfil'>
+                        <AiOutlineUser /> Perfil
+                      </Link>
+                    </li>
                     <li>
                       <Link to='/ranking'>
                           <FaListOl /> Ranking

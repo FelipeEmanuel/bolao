@@ -4,6 +4,7 @@ import Spinner from '../components/Spinner/Spinner'
 import useApi from '../hooks/useApi'
 import { useState } from 'react'
 import {ordenarRanking} from '../components/utils'
+import Header from '../components/Header/Header'
 
 function Ranking() {
 
@@ -81,6 +82,7 @@ function Ranking() {
 
   return (
     <>
+      <Header />
       <div className='ranking-top'>Ranking</div>
       <section className='ranking'>
         <div>

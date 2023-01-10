@@ -5,6 +5,7 @@ import useApi from '../hooks/useApi'
 import ListaJogos from '../components/ListaJogos'
 import Pagination from '../components/Pagination'
 import { ordenarJogos } from '../components/utils'
+import Header from '../components/Header/Header'
 
 
 function Admin() {
@@ -41,6 +42,7 @@ function Admin() {
 
     return (
         <>
+        <Header/>
         <section>
             <div className='div1'>
                 <Link to='/novojogo'>
