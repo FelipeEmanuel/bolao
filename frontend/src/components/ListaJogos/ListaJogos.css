@@ -6,7 +6,7 @@
     gap: 5px;
     margin: 10px 0;
     padding: 10px;
-    justify-content: center;
+    
 }
 
 .times {
@@ -44,19 +44,30 @@
     flex-basis: 6%;
 }
 
-.deletar {
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
-    right: -10px;
-    top: -80px;
+    width: 100%;  
+}
+
+.deletar {
     border: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
 }
 
 .editar {
-    position: relative;
-    right: -18px;
-    top: -80px;
     border: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 20px;
 }
+
 
 @media (max-width: 700px) {
     .times, .time1, .time2 { 

@@ -6,10 +6,11 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Ranking from './pages/Ranking'
 import Admin from './pages/Admin'
-import Header from './components/Header/Header'
 import NovoJogo from './pages/NovoJogo'
 import Perfil from './pages/Perfil'
 import PageNotFound from './pages/PageNotFound'
+import EditJogo from './pages/EditJogo'
+
 
 function App() {
  
@@ -26,6 +27,7 @@ function App() {
             <Route path='/novojogo' element={<NovoJogo/>} />
             <Route path='/perfil' element={<Perfil />}/>
             <Route path='*' element={<PageNotFound/>}/>
+            <Route path='/:id' element={<EditJogo />} />
           </Routes>
         </div>
       </Router>

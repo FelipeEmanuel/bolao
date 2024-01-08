@@ -51,10 +51,14 @@ function PalpiteItem({jogo, palpitou}) {
                 </div>
                     <div className='times'>
                         <div className='time1'>
-                            <ReactCountryFlag countryCode={jogo.isocodetime1} svg style={{
-                                width: '2em',
-                                height: '2em',
-                            }}/>
+                            <img 
+                                src={jogo.isocodetime1} 
+                                alt='Escudo Time 1' 
+                                style={{
+                                    width: '2em',
+                                    height: '2em'
+                                }}>
+                            </img>
                             <h2>{jogo.time1}</h2>
                             <input type="text" className="placar" id="palpite1" 
                                 name="palpite1" value={palpite1} onChange={(e) => setPalpite1(e.target.value)}
@@ -67,10 +71,14 @@ function PalpiteItem({jogo, palpitou}) {
                                 name="palpite2" value={palpite2} onChange={(e) => setPalpite2(e.target.value)}
                                 onKeyPress={(e) => onKeyPress1(e)}/>
                             <h2>{jogo.time2}</h2>
-                            <ReactCountryFlag countryCode={jogo.isocodetime2} svg style={{
-                                width: '2em',
-                                height: '2em',
-                            }}/>
+                            <img 
+                                src={jogo.isocodetime2} 
+                                alt='Escudo Time 2' 
+                                style={{
+                                    width: '2em',
+                                    height: '2em'
+                                }}>
+                            </img>
                         </div>
                     </div>
             

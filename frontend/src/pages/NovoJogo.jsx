@@ -1,5 +1,5 @@
 import Formulario from "../components/Formulario"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Header from "../components/Header/Header"
@@ -7,7 +7,10 @@ import Header from "../components/Header/Header"
 function NovoJogo() {
 
     const navigate = useNavigate()
-    const {user} = useSelector((state) => state.auth)
+    const [users, setUsers] = useState(null)
+
+    const user = JSON.parse(localStorage.getItem('user'))
+    //const {user} = useSelector((state) => state.auth)
 
     useEffect(() => {
         if(!user) {

@@ -7,8 +7,20 @@ const getGames = asyncHandler(async (req, res) => {
     res.status(200).json(games)
 })
 
+const getGameById = asyncHandler(async (req, res) => {
+    const game = await Game.findById(req.params.id)
+
+    if(!game) {
+        res.status(400)
+        throw new Error('Game not found')
+    }
+
+    res.status(200).json(game)
+
+})
+
 const setGames = asyncHandler(async (req, res) => {
-    const {time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoJogo, infoGroup, gameType} = req.body
+    const {time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType} = req.body
 
     if (!time1 || !time2) {
         res.status(400)
@@ -18,7 +30,7 @@ const setGames = asyncHandler(async (req, res) => {
     const game = await Game.create({
         user: req.user.id, time1, time2, placar1, placar2, 
         dataLimite, isocodetime1, isocodetime2, 
-        infoJogo, infoGroup, gameType
+        infoCamp, infoJogo, infoGroup, gameType
     })
 
     res.status(200).json(game)
@@ -55,5 +67,5 @@ const deleteGame = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    getGames, setGames, updateGame, deleteGame
+    getGames, getGameById, setGames, updateGame, deleteGame
 }

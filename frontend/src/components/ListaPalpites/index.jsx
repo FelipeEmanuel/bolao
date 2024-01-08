@@ -5,10 +5,14 @@ function ListaPalpites({palpite}) {
         <>{palpite?.jogoObj?.infoJogo}
                 <div className='times'>
                   <div className='time1'>
-                  <ReactCountryFlag countryCode={palpite?.jogoObj?.isocodetime1} svg style={{
-                    width: '2em',
-                    height: '2em',
-                  }}/>
+                  <img 
+                        src={palpite?.jogoObj?.isocodetime1} 
+                        alt='Escudo Time 1' 
+                        style={{
+                            width: '2em',
+                            height: '2em'
+                    }}>
+                  </img>
                   <h2>{palpite?.jogoObj?.time1}</h2>
                   <h2>{palpite?.palpite1}</h2>
                   </div>
@@ -16,10 +20,14 @@ function ListaPalpites({palpite}) {
                   <div className='time2'>
                     <h2>{palpite?.palpite2}</h2>
                     <h2>{palpite?.jogoObj?.time2}</h2>
-                    <ReactCountryFlag countryCode={palpite?.jogoObj?.isocodetime2} svg style={{
-                      width: '2em',
-                      height: '2em',
-                    }}/>
+                    <img 
+                        src={palpite?.jogoObj?.isocodetime2} 
+                        alt='Escudo Time 2' 
+                        style={{
+                            width: '2em',
+                            height: '2em'
+                    }}>
+                    </img>
                     <>{palpite?.jogoObj?.gameType === 1 && palpite?.pontuacao === 5 && <h2 className='palpiteG'>+{palpite?.pontuacao}</h2>}
                     {palpite?.jogoObj?.gameType === 1 && palpite?.pontuacao === 4 && <h2 className='palpiteB'>+{palpite?.pontuacao}</h2>}
                     {palpite?.jogoObj?.gameType === 1 && palpite?.pontuacao === 3 && <h2 className='palpiteY'>+{palpite?.pontuacao}</h2>}

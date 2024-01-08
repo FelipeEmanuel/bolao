@@ -32,7 +32,7 @@ function Login() {
     }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
 
     const userData = {
@@ -40,7 +40,7 @@ function Login() {
       password,
     }
 
-    login(userData)
+    await login(userData)
     navigate('/')
   }
 

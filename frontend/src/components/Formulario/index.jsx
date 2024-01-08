@@ -3,17 +3,30 @@ import { useState } from 'react'
 import Campo from '../Campo'
 import Botao from '../Botao'
 import ListaSuspensa from '../ListaSuspensa'
+import ListaSuspensaImg from '../ListaSuspensaImg'
 import { toast } from 'react-toastify'
 import { post } from '../../api'
 import { useNavigate } from 'react-router-dom'
+import treze from '../../images/logo-treze-de-campina-grande-256.png'
+import campinense from '../../images/logo-campinense-256.png'
+import serrabranca from '../../images/logo-serra-branca.png'
+import botafogopb from '../../images/logo-botafogo-pb.png'
+import atleticopb from '../../images/logo-atletico-pb.png'
+import sousa from '../../images/logo-sousa-pb-256.png'
+import nacionalpb from '../../images/logo-nacional-de-patos-pb.png'
+import csp from '../../images/logo-csp.png'
+import pombal from '../../images/logo-pombal.png'
+import saopaulopb from '../../images/logo-sao-paulo-crystal.png'
 
 const Formulario = () => {
+
 
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
     const[dataLimite, setDataLimite] = useState('')
     const[isocodetime1, setIsocodetime1] = useState('')
     const[isocodetime2, setIsocodetime2] = useState('')
+    const[infoCamp, setInfoCamp] = useState('')
     const[infoJogo, setInfoJogo] = useState('')
     const[infoGroup, setInfoGroup] = useState('')
     const[placar1, setPlacar1] = useState('')
@@ -28,14 +41,28 @@ const Formulario = () => {
         '2'
     ]
 
+    const escudos = [
+        {img: treze, text: "Treze"},
+        {img: campinense, text: "Campinense"},
+        {img: atleticopb, text: "Atlético-PB"},
+        {img: botafogopb, text: "Botafogo-PB"},
+        {img: sousa, text: "Sousa"},
+        {img: serrabranca, text: "Serra Branca"},
+        {img: nacionalpb, text: "Nacional de Patos"},
+        {img: csp, text: "CSP"},
+        {img: pombal, text: "Pombal"},
+        {img: saopaulopb, text: "São Paulo Crystal"},
+
+    ]   
+
     const adicionarJogo = ((e) => {
         e.preventDefault()
         
         const body = {
-            time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoJogo, infoGroup, gameType, 
+            time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
         }
         
-        if(!time1 || !time2 || !dataLimite || !isocodetime1 || !isocodetime2 || !infoJogo || !infoGroup || !gameType) {
+        if(!time1 || !time2 || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
             toast.error("Preencha todos os campos")
         } else {
             post('api/games', body)
@@ -70,20 +97,19 @@ const Formulario = () => {
                 </div>
                 
                 <div className='side-input'>
-                    <Campo 
-                        required
-                        label="IsoCode Time 1"
-                        placeholder="IsoCode do time 1"
+                    <ListaSuspensaImg 
+                        required 
+                        label="Escudo do Time 1" 
+                        //itens={<img src={escudos} alt='Escudo'></img>}
+                        itens={escudos}
                         valor={isocodetime1}
-                        type='sizeLimit'
                         aoAlterado={valor => setIsocodetime1(valor)}
                     />
-                    <Campo 
-                        required
-                        label="IsoCode Time 2"
-                        placeholder="IsoCode do time 2"
+                    <ListaSuspensaImg 
+                        required 
+                        label="Escudo do Time 2" 
+                        itens={escudos}
                         valor={isocodetime2}
-                        type='sizeLimit'
                         aoAlterado={valor => setIsocodetime2(valor)}
                     />
                 </div>
@@ -105,6 +131,13 @@ const Formulario = () => {
                         aoAlterado={valor => setPlacar2(valor)}
                     />
                 </div>
+                <Campo 
+                    required
+                    label="Informa a competição que esse jogo pertence (Ex: PB24)"
+                    placeholder="Competição do jogo"
+                    valor={infoCamp}
+                    aoAlterado={valor => setInfoCamp(valor)}
+                />
                 <Campo 
                     required
                     label="Data Limite (Ex: 2022-12-28T09:45:00)"
