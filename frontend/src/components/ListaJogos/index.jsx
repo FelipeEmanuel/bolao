@@ -1,4 +1,3 @@
-import ReactCountryFlag from 'react-country-flag'
 import './ListaJogos.css'
 import {MdOutlineDelete, MdEdit} from 'react-icons/md'
 import { remove, put } from '../../api'

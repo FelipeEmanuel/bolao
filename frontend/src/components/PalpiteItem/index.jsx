@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import './palpiteItem.css'
 import { useEffect } from 'react'
-import ReactCountryFlag from 'react-country-flag'
 import { toast } from 'react-toastify'
 import {post} from '../../api/'
 
