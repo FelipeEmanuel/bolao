@@ -14,7 +14,6 @@ import Header from '../components/Header/Header.jsx'
 function Dashboard() {
 
   const user = localStorage.getItem('user')
-  console.log(localStorage.getItem('user'))
   const navigate = useNavigate()
   
   useEffect(() => {

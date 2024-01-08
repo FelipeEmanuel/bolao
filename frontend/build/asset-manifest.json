@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.d705c2c2.css",
-    "main.js": "/static/js/main.c4586a8c.js",
+    "main.js": "/static/js/main.d8b5eb6e.js",
     "static/media/logo-pombal.png": "/static/media/logo-pombal.d47dc30bf1eedab55076.png",
     "static/media/logo-sao-paulo-crystal.png": "/static/media/logo-sao-paulo-crystal.5493cbdf82ce031ee59b.png",
     "static/media/logo-csp.png": "/static/media/logo-csp.ea58ce56385f9a09d918.png",
     "static/media/logo-serra-branca.png": "/static/media/logo-serra-branca.79f69fd0088ae3afa96b.png",
     "index.html": "/index.html",
     "main.d705c2c2.css.map": "/static/css/main.d705c2c2.css.map",
-    "main.c4586a8c.js.map": "/static/js/main.c4586a8c.js.map"
+    "main.d8b5eb6e.js.map": "/static/js/main.d8b5eb6e.js.map"
   },
   "entrypoints": [
     "static/css/main.d705c2c2.css",
-    "static/js/main.c4586a8c.js"
+    "static/js/main.d8b5eb6e.js"
   ]
 }
