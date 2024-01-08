@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.c0cc098e.css",
-    "main.js": "/static/js/main.d6d5a92c.js",
-    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "main.css": "/static/css/main.d705c2c2.css",
+    "main.js": "/static/js/main.2ee044b1.js",
+    "static/media/logo-pombal.png": "/static/media/logo-pombal.d47dc30bf1eedab55076.png",
+    "static/media/logo-sao-paulo-crystal.png": "/static/media/logo-sao-paulo-crystal.5493cbdf82ce031ee59b.png",
+    "static/media/logo-csp.png": "/static/media/logo-csp.ea58ce56385f9a09d918.png",
+    "static/media/logo-serra-branca.png": "/static/media/logo-serra-branca.79f69fd0088ae3afa96b.png",
     "index.html": "/index.html",
-    "main.c0cc098e.css.map": "/static/css/main.c0cc098e.css.map",
-    "main.d6d5a92c.js.map": "/static/js/main.d6d5a92c.js.map",
-    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+    "main.d705c2c2.css.map": "/static/css/main.d705c2c2.css.map",
+    "main.2ee044b1.js.map": "/static/js/main.2ee044b1.js.map"
   },
   "entrypoints": [
-    "static/css/main.c0cc098e.css",
-    "static/js/main.d6d5a92c.js"
+    "static/css/main.d705c2c2.css",
+    "static/js/main.2ee044b1.js"
   ]
 }
