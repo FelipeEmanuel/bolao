@@ -1,5 +1,3 @@
-import ReactCountryFlag from 'react-country-flag'
-
 function ListaPalpites({palpite}) {
     return (
         <>{palpite?.jogoObj?.infoJogo}
