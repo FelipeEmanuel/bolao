@@ -23,7 +23,7 @@ app.use('/api/ranking', require('./routes/rankingRoutes'))
 
 // Serve frontend
 
-if (process.env.NODE_ENV === 'production') {
+/*if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/build')));
   
     app.get('*', (req, res) =>
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
     );
   } else {
     app.get('/', (req, res) => res.send('Please set to production'));
-}
+}*/
 
 app.use(errorHandler)
 
