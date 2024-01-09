@@ -1,27 +1,36 @@
 import axios from 'axios'
 const API_URL = '/api/users/'
 
-// Register user
-export const register = async (userData) => {
-    const response = await axios.post(API_URL, userData)
-  
-    if (response.data) {
-      localStorage.setItem('user', JSON.stringify(response.data))
-    }
-  
-    return response.data
+const api = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL_API,
+  headers: {
+      Authorization : "COMO ISSO TA FUNCIONANDO"
+  }
+});
+
+api.interceptors.request.use(
+  (config) =>  {
+      
+      const user = JSON.parse(localStorage.getItem("user"))
+      
+      config.headers.Authorization = user ? `Bearer ${user?.token}` : "";
+      
+      return config;
+  }, 
+  (error) => {
+      console.log(error);
+      return;
+  }
+);
+
+export const login = (body) => {
+    return api.post(API_URL + 'login', body);  
 }
 
-//login user
-export const login = async (userData) => {
-    const response = await axios.post(API_URL + 'login', userData)
-  
-    if (response.data) {
-      localStorage.setItem('user', JSON.stringify(response.data))
-    }
-  
-    return response.data
+export const register = (body) => {
+  return api.post(API_URL, body);
 }
+
 
 //logout user
 export const logout = () => {

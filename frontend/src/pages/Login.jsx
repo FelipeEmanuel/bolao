@@ -32,7 +32,7 @@ function Login() {
     }))
   }
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
 
     const userData = {
@@ -40,8 +40,16 @@ function Login() {
       password,
     }
 
-    await login(userData)
-    navigate('/')
+    login(userData).then(response => {
+      if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
+        navigate('/')
+      }
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    
   }
 
   /*if (isFetching) {

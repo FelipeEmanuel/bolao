@@ -47,9 +47,17 @@ function Register() {
         password,
       }
 
-      register(userData)
-      alert('Usuário cadastrado com sucesso')
-      navigate('/')
+    register(userData).then(response => {
+      if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
+        alert('Usuário cadastrado com sucesso')
+        navigate('/')
+      }
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+      
     }
   }
 
