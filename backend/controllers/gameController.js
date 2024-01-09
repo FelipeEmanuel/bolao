@@ -24,7 +24,7 @@ const setGames = asyncHandler(async (req, res) => {
 
     if (!time1 || !time2) {
         res.status(400)
-        throw new Error('Please add a text field')
+        throw new Error('Please add a text field!')
     }
 
     const game = await Game.create({
