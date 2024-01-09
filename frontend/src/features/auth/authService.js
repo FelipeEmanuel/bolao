@@ -1,5 +1,27 @@
 import axios from 'axios'
-const API_URL = process.env.BASE_URL_API + '/api/users/'
+const API_URL = '/api/users/'
+
+const api = axios.create({
+    baseURL: process.env.REACT_APP_BASE_URL_API,
+    headers: {
+        Authorization : ""
+    }
+});
+
+api.interceptors.request.use(
+    (config) =>  {
+        
+        const user = JSON.parse(localStorage.getItem("user"))
+        
+        config.headers.Authorization = user ? `Bearer ${user?.token}` : "";
+        
+        return config;
+    }, 
+    (error) => {
+        console.log(error);
+        return;
+    }
+);
 
 // Register user
 export const register = async (userData) => {

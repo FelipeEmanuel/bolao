@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
-
 const api = axios.create({
-    baseURL: process.env.BASE_URL_API,
+    baseURL: process.env.REACT_APP_BASE_URL_API,
     headers: {
         Authorization : ""
     }
