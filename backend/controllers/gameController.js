@@ -12,7 +12,7 @@ const getGameById = asyncHandler(async (req, res) => {
 
     if(!game) {
         res.status(400)
-        throw new Error('Game not found')
+        throw new Error('Game not found!')
     }
 
     res.status(200).json(game)
