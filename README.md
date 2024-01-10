@@ -58,4 +58,4 @@ Projeto em desenvolvimento para estudo pessoal do autor, inicialmente um Bolão 
 
 ## Demo
 
-https://bolao-parabaino.vercel.app
+https://bolao-paraibano.vercel.app
