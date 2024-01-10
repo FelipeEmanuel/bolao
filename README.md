@@ -1,6 +1,6 @@
 
 
-<h1 align="center"> Bolão da Copa do Mundo 2022 </h1>
+<h1 align="center"> Bolão! </h1>
 
 <p align="center">
 <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
@@ -16,14 +16,13 @@
 
 ## Descrição do Projeto
 
-Projeto em desenvolvimento para estudo pessoal do autor, um Bolão da Copa do Mundo 2022! Permite palpitar em jogos e acompanhar sua pontuação. Usuários administradores podem criar, editar e excluir jogos também. 
+Projeto em desenvolvimento para estudo pessoal do autor, inicialmente um Bolão da Copa do Mundo de 2022 que permitia palpitar em jogos e acompanhar sua pontuação! Expandido para outras competições! Usuários administradores podem criar, editar e excluir jogos também. 
  
 ## Funcionalidades
 
 ### Para usuários comuns
 * Cadastrar-se no site;
 * Fazer login no site;
-* Recuperar senha (futuramente);
 * Palpitar em jogos;
 * Ver os palpites já feitos;
 * Ver a pontuação individual em cada jogo;
@@ -41,7 +40,14 @@ Projeto em desenvolvimento para estudo pessoal do autor, um Bolão da Copa do Mu
 * MongoDB
 * Express
 * React
-* Node.js! 
+* Node.js!
+
+## Funções em desenvolvimento
+* Recuperar senha (futuramente);
+* Ranking separado por competições;
+* Perfil do usuário com suas conquistas e outras estatísticas;
+* Login pelo Google;
+* Palpites separados por competição;
 
 ## Acesso ao projeto
 
@@ -52,4 +58,4 @@ Projeto em desenvolvimento para estudo pessoal do autor, um Bolão da Copa do Mu
 
 ## Demo
 
-https://bolaodacopa2022.up.railway.app/ (Agora que a Copa acabou, está fora do ar, mas é possível subir a qualquer momento)
+https://bolao-parabaino.vercel.app
