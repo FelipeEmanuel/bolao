@@ -9,6 +9,7 @@ import { get } from '../api'
 import {ordenarJogos} from '../components/utils'
 import ListaPalpites from '../components/ListaPalpites/index.jsx'
 import Header from '../components/Header/Header.jsx'
+import Pagination from '../components/Pagination/index.jsx'
 
 
 function Dashboard() {
@@ -29,6 +30,10 @@ function Dashboard() {
   const [usuario, setUsuario] = useState(null)
   const [games, setGames] = useState(null)
   const [palpitou, setPalpitou] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage] = useState(5);
+  const [currentPagePalpites, setCurrentPagePalpites] = useState(1);
+  const [gamesPerPagePalpites] = useState(10);
 
   useEffect(() => {
     get("api/palpites", setData, setError, setIsFetching)
@@ -104,6 +109,24 @@ function Dashboard() {
     return <Spinner/>
   } 
 
+  // Get current games
+  const indexOfLastGame = currentPage * gamesPerPage;
+  const indexOfFirstGame = indexOfLastGame - gamesPerPage;
+  const currentPages = games?.slice(indexOfFirstGame, indexOfLastGame);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  //Palpites
+
+  // Get current games
+  const indexOfLastGamePalpites = currentPagePalpites * gamesPerPagePalpites;
+  const indexOfFirstGamePalpites = indexOfLastGamePalpites - gamesPerPagePalpites;
+  const currentPagesPalpites = usuario?.palpites?.slice(indexOfFirstGamePalpites, indexOfLastGamePalpites);
+
+  // Change page
+  const paginatePalpites = pageNumber => setCurrentPagePalpites(pageNumber);
+
   return (
     <>
       <Header />
@@ -122,13 +145,19 @@ function Dashboard() {
         <section className='contentpalpites'>
           <h2>Jogos disponíveis para palpitar no momento!</h2>
           { 
-            games?.length > 0 && 
+            currentPages?.length > 0 && 
             <div className='palpites'>
                 { 
-                  games?.map((jogo) => (
+                  currentPages?.map((jogo) => (
                     <PalpiteItem key={jogo._id} jogo={jogo} palpitou={setPalpitou}/>
                   ))
                 }
+                <Pagination 
+                        gamesPerPage={gamesPerPage} 
+                        totalGames={games?.length} 
+                        paginate={paginate}
+                />
+                
             </div>
           }
           {
@@ -137,15 +166,22 @@ function Dashboard() {
         </section>
         <section className='contentpalpites'>
           <h2>Seus palpites</h2>
-          {usuario?.palpites?.length > 0 && 
+          {currentPagesPalpites?.length > 0 && 
             <div className='palpite'>
-              {usuario?.palpites?.sort(ordenarJogos).reverse().map((palpite) =>(
+              {currentPagesPalpites?.map((palpite) =>(
                 <ListaPalpites key={palpite._id} palpite={palpite}/>
-              ))}
+              ))
+              }
+              <Pagination 
+                        gamesPerPage={gamesPerPagePalpites} 
+                        totalGames={usuario?.palpites?.length} 
+                        paginate={paginatePalpites}
+              />
+              
             </div>
           }
           {
-            usuario?.palpites?.length === 0 &&
+            currentPagesPalpites?.length === 0 &&
             <h3>Você ainda não fez palpites.</h3>
           }   
           

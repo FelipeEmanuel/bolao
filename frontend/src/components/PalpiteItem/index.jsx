@@ -45,7 +45,7 @@ function PalpiteItem({jogo, palpitou}) {
         <form onSubmit={aoPalpitar}>
             <div className='palpite'>
                 <div>
-                    <h3>{jogo.infoGroup}</h3>
+                    <h3>{jogo.infoGroup} - {jogo.infoCamp}</h3>
                     {jogo.infoJogo}
                 </div>
                     <div className='times'>
