@@ -59,7 +59,7 @@ const deleteGame = asyncHandler(async (req, res) => {
     try {
         await Palpite.deleteMany({ "jogo" : req.params.id})
     } catch (error) {
-        console.log(error);
+        console.log("Deu erro aqui", error);
     }
 
     await Game.findByIdAndDelete(req.params.id, function (err, docs) {

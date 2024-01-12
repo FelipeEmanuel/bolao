@@ -17,6 +17,13 @@ import nacionalpb from '../images/logo-nacional-de-patos-pb.png'
 import csp from '../images/logo-csp.png'
 import pombal from '../images/logo-pombal.png'
 import saopaulopb from '../images/logo-sao-paulo-crystal.png'
+import altos from '../images/logo-altospi.png'
+import abc from '../images/logo-abc-rn-256.png'
+import iguatu from '../images/logo-iguatu.png'
+import asa from '../images/logo-asa-de-arapiraca-al-256.png'
+import juazeirense from '../images/logo-juazeirense.png'
+import retro from '../images/logo-retrope.png'
+import potiguar from '../images/logo-potiguar.png'
 import Spinner from '../components/Spinner/Spinner'
 
 const EditJogo = () => {
@@ -56,6 +63,13 @@ const EditJogo = () => {
         {img: csp, text: "CSP"},
         {img: pombal, text: "Pombal"},
         {img: saopaulopb, text: "São Paulo Crystal"},
+        {img: altos, text: "Altos-PI"},
+        {img: abc, text: "ABC-RN"},
+        {img: potiguar, text: "Potiguar-RN"},
+        {img: juazeirense, text: "Juazeirense"},
+        {img: retro, text: "Retrô"},
+        {img: asa, text: "ASA"},
+        {img: iguatu, text: "Iguatu"}
 
     ] 
 
