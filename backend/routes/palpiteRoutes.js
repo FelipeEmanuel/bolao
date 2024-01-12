@@ -7,4 +7,5 @@ router.route('/').get(protect, getPartidas)
 router.route('/').post(protect, setPalpite)
 router.route('/userPalpites').get(protect, getUserPalpites)
 
+
 module.exports = router

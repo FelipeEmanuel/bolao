@@ -5,9 +5,9 @@ const Game = require('../models/gameModel')
 const getRanking = asyncHandler(async (req, res) => {
     const users = await User.aggregate( [
         {
-            $match:
-            {
-                role: "user"
+            $match:{
+                role: "user",
+                palpitou: true
             }
         },
         {
