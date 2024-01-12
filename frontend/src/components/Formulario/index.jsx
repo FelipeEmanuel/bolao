@@ -20,10 +20,10 @@ import saopaulopb from '../../images/logo-sao-paulo-crystal.png'
 
 const Formulario = () => {
 
-    const[data, setData] = useState(null)
+    /*const[data, setData] = useState(null)
     const[error, setError] = useState(null)
     const[isFetching, setIsFetching] = useState(false)
-    const[competicao, setCompeticao] = useState(null)
+    const[competicao, setCompeticao] = useState(null)*/
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
     const[dataLimite, setDataLimite] = useState('')
@@ -38,19 +38,29 @@ const Formulario = () => {
     //const[jogoAdicionado, setJogoAdicionado] = useState(false)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        get("api/competicoes", setData, setError, setIsFetching)
+    //let competicoes = []
+
+    /*useEffect(() => {
+        get("api/competicoes", setData, setError, setIsFetching).then((response) => {
+            console.log(response);
+            const competicoes = response.data.map((c) => ({
+                nome: c.name,
+                id: c._id
+            }));
+
+            setCompeticao({competicoes});
+        });
         //console.log(data)
-    }, [data])
+    })
 
-    console.log(data)
+    //console.log(data)
 
-    let competicoes = []
-    data?.forEach(x => {
+    
+    /*data?.forEach(x => {
         competicoes.push({id: x._id, nome: x.name})
     })
 
-    console.log(competicoes)
+    console.log(competicoes)*/
 
     const options = [
         '1',
@@ -75,10 +85,10 @@ const Formulario = () => {
         e.preventDefault()
         
         const body = {
-            time1, time2, placar1, placar2, competicao, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
+            time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
         }
         
-        if(!time1 || !time2 || !competicao || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
+        if(!time1 || !time2 || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
             toast.error("Preencha todos os campos")
         } else {
             post('api/games', body)
@@ -110,16 +120,6 @@ const Formulario = () => {
                         valor={time2}
                         aoAlterado={valor => setTime2(valor)}
                     />
-                </div>
-                <div>
-                    <ListaSuspensa 
-                        required 
-                        label="Competição" 
-                        itens={competicoes.nome}
-                        valor={competicoes.id}
-                        aoAlterado={valor => setCompeticao(valor)}
-                    />
-
                 </div>
                 <div className='side-input'>
                     <ListaSuspensaImg 
