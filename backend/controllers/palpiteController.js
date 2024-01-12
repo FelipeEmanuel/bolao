@@ -48,6 +48,7 @@ const setPalpite = asyncHandler(async (req, res) => {
 
     let palpite = req.body
     let user = req.user.id
+    const getUser = true
 
     if(!palpite) {
         res.status(400)
@@ -60,12 +61,15 @@ const setPalpite = asyncHandler(async (req, res) => {
     let jogoAtual = await Game.findById(obj.jogo)
     if(jogoAtual.dataLimite >= jogoDisponivel) {
         if(palpiteEncontrado) {   
-            if(user === palpiteEncontrado.user.toString()){ 
+            if(user === palpiteEncontrado.user.toString()){
+                await User.findByIdAndUpdate(user, {palpitou: getUser}) 
                 await Palpite.findByIdAndUpdate(palpiteEncontrado.id, obj)
-            } else {    
+            } else {
+                await User.findByIdAndUpdate(user, {palpitou: getUser})    
                 await Palpite.create(obj)
             }    
-        } else { 
+        } else {
+            await User.findByIdAndUpdate(user, {palpitou: getUser}) 
             await Palpite.create(obj)
         }
     } else {

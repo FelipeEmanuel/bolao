@@ -104,8 +104,13 @@ function Ranking() {
         }
       </section>
       <p className='linha'></p>
-      <h3 className='regras'>O ranking sempre será atualizado alguns minutos após o último jogo do dia!</h3>
-      <h2 className='regras'>Regras de Pontuação - Mata-mata</h2>
+      <h3 className='regras'>O ranking será atualizado periodicamente, ao fim de cada jogo ou dia de jogos!</h3>
+      <h2 className='regras'>Regras de Pontuação - Jogo comum</h2>
+      <p className='texto'>Acertar o placar em cheio: <b>5 pontos</b></p>
+      <p className='texto'>Acertar que foi empate/o vencedor do jogo: <b>3 pontos</b></p>
+      <p className='texto'>Errar o placar mas acertar o número de gols de um dos times: <b>1 pontos</b></p>
+      <p className='texto'>Errar completamente o placar: <b>0 pontos</b></p>
+      <h2 className='regras'>Regras de Pontuação - Mata-mata (Pontuação em dobro)</h2>
       <h2 className='regras'>Só vale os 90 (+30 de prorrogação) minutos do jogo, pênaltis não contam pro resultado.</h2>
       <p className='texto'>Acertar o placar em cheio: <b>10 pontos</b></p>
       <p className='texto'>Acertar que foi empate/o vencedor do jogo: <b>6 pontos</b></p>

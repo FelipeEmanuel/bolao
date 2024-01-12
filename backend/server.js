@@ -19,6 +19,7 @@ app.use('/api/games', require('./routes/gameRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/palpites', require('./routes/palpiteRoutes'))
 app.use('/api/ranking', require('./routes/rankingRoutes'))
+app.use('/api/competicoes', require('./routes/competicaoRoutes'))
 
 
 // Serve frontend

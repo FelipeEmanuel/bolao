@@ -1,11 +1,11 @@
 import './Formulario.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Campo from '../Campo'
 import Botao from '../Botao'
 import ListaSuspensa from '../ListaSuspensa'
 import ListaSuspensaImg from '../ListaSuspensaImg'
 import { toast } from 'react-toastify'
-import { post } from '../../api'
+import { get, post } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import treze from '../../images/logo-treze-de-campina-grande-256.png'
 import campinense from '../../images/logo-campinense-256.png'
@@ -20,7 +20,10 @@ import saopaulopb from '../../images/logo-sao-paulo-crystal.png'
 
 const Formulario = () => {
 
-
+    const[data, setData] = useState(null)
+    const[error, setError] = useState(null)
+    const[isFetching, setIsFetching] = useState(false)
+    const[competicao, setCompeticao] = useState(null)
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
     const[dataLimite, setDataLimite] = useState('')
@@ -35,6 +38,19 @@ const Formulario = () => {
     //const[jogoAdicionado, setJogoAdicionado] = useState(false)
     const navigate = useNavigate()
 
+    useEffect(() => {
+        get("api/competicoes", setData, setError, setIsFetching)
+        //console.log(data)
+    }, [data])
+
+    console.log(data)
+
+    let competicoes = []
+    data?.forEach(x => {
+        competicoes.push({id: x._id, nome: x.name})
+    })
+
+    console.log(competicoes)
 
     const options = [
         '1',
@@ -59,10 +75,10 @@ const Formulario = () => {
         e.preventDefault()
         
         const body = {
-            time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
+            time1, time2, placar1, placar2, competicao, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
         }
         
-        if(!time1 || !time2 || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
+        if(!time1 || !time2 || !competicao || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
             toast.error("Preencha todos os campos")
         } else {
             post('api/games', body)
@@ -95,12 +111,20 @@ const Formulario = () => {
                         aoAlterado={valor => setTime2(valor)}
                     />
                 </div>
-                
+                <div>
+                    <ListaSuspensa 
+                        required 
+                        label="Competição" 
+                        itens={competicoes.nome}
+                        valor={competicoes.id}
+                        aoAlterado={valor => setCompeticao(valor)}
+                    />
+
+                </div>
                 <div className='side-input'>
                     <ListaSuspensaImg 
                         required 
                         label="Escudo do Time 1" 
-                        //itens={<img src={escudos} alt='Escudo'></img>}
                         itens={escudos}
                         valor={isocodetime1}
                         aoAlterado={valor => setIsocodetime1(valor)}
