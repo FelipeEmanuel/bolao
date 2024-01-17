@@ -84,7 +84,7 @@ function Ranking() {
 
   if(isFetching) {
     return <Spinner />
-  } 
+  }
 
   return (
     <>

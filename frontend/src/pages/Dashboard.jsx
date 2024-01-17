@@ -104,6 +104,8 @@ function Dashboard() {
       setUsuario(data?.user[0])
       setGames(data?.gamesDisponiveis)
 
+
+
       const qtdPalpitesUser = data?.user[0].palpites.length;
       const qtdGames = data?.gamesDisponiveis.length - qtdPalpitesUser;
 
@@ -139,6 +141,9 @@ function Dashboard() {
   // Change page
   const paginatePalpites = pageNumber => setCurrentPagePalpites(pageNumber);
 
+  /*<h2>Dos {games?.length} jogos disponíveis, você já palpitou em {qtdPalpitou}!</h2>
+  <h2>Falta palpitar em {qtdNaoPalpitou} jogos!</h2>*/
+
   return (
     <>
       <Header />
@@ -156,8 +161,7 @@ function Dashboard() {
       <div className='palpitesgrid'>
         <section className='contentpalpites'>
           <h2>Jogos disponíveis para palpitar no momento!</h2>
-          <h2>Dos {games?.length} jogos disponíveis, você já palpitou em {qtdPalpitou}!</h2>
-          <h2>Falta palpitar em {qtdNaoPalpitou} jogos!</h2>
+          
           { 
             currentPages?.length > 0 && 
             <div className='palpites'>
