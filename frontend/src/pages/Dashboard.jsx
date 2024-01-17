@@ -34,6 +34,8 @@ function Dashboard() {
   const [gamesPerPage] = useState(5);
   const [currentPagePalpites, setCurrentPagePalpites] = useState(1);
   const [gamesPerPagePalpites] = useState(10);
+  const [qtdPalpitou, setQtdPalpitou] = useState(0);
+  const [qtdNaoPalpitou, setQtdNaoPalpitou] = useState(0);
 
   useEffect(() => {
     get("api/palpites", setData, setError, setIsFetching)
@@ -102,8 +104,17 @@ function Dashboard() {
       setUsuario(data?.user[0])
       setGames(data?.gamesDisponiveis)
 
+      const qtdPalpitesUser = data?.user[0].palpites.length;
+      const qtdGames = data?.gamesDisponiveis.length - qtdPalpitesUser;
+
+      setQtdPalpitou(qtdPalpitesUser)
+      setQtdNaoPalpitou(qtdGames)
+        
+
     }
   }, [data])
+
+  
 
   if(isFetching) {
     return <Spinner/>
@@ -113,6 +124,7 @@ function Dashboard() {
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentPages = games?.slice(indexOfFirstGame, indexOfLastGame);
+
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -131,7 +143,7 @@ function Dashboard() {
     <>
       <Header />
       <section>
-       <h1>Bem-vindo, {user && user.name}</h1>
+       <h1>Bem-vindo, {data?.user[0].name}!</h1>
         <br/>
         <h3>Você pode palpitar até 15 minutos antes do início do jogo!</h3>
         <h3 className='alerta'>INSTRUÇÕES:</h3>
@@ -144,6 +156,8 @@ function Dashboard() {
       <div className='palpitesgrid'>
         <section className='contentpalpites'>
           <h2>Jogos disponíveis para palpitar no momento!</h2>
+          <h2>Dos {games?.length} jogos disponíveis, você já palpitou em {qtdPalpitou}!</h2>
+          <h2>Falta palpitar em {qtdNaoPalpitou} jogos!</h2>
           { 
             currentPages?.length > 0 && 
             <div className='palpites'>

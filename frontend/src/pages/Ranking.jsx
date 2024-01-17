@@ -5,6 +5,7 @@ import useApi from '../hooks/useApi'
 import { useState } from 'react'
 import {ordenarRanking} from '../components/utils'
 import Header from '../components/Header/Header'
+import { imgDefault } from '../components/utils/constants'
 
 function Ranking() {
 
@@ -25,16 +26,21 @@ function Ranking() {
 
   useEffect(() => {
     if(data) {
+      console.log(data)
+      console.log(data?.users)
       data?.users?.forEach(u => {   
           u.pontuacao = 0;
+          u.palpitesCravados = 0;
           u.palpites.forEach(p => {
             data?.games?.forEach(g => {
               if(p.jogo === g._id) {
                 if(p.palpite1 === g.placar1 && p.palpite2 === g.placar2){
                   if(g.gameType === 2) {
                     u.pontuacao = u.pontuacao + 10;
+                    u.palpitesCravados += 1;
                   } else {
                     u.pontuacao = u.pontuacao + 5;
+                    u.palpitesCravados += 1;
                   }
                 } else if((p.palpite1 > p.palpite2 && g.placar1 > g.placar2) || (p.palpite1 < p.palpite2 && g.placar1 < g.placar2)) {  
                   if(g.gameType === 2) {
@@ -85,19 +91,31 @@ function Ranking() {
       <Header />
       <div className='ranking-top'>Ranking</div>
       <section className='ranking'>
-        <div>
-          <span>Posição</span>
-          <span>Nome</span>
-          <span>Pontuação</span>
+        <div className='ranking-cabecalho'>
+          <div className='ranking-col-1'>Posição</div>
+          <div className='ranking-col-2'>Nome</div>
+          <div className='ranking-col-1'>Pontuação</div>
+          <div className='ranking-col-1'>Cravadas</div>
         </div>
         <p className='linha'></p>
         {
           users?.map((u, key) => {
             return (
               <div className='pos' key={key}>
-                <div>{ key + 1 }</div>
-                <div>{ u.name }</div>
-                <div>{ u.pontuacao }</div>
+                <div className='ranking-col-1'>{ key + 1 }</div>
+                <div className='ranking-col-3'>
+                  <img 
+                    src={u?.imgPerfil ? u?.imgPerfil : imgDefault} 
+                    alt='Imagem do usuário' 
+                    style={{
+                        width: '1.5em',
+                        height: '1.5em'
+                    }}>
+                  </img> 
+                  <span>{ u.name }</span>
+                </div>
+                <div className='ranking-col-1'>{ u.pontuacao }</div>
+                <div className='ranking-col-1'>{ u.palpitesCravados }</div>
               </div> 
             )
           })
