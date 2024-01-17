@@ -7,24 +7,15 @@ import ListaSuspensaImg from '../ListaSuspensaImg'
 import { toast } from 'react-toastify'
 import { get, post } from '../../api'
 import { useNavigate } from 'react-router-dom'
-import treze from '../../images/logo-treze-de-campina-grande-256.png'
-import campinense from '../../images/logo-campinense-256.png'
-import serrabranca from '../../images/logo-serra-branca.png'
-import botafogopb from '../../images/logo-botafogo-pb.png'
-import atleticopb from '../../images/logo-atletico-pb.png'
-import sousa from '../../images/logo-sousa-pb-256.png'
-import nacionalpb from '../../images/logo-nacional-de-patos-pb.png'
-import csp from '../../images/logo-csp.png'
-import pombal from '../../images/logo-pombal.png'
-import saopaulopb from '../../images/logo-sao-paulo-crystal.png'
+import { escudos } from '../utils/constants'
 
 
 const Formulario = () => {
 
-    /*const[data, setData] = useState(null)
-    const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
-    const[competicao, setCompeticao] = useState(null)*/
+    const[dataCompeticao, setDataCompeticao] = useState(null)
+    const[errorCompeticao, setErrorCompeticao] = useState(null)
+    const[isFetchingCompeticao, setIsFetchingCompeticao] = useState(false)
+    const[competicao, setCompeticao] = useState(null)
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
     const[dataLimite, setDataLimite] = useState('')
@@ -36,23 +27,13 @@ const Formulario = () => {
     const[placar1, setPlacar1] = useState('')
     const[placar2, setPlacar2] = useState('')
     const[gameType, setGameType] = useState('')
-    //const[jogoAdicionado, setJogoAdicionado] = useState(false)
     const navigate = useNavigate()
 
     //let competicoes = []
 
-    /*useEffect(() => {
-        get("api/competicoes", setData, setError, setIsFetching).then((response) => {
-            console.log(response);
-            const competicoes = response.data.map((c) => ({
-                nome: c.name,
-                id: c._id
-            }));
-
-            setCompeticao({competicoes});
-        });
-        //console.log(data)
-    })
+    useEffect(() => {
+        get("api/competicoes", setDataCompeticao, setErrorCompeticao, setIsFetchingCompeticao)
+    }, [])
 
     //console.log(data)
 
@@ -63,42 +44,37 @@ const Formulario = () => {
 
     console.log(competicoes)*/
 
+
     const options = [
         '1',
         '2'
-    ]
-
-    const escudos = [
-        {img: treze, text: "Treze"},
-        {img: campinense, text: "Campinense"},
-        {img: atleticopb, text: "Atlético-PB"},
-        {img: botafogopb, text: "Botafogo-PB"},
-        {img: sousa, text: "Sousa"},
-        {img: serrabranca, text: "Serra Branca"},
-        {img: nacionalpb, text: "Nacional de Patos"},
-        {img: csp, text: "CSP"},
-        {img: pombal, text: "Pombal"},
-        {img: saopaulopb, text: "São Paulo Crystal"},
-
-    ]   
+    ]  
 
     const adicionarJogo = ((e) => {
         e.preventDefault()
         
         const body = {
-            time1, time2, placar1, placar2, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
+            time1, time2, placar1, placar2, competicao, dataLimite, isocodetime1, isocodetime2, infoCamp, infoJogo, infoGroup, gameType, 
         }
         
-        if(!time1 || !time2 || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
+        if(!time1 || !time2 || !competicao || !dataLimite || !isocodetime1 || !isocodetime2 || !infoCamp || !infoJogo || !infoGroup || !gameType) {
             toast.error("Preencha todos os campos")
         } else {
-            post('api/games', body)
+            post('api/games', body, setDataCompeticao)
             //setJogoAdicionado(true)
             navigate('/admin')
         }
         
     })
 
+    function organizaCompeticao(value) {
+        setCompeticao(value)
+        dataCompeticao.forEach(e => {
+            if(e._id == value) {
+                setInfoCamp(e.name)
+            }
+        });
+    }
 
     return (
         <section className='formulario-container'>
@@ -156,13 +132,15 @@ const Formulario = () => {
                         aoAlterado={valor => setPlacar2(valor)}
                     />
                 </div>
-                <Campo 
-                    required
-                    label="Informa a competição que esse jogo pertence (Ex: PB24)"
-                    placeholder="Competição do jogo"
-                    valor={infoCamp}
-                    aoAlterado={valor => setInfoCamp(valor)}
-                />
+                <div className="lista-suspensa">
+                    <label>Competições</label>
+                    <select required={true} value={competicao} onChange={evento => organizaCompeticao(evento.target.value)} >
+                        <option />
+                        {dataCompeticao?.map(competicao => {
+                            return <option key={competicao?._id} value={competicao?._id}>{competicao?.name}</option>
+                        })}    
+                    </select>
+                </div>
                 <Campo 
                     required
                     label="Data Limite (Ex: 2022-12-28T09:45:00)"

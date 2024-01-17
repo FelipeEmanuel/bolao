@@ -27,7 +27,8 @@ const getRanking = asyncHandler(async (req, res) => {
                     palpite1: 1, 
                     palpite2: 1,
                     jogo: 1  
-                } 
+                },
+                imgPerfil: 1 
             } 
         }
     ]);

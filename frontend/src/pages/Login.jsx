@@ -5,6 +5,7 @@ import { login } from '../features/auth/authService'
 import Spinner from '../components/Spinner/Spinner'
 import Header from '../components/Header/Header'
 
+
 function Login() {
 
   const [formData, setFormData] = useState({
@@ -43,6 +44,7 @@ function Login() {
     login(userData).then(response => {
       if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
+        alert('Login efetuado com sucesso!')
         navigate('/')
       }
     })

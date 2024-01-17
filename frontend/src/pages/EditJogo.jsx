@@ -7,44 +7,7 @@ import ListaSuspensaImg from '../components/ListaSuspensaImg'
 import ListaSuspensa from '../components/ListaSuspensa'
 import Botao from '../components/Botao'
 import { get, put } from '../api'
-import treze from '../images/logo-treze-de-campina-grande-256.png'
-import campinense from '../images/logo-campinense-256.png'
-import serrabranca from '../images/logo-serra-branca.png'
-import botafogopb from '../images/logo-botafogo-pb.png'
-import atleticopb from '../images/logo-atletico-pb.png'
-import sousa from '../images/logo-sousa-pb-256.png'
-import nacionalpb from '../images/logo-nacional-de-patos-pb.png'
-import csp from '../images/logo-csp.png'
-import pombal from '../images/logo-pombal.png'
-import saopaulopb from '../images/logo-sao-paulo-crystal.png'
-import flamengo from '../images/logo-flamengo-256.png'
-import fluminense from '../images/logo-fluminense-256.png'
-import vasco from '../images/logo-vasco-da-gama-256.png'
-import botafogo from '../images/logo-botafogo-256.png'
-import madureira from '../images/logo-madureira-256.png'
-import boavista from '../images/logo-boavista-rj-256.png'
-import novaiguacu from '../images/logo-nova-iguacu-256.png'
-import audaxrj from '../images/logo-audax.png'
-import bangu from '../images/logo-bangu-256.png'
-import sampaio from '../images/logo-sampaio-correa.png'
-import voltaredonda from '../images/logo-volta-redonda-256.png'
-import portuguesarj from '../images/logo-portuguesa-rj-256.png'
-import palmeiras from '../images/logo-palmeiras-256.png'
-import corinthians from '../images/logo-corinthians-256.png'
-import santos from '../images/logo-santos-256.png'
-import saopaulo from '../images/logo-sao-paulo-256.png'
-import guarani from '../images/logo-guarani-256.png'
-import pontepreta from '../images/logo-ponte-preta-256.png'
-import bragantino from '../images/logo-red-bull-bragantino-256.png'
-import aguasanta from '../images/logo-agua-santa-256.png'
-import novorizontino from '../images/logo-novorizontino.png'
-import santoandre from '../images/logo-santo-andre-256.png'
-import saobernardo from '../images/logo-sao-bernardo-256.png'
-import interlimeira from '../images/logo-inter-limeira.png'
-import portuguesasp from '../images/logo-portuguesa-sp.png'
-import mirassol from '../images/logo-mirassol-atualizado-256.png'
-import ituano from '../images/logo-ituano-256.png'
-import botafogosp from '../images/logo-botafogo-sp-256.png'
+import { escudos } from '../components/utils/constants'
 import Spinner from '../components/Spinner/Spinner'
 
 const EditJogo = () => {
@@ -72,48 +35,6 @@ const EditJogo = () => {
         '1',
         '2'
     ]
-
-    const escudos = [
-        {img: aguasanta, text: "Água Santa"},
-        {img: atleticopb, text: "Atlético-PB"},
-        {img: audaxrj, text: "Audax-RJ"},
-        {img: bangu, text: "Bangu"},
-        {img: boavista, text: "Boa Vista-RJ"},
-        {img: botafogopb, text: "Botafogo-PB"},
-        {img: botafogo, text: "Botafogo-RJ"},
-        {img: botafogosp, text: "Botafogo-SP"},
-        {img: campinense, text: "Campinense"},
-        {img: corinthians, text: "Corinthians"},
-        {img: csp, text: "CSP"},
-        {img: flamengo, text: "Flamengo"},
-        {img: fluminense, text: "Fluminense"},
-        {img: guarani, text: "Guarani"},
-        {img: interlimeira, text: "Inter de Limeira"},
-        {img: ituano, text: "Ituano"},
-        {img: madureira, text: "Madureira"},
-        {img: mirassol, text: "Mirassol"},
-        {img: nacionalpb, text: "Nacional de Patos"},
-        {img: novaiguacu, text: "Nova Iguaçu"},
-        {img: novorizontino, text: "Novorizontino"},
-        {img: palmeiras, text: "Palmeiras"},
-        {img: pombal, text: "Pombal"},
-        {img: pontepreta, text: "Ponte Preta"},
-        {img: portuguesarj, text: "Portuguesa-RJ"},
-        {img: portuguesasp, text: "Portuguesa-SP"},
-        {img: bragantino, text: "RB Bragantino"},
-        {img: santoandre, text: "Santo André"},
-        {img: santos, text: "Santos"},
-        {img: saobernardo, text: "São Bernardo"},
-        {img: saopaulo, text: "São Paulo"},
-        {img: saopaulopb, text: "São Paulo Crystal"},
-        {img: sampaio, text: "Sampaio Corrêa-RJ"},
-        {img: serrabranca, text: "Serra Branca"},
-        {img: sousa, text: "Sousa"},
-        {img: treze, text: "Treze"},
-        {img: vasco, text: "Vasco"},
-        {img: voltaredonda, text: "Volta Redonda"},
-
-    ] 
 
     useEffect(() => {
 
