@@ -98,15 +98,16 @@ function Perfil() {
                                 src={data?.imgPerfil ? data?.imgPerfil : imgDefault} 
                                 alt='Imagem do usuário' 
                                 style={{
-                                    width: '4em',
-                                    height: '4em'
+                                    width: '7em',
+                                    height: '7em'
                                 }}>
                             </img>
-                            <button className='' onClick={() => setButtonPopup(true)}>
-                                <MdEdit />
+                            <button className='button-imagem' onClick={() => setButtonPopup(true)}>
+                                Editar perfil
                             </button>
                             
                         </div>
+                        
                         <div className='perfilNome'>
                                 <p>Nome</p>
                                 <h2>{data?.name}</h2>

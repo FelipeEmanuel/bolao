@@ -370,8 +370,19 @@ h3 {
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  position: relative;
 }
 
+.perfilMain .perfil .button-imagem{
+  border: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0px 0;
+  padding: 4px 20px 4px;
+  color: white;
+  background-color: black;
+}
 .perfilMain .conquistas {
   display: flex;
   flex-direction: column;
