@@ -104,11 +104,16 @@ function Dashboard() {
       setUsuario(data?.user[0])
       setGames(data?.gamesDisponiveis)
 
+      let qtdPalpitesUser = 0
+      data?.gamesDisponiveis.forEach(gd => {
+        data?.user[0].palpites.forEach(up => {
+          if(gd._id == up.jogo) {
+            qtdPalpitesUser+=1;
+          } 
+        })
+      });
 
-
-      const qtdPalpitesUser = data?.user[0].palpites.length;
-      const qtdGames = data?.gamesDisponiveis.length - qtdPalpitesUser;
-
+      const qtdGames = data?.gamesDisponiveis.length - qtdPalpitesUser 
       setQtdPalpitou(qtdPalpitesUser)
       setQtdNaoPalpitou(qtdGames)
         
@@ -141,8 +146,7 @@ function Dashboard() {
   // Change page
   const paginatePalpites = pageNumber => setCurrentPagePalpites(pageNumber);
 
-  /*<h2>Dos {games?.length} jogos disponíveis, você já palpitou em {qtdPalpitou}!</h2>
-  <h2>Falta palpitar em {qtdNaoPalpitou} jogos!</h2>*/
+  /**/
 
   return (
     <>
@@ -161,7 +165,8 @@ function Dashboard() {
       <div className='palpitesgrid'>
         <section className='contentpalpites'>
           <h2>Jogos disponíveis para palpitar no momento!</h2>
-          
+          <h3>Dos {games?.length} jogos disponíveis, você já palpitou em {qtdPalpitou}!</h3>
+          <h3 className='falta-palpite'>Falta palpitar em {qtdNaoPalpitou} jogo(s)!</h3>
           { 
             currentPages?.length > 0 && 
             <div className='palpites'>
