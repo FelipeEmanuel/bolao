@@ -178,6 +178,10 @@ h3 {
   background-color: #CD7F32;
 }
 
+.falta-palpite {
+  color: red;
+}
+
 .palpiteG {
   color: green;
 }

@@ -82,23 +82,9 @@ function Perfil() {
   
     };
 
-    /*<h3>Escolha um time para sua imagem de perfil!</h3>
-                    <ListaSuspensaImg 
-                        required={false} 
-                        label="Imagem do Perfil" 
-                        itens={escudos}
-                        valor={imgPerfil ? imgPerfil : ''}
-                        aoAlterado={valor => setImgPerfil(valor)}
-                    />
+    /*
 
-                    <img 
-                                src={data?.imgPerfil ? data?.imgPerfil : imgDefault} 
-                                alt='Imagem do usuário' 
-                                style={{
-                                    width: '4em',
-                                    height: '4em'
-                                }}>
-                            </img>*/
+                    */
 
 
     return (
@@ -108,11 +94,17 @@ function Perfil() {
             <div className="perfilMain">
                 <div className='perfil'>
                         <div className='perfilimagem'>
-                             
+                            <img 
+                                src={data?.imgPerfil ? data?.imgPerfil : imgDefault} 
+                                alt='Imagem do usuário' 
+                                style={{
+                                    width: '4em',
+                                    height: '4em'
+                                }}>
+                            </img>
                             <button className='' onClick={() => setButtonPopup(true)}>
                                 <MdEdit />
                             </button>
-
                             
                         </div>
                         <div className='perfilNome'>
@@ -132,7 +124,14 @@ function Perfil() {
             
             <ModalPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
                 <form className='formulario' onSubmit={(event) => editarImagem(event)}>
-                    
+                    <h3>Escolha um time para sua imagem de perfil!</h3>
+                        <ListaSuspensaImg 
+                            required={false} 
+                            label="Imagem do Perfil" 
+                            itens={escudos}
+                            valor={imgPerfil ? imgPerfil : ''}
+                            aoAlterado={valor => setImgPerfil(valor)}
+                        /> 
                     <Campo 
                         required
                         label="Alterar nome"
