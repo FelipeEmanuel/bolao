@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const {getRanking} = require('../controllers/rankingController')
+const {getRanking, setPontuacao} = require('../controllers/rankingController')
 const { protect } = require('../middleware/authMiddleware')
 
-router.route('/').get(protect, getRanking)
-
+router.route('/:id').get(protect, getRanking)
+router.route('/setPontuacao/:id').put(protect, setPontuacao)
 
 module.exports = router

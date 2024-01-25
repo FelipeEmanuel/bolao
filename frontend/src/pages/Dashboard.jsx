@@ -172,7 +172,7 @@ function Dashboard() {
             <div className='palpites'>
                 { 
                   currentPages?.map((jogo) => (
-                    <PalpiteItem key={jogo._id} jogo={jogo} palpitou={setPalpitou}/>
+                    <PalpiteItem key={jogo._id} jogo={jogo} competicao={jogo.competicao} palpitou={setPalpitou}/>
                   ))
                 }
                 <Pagination 

@@ -5,12 +5,12 @@ import { toast } from 'react-toastify'
 import {post} from '../../api/'
 
 
-function PalpiteItem({jogo, palpitou}) {
+function PalpiteItem({jogo, competicao, palpitou}) {
 
     const [palpite1, setPalpite1] = useState(jogo?.palpite1)
     const [palpite2, setPalpite2] = useState(jogo?.palpite2)
     const [palpiteRealizado, setPalpiteRealizado] = useState(false)
-    
+
     useEffect (() => {
         if(jogo?.palpite1 && jogo?.palpite2) {
             setPalpiteRealizado(true)
@@ -22,6 +22,7 @@ function PalpiteItem({jogo, palpitou}) {
         
         const body = {
             jogo_id: jogo._id,
+            competicao,
             palpite1,
             palpite2, 
         }
