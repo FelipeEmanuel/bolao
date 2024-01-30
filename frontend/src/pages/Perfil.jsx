@@ -3,12 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import ModalPopup from "../components/ModalPopup"
 import Header from "../components/Header/Header"
-import { MdEdit } from "react-icons/md"
-import Popup from "reactjs-popup"
 import Botao from "../components/Botao"
 import ListaSuspensaImg from "../components/ListaSuspensaImg"
-import treze from '../images/logo-treze-de-campina-grande-256.png'
-import campinense from '../images/logo-campinense-256.png'
 import { get, put } from "../api"
 import { imgDefault } from '../components/utils/constants'
 import Spinner from "../components/Spinner/Spinner"

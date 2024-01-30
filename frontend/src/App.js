@@ -10,6 +10,8 @@ import NovoJogo from './pages/NovoJogo'
 import Perfil from './pages/Perfil'
 import PageNotFound from './pages/PageNotFound'
 import EditJogo from './pages/EditJogo'
+import Comps from './pages/Comps'
+import Rankings from './components/Rankings'
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
             <Route path='/perfil' element={<Perfil />}/>
             <Route path='*' element={<PageNotFound/>}/>
             <Route path='/:id' element={<EditJogo />} />
+            <Route path='/comps' element={<Comps />}/>
+            <Route path='/getPontuacao/:id' element={<Rankings />}/>
           </Routes>
         </div>
       </Router>

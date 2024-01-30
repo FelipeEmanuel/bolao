@@ -58,7 +58,8 @@ export const put = (url, body, setData) => {
 export const remove = (url, setData, setError, setIsFetching) => {
     api.delete(url)
         .then(response => {
-            setData(response.data);
+            setData(response?.data);
+            console.log(response?.data)
         })
         .catch((err) => {
             setError(err);

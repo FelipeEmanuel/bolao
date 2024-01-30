@@ -2,8 +2,8 @@ const asyncHandler = require('express-async-handler')
 const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const User = require('../models/userModel')
+const Ranking = require('../models/rankingModel')
 const { getDate, parseObjectId } = require('../util/index')
-
 
 const getPartidas = asyncHandler(async (req, res) => {
 
@@ -57,18 +57,26 @@ const setPalpite = asyncHandler(async (req, res) => {
 
     const jogoDisponivel = getDate()
     let palpiteEncontrado = await Palpite.findOne({jogo: palpite.jogo_id, user: req.user.id})
-    let obj = {user: req.user.id, jogo: palpite.jogo_id, palpite1: palpite.palpite1, palpite2: palpite.palpite2} 
+    let ranking = await Ranking.findOne({user: req.user.id, competicao: palpite.competicao})
+    let obj = {user: req.user.id, jogo: palpite.jogo_id, competicao: palpite.competicao, palpite1: palpite.palpite1, palpite2: palpite.palpite2} 
     let jogoAtual = await Game.findById(obj.jogo)
+    let instancia = {user: req.user.id, competicao: palpite.competicao}
     if(jogoAtual.dataLimite >= jogoDisponivel) {
         if(palpiteEncontrado) {   
             if(user === palpiteEncontrado.user.toString()){
                 await User.findByIdAndUpdate(user, {palpitou: getUser}) 
                 await Palpite.findByIdAndUpdate(palpiteEncontrado.id, obj)
             } else {
+                if(!ranking && user.role === 'user') {
+                    await Ranking.create(instancia)
+                }
                 await User.findByIdAndUpdate(user, {palpitou: getUser})    
                 await Palpite.create(obj)
             }    
         } else {
+            if(!ranking && user.role === 'user') {
+                await Ranking.create(instancia)
+            }
             await User.findByIdAndUpdate(user, {palpitou: getUser}) 
             await Palpite.create(obj)
         }
@@ -86,6 +94,7 @@ const getUserPalpites = asyncHandler(async (req, res) => {
 
     res.status(200).json(userPalpites)
 })
+
 
 module.exports = {
     setPalpite, getPartidas, getUserPalpites
