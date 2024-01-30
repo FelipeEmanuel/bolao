@@ -5,6 +5,7 @@ const rankingSchema = mongoose.Schema({
     competicao: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Competicao'},
     pontuacao: {type: Number, default: 0},
     cravadas: {type: Number, default: 0},
+    jogos: {type: Number, default: 0}
 },{
     timestamps: true
 })

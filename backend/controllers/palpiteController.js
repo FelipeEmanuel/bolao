@@ -5,7 +5,6 @@ const User = require('../models/userModel')
 const Ranking = require('../models/rankingModel')
 const { getDate, parseObjectId } = require('../util/index')
 
-
 const getPartidas = asyncHandler(async (req, res) => {
 
     const user = await User.aggregate( [
@@ -68,14 +67,14 @@ const setPalpite = asyncHandler(async (req, res) => {
                 await User.findByIdAndUpdate(user, {palpitou: getUser}) 
                 await Palpite.findByIdAndUpdate(palpiteEncontrado.id, obj)
             } else {
-                if(!ranking) {
+                if(!ranking && user.role === 'user') {
                     await Ranking.create(instancia)
                 }
                 await User.findByIdAndUpdate(user, {palpitou: getUser})    
                 await Palpite.create(obj)
             }    
         } else {
-            if(!ranking) {
+            if(!ranking && user.role === 'user') {
                 await Ranking.create(instancia)
             }
             await User.findByIdAndUpdate(user, {palpitou: getUser}) 
@@ -95,6 +94,7 @@ const getUserPalpites = asyncHandler(async (req, res) => {
 
     res.status(200).json(userPalpites)
 })
+
 
 module.exports = {
     setPalpite, getPartidas, getUserPalpites

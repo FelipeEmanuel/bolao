@@ -48,6 +48,9 @@ function Header() {
                       <li>
                         <Link to='/admin'>Jogos</Link>
                       </li>
+                      <li>
+                        <Link to='/comps'>Competições</Link>
+                      </li>
                     </ul>
                     
                   </div>

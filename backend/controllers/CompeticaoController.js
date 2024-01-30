@@ -22,7 +22,7 @@ const getCompeticaoById = asyncHandler(async (req, res) => {
 })
 
 const setCompeticoes = asyncHandler(async (req, res) => {
-    const {name, sigla, encerrado} = req.body
+    const {name, sigla, img, encerrado} = req.body
 
     if (!name || !sigla) {
         res.status(400)
@@ -30,10 +30,12 @@ const setCompeticoes = asyncHandler(async (req, res) => {
     }
 
     const competicao = await Competicao.create({
-        name, sigla, encerrado
+        name, sigla, img, encerrado
     })
 
-    res.status(200).json(competicao)
+    const Competicoes = await Competicao.find()
+
+    res.status(200).json(Competicoes)
 })
 
 const updateCompeticao = asyncHandler(async (req, res) => {
@@ -55,26 +57,26 @@ const deleteCompeticao = asyncHandler(async (req, res) => {
     try {
         await Palpite.deleteMany({ "competicao" : req.params.id})
     } catch (error) {
-        console.log(error);
+        res.status(400)
+        throw new Error(error)
     }
 
     try {
         await Game.deleteMany({"competicao" : req.params.id}) 
     } catch (error) {
-        console.log(error);
+        res.status(400)
+        throw new Error(error)
     }
 
-    await Competicao.findByIdAndDelete(req.params.id, function (err, docs) {
-        if (err) {
-            console.log(err)
-            res.status(400)
-            throw new Error('Competicao not found')
-        }
-        else {
-            console.log("Deleted : ", docs);
-            res.status(200).json({id: req.params.id})
-        }
-    });
+    try {
+        await Competicao.findByIdAndDelete(req.params.id)
+        const Competicoes = await Competicao.find()
+        res.status(200).json(Competicoes)
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+    
        
 })
 

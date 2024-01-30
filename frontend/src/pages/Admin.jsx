@@ -17,10 +17,16 @@ function Admin() {
     const [currentPage, setCurrentPage] = useState(1);
     const [gamesPerPage] = useState(15);
 
+    
+
     useEffect(() => {
         if(!user) {
           navigate('/login')
         }
+
+        /*if(user.role != "admin") {
+            navigate('/')
+        }*/
     
     }, [user, navigate])
 

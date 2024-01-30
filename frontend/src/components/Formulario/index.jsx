@@ -29,21 +29,9 @@ const Formulario = () => {
     const[gameType, setGameType] = useState('')
     const navigate = useNavigate()
 
-    //let competicoes = []
-
     useEffect(() => {
         get("api/competicoes", setDataCompeticao, setErrorCompeticao, setIsFetchingCompeticao)
     }, [])
-
-    //console.log(data)
-
-    
-    /*data?.forEach(x => {
-        competicoes.push({id: x._id, nome: x.name})
-    })
-
-    console.log(competicoes)*/
-
 
     const options = [
         '1',
