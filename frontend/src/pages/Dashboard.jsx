@@ -136,12 +136,12 @@ function Dashboard() {
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  //Palpites
 
+  //Palpites
   // Get current games
   const indexOfLastGamePalpites = currentPagePalpites * gamesPerPagePalpites;
   const indexOfFirstGamePalpites = indexOfLastGamePalpites - gamesPerPagePalpites;
-  const currentPagesPalpites = usuario?.palpites?.slice(indexOfFirstGamePalpites, indexOfLastGamePalpites);
+  const currentPagesPalpites = usuario?.palpites?.sort(ordenarJogos).reverse().slice(indexOfFirstGamePalpites, indexOfLastGamePalpites);
 
   // Change page
   const paginatePalpites = pageNumber => setCurrentPagePalpites(pageNumber);
