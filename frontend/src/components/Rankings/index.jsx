@@ -50,7 +50,7 @@ const Rankings = () => {
     }, [data2])
     
     if(isFetching) {
-    return <Spinner />
+      return <Spinner />
     }
 
     return (
