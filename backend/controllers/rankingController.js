@@ -4,7 +4,7 @@ const User = require('../models/userModel')
 const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const Ranking = require('../models/rankingModel')
-const Semanal = require('../models/SemanalModel')
+const Semanal = require('../models/semanalModel')
 
 const getRanking = asyncHandler(async (req, res) => {
 

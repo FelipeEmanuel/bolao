@@ -7,7 +7,7 @@ const Campeonato = require('../models/campeonatoModel')
 const Conquista = require('../models/conquistasModel')
 const { getDate, parseObjectId } = require('../util/index')
 const Competicao = require('../models/competicaoModel')
-const Semanal = require('../models/SemanalModel')
+const Semanal = require('../models/semanalModel')
 
 const getPartidas = asyncHandler(async (req, res) => {
 

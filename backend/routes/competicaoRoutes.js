@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getCompeticao, setCompeticoes, updateCompeticao, deleteCompeticao, getCompeticaoById, encerrarCompeticao} = require('../controllers/CompeticaoController')
+const {getCompeticao, setCompeticoes, updateCompeticao, deleteCompeticao, getCompeticaoById, encerrarCompeticao} = require('../controllers/competicaoController')
 const { protect, isAdmin } = require('../middleware/authMiddleware')
 
 router.route('/').get(protect, getCompeticao).post(protect, isAdmin, setCompeticoes)
