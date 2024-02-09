@@ -4,7 +4,7 @@ const colors = require('colors');
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
-const port = process.env.REACT_APP_PORT || 5000;
+const port = process.env.REACT_APP_PORT || 80;
 const cors = require('cors')
 
 connectDB()
