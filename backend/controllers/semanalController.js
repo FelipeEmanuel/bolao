@@ -240,7 +240,7 @@ cron.schedule("00 02 * * 1", function () {
     timezone: "America/Sao_Paulo"
 })
 
-cron.schedule("38 00 * * 5", function () {
+cron.schedule("00 * * * *", function () {
     const pont = pontuacaoSemana();
 }, {
     timezone: "America/Sao_Paulo"
