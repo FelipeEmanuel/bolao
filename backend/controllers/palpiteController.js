@@ -3,7 +3,11 @@ const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const User = require('../models/userModel')
 const Ranking = require('../models/rankingModel')
+const Campeonato = require('../models/campeonatoModel')
+const Conquista = require('../models/conquistasModel')
 const { getDate, parseObjectId } = require('../util/index')
+const Competicao = require('../models/competicaoModel')
+const Semanal = require('../models/SemanalModel')
 
 const getPartidas = asyncHandler(async (req, res) => {
 
@@ -58,24 +62,38 @@ const setPalpite = asyncHandler(async (req, res) => {
     const jogoDisponivel = getDate()
     let palpiteEncontrado = await Palpite.findOne({jogo: palpite.jogo_id, user: req.user.id})
     let ranking = await Ranking.findOne({user: req.user.id, competicao: palpite.competicao})
+    let userInfo = await User.findById(user)
+    let semanal = await Campeonato.findOne({name: 'Semanal'})
+    let semanal2 = await Semanal.findOne({user: req.user.id, campeonato: semanal._id})
+    let semanalCreate = {user: req.user.id, campeonato: semanal._id}
     let obj = {user: req.user.id, jogo: palpite.jogo_id, competicao: palpite.competicao, palpite1: palpite.palpite1, palpite2: palpite.palpite2} 
     let jogoAtual = await Game.findById(obj.jogo)
     let instancia = {user: req.user.id, competicao: palpite.competicao}
+   
     if(jogoAtual.dataLimite >= jogoDisponivel) {
         if(palpiteEncontrado) {   
             if(user === palpiteEncontrado.user.toString()){
                 await User.findByIdAndUpdate(user, {palpitou: getUser}) 
                 await Palpite.findByIdAndUpdate(palpiteEncontrado.id, obj)
+                if(!semanal2 && userInfo.role == 'user') {
+                    await Semanal.create(semanalCreate)
+                }
             } else {
-                if(!ranking && user.role === 'user') {
+                if(!ranking && userInfo.role == 'user') {
                     await Ranking.create(instancia)
+                }
+                if(!semanal2 && userInfo.role == 'user') {
+                    await Semanal.create(semanalCreate)
                 }
                 await User.findByIdAndUpdate(user, {palpitou: getUser})    
                 await Palpite.create(obj)
             }    
         } else {
-            if(!ranking && user.role === 'user') {
-                await Ranking.create(instancia)
+            if(!ranking && userInfo.role === 'user') {
+                await Ranking.create(instancia)  
+            }
+            if(!semanal2 && userInfo.role == 'user') {
+                await Semanal.create(semanalCreate)
             }
             await User.findByIdAndUpdate(user, {palpitou: getUser}) 
             await Palpite.create(obj)

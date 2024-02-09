@@ -1,10 +1,8 @@
 import {useEffect} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Spinner from '../components/Spinner/Spinner'
-import useApi from '../hooks/useApi'
 import { useState } from 'react'
 import Header from '../components/Header/Header'
-import Rankings from '../components/Rankings'
 import { get } from '../api'
 import CardsRanking from '../components/CardsRanking'
 
@@ -16,8 +14,8 @@ function Ranking() {
   const[data, setData] = useState(null)
   const[isFetching, setIsFetching] = useState(false)
   const[error, setError] = useState(null)
-  
-  
+  const[up, setUp] = useState(0)
+
   useEffect(() => {
     if(!user) {
       navigate('/login')
@@ -31,34 +29,40 @@ function Ranking() {
 
   useEffect(() => { 
     if(data) {
-        setComps(data)
+      setComps(data)
+
+      let up = 0;
+
+      data?.forEach(d => {
+        if(d.ativa === false) {
+          up = up + 1;
+        }
+      })
+
+      setUp(up)
     }
+
   }, [data])
 
   if(isFetching) {
     return <Spinner />
   }
 
-
   return (
     <>
       <Header />
-      <h1>Competições em andamento</h1>
+      <h1>Competições finalizadas</h1>
       <div className='lista-comps'>
-          { 
-          comps?.map((comp) => (
-              comp.ativa === true &&
-                <CardsRanking key={comp._id} competicao={comp}/>
-          ))
-          }           
+        { 
+        comps?.map((comp) => ( 
+            comp.ativa === false && 
+              <CardsRanking key={comp._id} competicao={comp} />
+        ))
+        }  
       </div>
-      <div className='div1'>
-        <Link to='/ranking/inativos'>
-          <button className='btn btn-block3'>
-            Ver rankings de competições passadas
-          </button>
-        </Link>
-      </div>
+      <section>
+        {up === 0 && <h2>Não existem competições finalizadas!</h2>}
+      </section>
     </>
   )
 }

@@ -400,6 +400,12 @@ h3 {
   flex-wrap: wrap;
 }
 
+.conquistas {
+  display: flex;
+  width: 100%;
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
 
 
 @keyframes spin {

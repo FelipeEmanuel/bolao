@@ -13,7 +13,8 @@ const gameSchema = mongoose.Schema({
     infoCamp: {type: String, required: true},
     infoJogo: {type:String, required: true},
     infoGroup: {type:String, required: true},
-    gameType: {type: Number, required: true}
+    gameType: {type: Number, required: true},
+    ativo: {type: Boolean, default: false}
 },{
     timestamps: true
 })

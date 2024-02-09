@@ -28,8 +28,13 @@ function Header() {
                         </Link>
                       </li>
                       <li>
+                        <Link to='/ranking/semanal'>
+                          <FaListOl /> Semanal
+                        </Link>
+                      </li>
+                      <li>
                         <Link to='/ranking'>
-                            <FaListOl /> Ranking
+                            <FaListOl /> Rankings
                         </Link>
                       </li>
                       <li>
@@ -65,8 +70,13 @@ function Header() {
                       </Link>
                     </li>
                     <li>
+                      <Link to='/ranking/semanal'>
+                        <FaListOl /> Semanal
+                      </Link>
+                    </li>
+                    <li>
                       <Link to='/ranking'>
-                          <FaListOl /> Ranking
+                          <FaListOl /> Rankings
                       </Link>
                     </li>
                     <li>

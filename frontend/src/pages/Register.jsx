@@ -56,6 +56,7 @@ function Register() {
     })
     .catch((error) => {
         console.log(error);
+        alert('Esse e-mail já está sendo utilizado por algum usuário!')
     })
       
     }

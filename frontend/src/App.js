@@ -12,7 +12,8 @@ import PageNotFound from './pages/PageNotFound'
 import EditJogo from './pages/EditJogo'
 import Comps from './pages/Comps'
 import Rankings from './components/Rankings'
-
+import RankingInativos from './pages/RankingInativos'
+import RankingSemanal from './pages/RankingSemanal'
 
 function App() {
  
@@ -32,6 +33,8 @@ function App() {
             <Route path='/:id' element={<EditJogo />} />
             <Route path='/comps' element={<Comps />}/>
             <Route path='/getPontuacao/:id' element={<Rankings />}/>
+            <Route path='/ranking/inativos' element={<RankingInativos />}/>
+            <Route path='/ranking/semanal' element={<RankingSemanal />}/>
           </Routes>
         </div>
       </Router>

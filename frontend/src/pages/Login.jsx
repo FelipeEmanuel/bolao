@@ -42,7 +42,7 @@ function Login() {
     }
 
     login(userData).then(response => {
-      if (response.data) {
+      if(response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
         alert('Login efetuado com sucesso!')
         navigate('/')
@@ -50,6 +50,7 @@ function Login() {
     })
     .catch((error) => {
         console.log(error);
+        alert('Dados incorretos!')
     })
     
   }

@@ -7,16 +7,16 @@ import ModalPopup from '../ModalPopup';
 import ListaSuspensaImg from '../ListaSuspensaImg';
 import Campo from '../Campo';
 import Botao from '../Botao';
-function Cards({competicao, setComp}) {
+
+function Cards({competicao, setComp, camp}) {
 
     const[buttonPopup, setButtonPopup] = useState(false);
+    const[statusPopup, setStatusPopup] = useState(false);
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
     const[isFetching, setIsFetching] = useState(false)
-    const[sigla, setSigla] = useState(competicao?.sigla)
-    const[name, setName] = useState(competicao?.name)
+    const[ano, setAno] = useState(competicao?.sigla)
     const[img, setImg] = useState(competicao?.img)
-    const[ativa, setAtiva] = useState(competicao?.ativa)
 
     const editarComp = async (event) => {
 
@@ -25,12 +25,11 @@ function Cards({competicao, setComp}) {
         setButtonPopup(false)
         
         const body = {
-            img, name, sigla
+            img, ano
         }
         
         try{
             put(`api/competicoes/${competicao?._id}`, body, setData) 
-        //setJogoAdicionado(true) 
         } catch (error) {
             console.error('Erro ao editar o usuário', error)
         }
@@ -46,14 +45,14 @@ function Cards({competicao, setComp}) {
         return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`
     }
 
-    const editPontuacao = ((e) => {
-        //e.preventDefault()
-        alert("Pontuação atualizada com sucesso!")
+    const atualizarComp = async (e) => {
+        e.preventDefault()
+        alert("Status atualizado com sucesso!")
+        setStatusPopup(false)
 
         const body = {}
-
-        put(`api/ranking/setPontuacao/${competicao?._id}`, body, setData)
-    })
+        put(`api/competicoes/encerrar/${competicao?._id}`, body, setData)
+    }
 
     return (
         <>
@@ -75,7 +74,7 @@ function Cards({competicao, setComp}) {
                 </div>
                 <div className="rodape">
                     <h2>{competicao?.name}</h2>
-                    <h5>{competicao?.sigla}</h5>
+                    <h5>{competicao?.ano}</h5>
                     <div className='ativa'>
                         {competicao?.ativa ? (<h5 style={{color: '#00FF00'}}>Em andamento</h5>) : (<h5 style={{color: '#FF0000'}}>Finalizada</h5>)}
                     </div>
@@ -83,9 +82,11 @@ function Cards({competicao, setComp}) {
                         <button className='btn btn-block3' onClick={() => setButtonPopup(true)}>
                             Editar competição
                         </button>
-                        <button className='btn btn-block3' onClick={editPontuacao}>
-                            Atualizar pontuação
+                        {competicao?.ativa === true &&
+                        <button className='btn btn-block3' onClick={() => setStatusPopup(true)}>
+                            Encerrar competição
                         </button>
+                        }
                     </div>
                     
                 </div>
@@ -93,8 +94,15 @@ function Cards({competicao, setComp}) {
             </div>
 
             <ModalPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-            <form className='formulario' onSubmit={(event) => editarComp(event)}>
-                <h3>Escolha um logo para a imagem do campeonato!</h3>
+                <form className='formulario' onSubmit={(event) => editarComp(event)}>
+                    <Campo 
+                        required
+                        label="Ano"
+                        type='size-input1'
+                        placeholder="Ano da Competição"
+                        valor={ano ? ano : ''}
+                        aoAlterado={valor => setAno(valor)}
+                    />
                     <ListaSuspensaImg 
                         required={false} 
                         label="Logo da Competição" 
@@ -102,26 +110,19 @@ function Cards({competicao, setComp}) {
                         valor={img ? img : ''}
                         aoAlterado={valor => setImg(valor)}
                     /> 
-                <Campo 
-                    required
-                    label="Alterar nome"
-                    type='size-input1'
-                    placeholder="Alterar nome"
-                    valor={name ? name : ""}
-                    aoAlterado={valor => setName(valor)}
-                />
-                <Campo 
-                    required
-                    label="Alterar sigla"
-                    type='size-input1'
-                    placeholder="Alterar sigla"
-                    valor={sigla ? sigla : ""}
-                    aoAlterado={valor => setSigla(valor)}
-                />
+                    <div className='div1'>
+                        <Botao texto='Finalizar edição' />
+                    </div>
+                </form>
+            </ModalPopup>
+
+            <ModalPopup trigger={statusPopup} setTrigger={setStatusPopup}>
+                <h2>Tem certeza que deseja encerrar a competição?</h2>
                 <div className='div1'>
-                    <Botao texto='Finalizar edição' />
+                    <button className='btn btn-block3' onClick={atualizarComp}>
+                        Sim
+                    </button>
                 </div>
-            </form>
             </ModalPopup>
 
         </>

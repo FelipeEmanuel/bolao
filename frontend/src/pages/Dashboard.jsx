@@ -4,7 +4,6 @@ import Spinner from '../components/Spinner/Spinner.jsx'
 import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
 import '../components/PalpiteItem/palpiteItem.css'
-
 import { get } from '../api'
 import {ordenarJogos} from '../components/utils'
 import ListaPalpites from '../components/ListaPalpites/index.jsx'
@@ -154,7 +153,7 @@ function Dashboard() {
       <section>
        <h1>Bem-vindo, {data?.user[0].name}!</h1>
         <br/>
-        <h3>Você pode palpitar até 15 minutos antes do início do jogo!</h3>
+        <h3>Você pode palpitar até 5 minutos antes do início do jogo!</h3>
         <h3 className='alerta'>INSTRUÇÕES:</h3>
         <h3 className='alerta'>- Caso a lista de jogos não esteja aparecendo, saia e faça seu login novamente, muito provavelmente há uma nova versão do site no ar!</h3>
         <h3 className='alerta'>- É necessário palpitar em um jogo por vez, um aviso em verde com a mensagem "Palpite Realizado" aparecerá embaixo do botão de confirmar palpite e o palpite também aparecerá na lateral!</h3>
@@ -184,7 +183,7 @@ function Dashboard() {
             </div>
           }
           {
-            games?.length === 0 && <h3>Não há jogos cadastrados</h3>
+            games?.length == 0 && <h3>Não há jogos cadastrados</h3>
           }     
         </section>
         <section className='contentpalpites'>

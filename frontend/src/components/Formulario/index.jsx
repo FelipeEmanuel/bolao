@@ -55,11 +55,14 @@ const Formulario = () => {
         
     })
 
+
     function organizaCompeticao(value) {
         setCompeticao(value)
+        let str1 = "";
         dataCompeticao.forEach(e => {
             if(e._id == value) {
-                setInfoCamp(e.name)
+                str1+= `${e.name} ${e.ano}`
+                setInfoCamp(str1)
             }
         });
     }
@@ -125,7 +128,7 @@ const Formulario = () => {
                     <select required={true} value={competicao} onChange={evento => organizaCompeticao(evento.target.value)} >
                         <option />
                         {dataCompeticao?.map(competicao => {
-                            return <option key={competicao?._id} value={competicao?._id}>{competicao?.name}</option>
+                            return <option key={competicao?._id} value={competicao?._id}>{competicao?.name} {competicao?.ano}</option>
                         })}    
                     </select>
                 </div>

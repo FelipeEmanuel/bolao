@@ -1,8 +1,10 @@
 const asyncHandler = require('express-async-handler')
+const cron = require('node-cron')
 const User = require('../models/userModel')
 const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const Ranking = require('../models/rankingModel')
+const Semanal = require('../models/SemanalModel')
 
 const getRanking = asyncHandler(async (req, res) => {
 
@@ -12,6 +14,12 @@ const getRanking = asyncHandler(async (req, res) => {
 
     res.status(200).json(ranking);
 
+})
+
+const getRankingSemanal = asyncHandler(async (req, res) => {
+    const ranking = await Semanal.find().populate("user", "name imgPerfil").sort({pontuacao: -1, cravadas: -1})
+
+    res.status(200).json(ranking)
 })
 
 async function setPontuacaoUser(user, pontuacao, cravadas, competicao, jogos) {
@@ -37,19 +45,18 @@ async function setPontuacaoUser(user, pontuacao, cravadas, competicao, jogos) {
 
 const setPontuacao = asyncHandler(async (req, res) => {
 
-    let competicaoId = req.params.id
-    const gamesTodos = await Game.find({competicao: competicaoId})
-    const palpitesTodos = await Palpite.find({competicao: competicaoId})
-    const instancias = await Ranking.find({competicao: competicaoId})
+    const gamesTodos = await Game.find()
+    const palpitesTodos = await Palpite.find()
+    const instancias = await Ranking.find()
 
     instancias.forEach(i => {
         let pontuacao = 0;
         let cravadas = 0;
         let jogos = 0;
         palpitesTodos.forEach(p => {
-            if(i.user.toString() === p.user.toString()) {
+            if(i.user.toString() === p.user.toString() && i.competicao.toString() === p.competicao.toString()) {
                 gamesTodos.forEach(g => {
-                    if(g._id.toString() === p.jogo.toString()) {
+                    if(g._id.toString() === p.jogo.toString() && g.competicao.toString() === p.competicao.toString()) {
                         if(g.placar1 !== '' && g.placar2 !== ''){
                             if(g.placar1 === p.palpite1 && g.placar2 === p.palpite2) {
                                 if (g.gameType === 2) {
@@ -104,12 +111,12 @@ const setPontuacao = asyncHandler(async (req, res) => {
             }
             
         })   
-        setPontuacaoUser(i.user, pontuacao, cravadas, competicaoId, jogos)
+        setPontuacaoUser(i.user, pontuacao, cravadas, i.competicao, jogos)
     })
 
     
 
-    res.status(200).json(instancias);
+    //res.status(200).json(instancias);
       
 }) 
 
@@ -129,6 +136,12 @@ const criarRanking = asyncHandler(async (req, res) => {
 
 })
 
+cron.schedule("00 * * * *", function () {
+    const pont = setPontuacao();
+}, {
+    timezone: "America/Sao_Paulo"
+})
+
 module.exports = {
-    getRanking, setPontuacao, criarRanking
+    getRanking, setPontuacao, criarRanking, getRankingSemanal
 }
