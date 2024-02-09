@@ -1,0 +1,58 @@
+.conquista-card {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0px 0px 15px 0px;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+}
+
+.conquista-nome {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.posicoes {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.primeiro, .segundo, .terceiro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+}
+
+.anos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+.primeiro-anos {
+    padding: 2px 4px;
+    background-color: gold;
+    border-radius: 15px;
+}
+
+.segundo-anos {
+    padding: 2px 4px;
+    background-color: silver;
+    border-radius: 15px;
+}
+
+.terceiro-anos {
+    padding: 2px 4px;
+    background-color: #CD7F32;
+    border-radius: 15px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+}

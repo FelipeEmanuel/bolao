@@ -10,6 +10,8 @@ import { imgDefault } from '../components/utils/constants'
 import Spinner from "../components/Spinner/Spinner"
 import Campo from "../components/Campo"
 import { escudos } from "../components/utils/constants"
+import ConquistaCard from "../components/ConquistaCard"
+import SemanalCard from "../components/SemanalCard"
 
 function Perfil() {
 
@@ -22,6 +24,12 @@ function Perfil() {
     const[email, setEmail] = useState('')
     const[name, setName] = useState('')
     const[imgPerfil, setImgPerfil] = useState('')
+    const[semanaisData, setSemanaisData] = useState(null)
+    const[semanaiserror, setSemanaisError] = useState(null)
+    const[semanaisisFetching, setSemanaisIsFetching] = useState(false)
+    const[conquistasData, setConquistasData] = useState(null)
+    const[conquistaserror, setConquistasError] = useState(null)
+    const[conquistasisFetching, setConquistasIsFetching] = useState(false)
 
     useEffect(() => {
         
@@ -41,7 +49,6 @@ function Perfil() {
 
     useEffect(() => {
 
-        console.log(data)
         if(isFetching) {
             return <Spinner/>
         } 
@@ -58,6 +65,13 @@ function Perfil() {
         
     }, [data, error, isFetching])
 
+    useEffect(() => {
+        get("api/conquistas", setConquistasData, setConquistasError, setConquistasIsFetching)
+    }, [])
+
+    useEffect(() => {
+        get("api/conquistas/semanais", setSemanaisData, setSemanaisError, setSemanaisIsFetching)
+    }, [])
 
     const editarImagem = async (event) => {
 
@@ -70,23 +84,17 @@ function Perfil() {
         }
         
         try{
-            put(`api/users/${data?._id}`, body, setData) 
-        //setJogoAdicionado(true) 
+            put(`api/users/${data?._id}`, body, setData)  
         } catch (error) {
             console.error('Erro ao editar o usuário', error)
         }
   
     };
 
-    /*
-
-                    */
-
-
     return (
         <>
             <Header/>
-            <h1>Olá, {data?.name}! Estes são seus dados e suas conquistas!</h1>
+            <h2>Olá, {data?.name}! Estes são seus dados e suas conquistas!</h2>
             <div className="perfilMain">
                 <div className='perfil'>
                         <div className='perfilimagem'>
@@ -114,9 +122,23 @@ function Perfil() {
                                 <h3>{data?.email}</h3>
                             </div>   
                 </div>
-                <div>
-                    <h2>Em breve!</h2>
-                </div> 
+                {
+                    (conquistasData?.length > 0 || semanaisData?.length > 0) &&
+                    <div className="conquistas">
+                        <h1>Suas conquistas!</h1>
+                        {semanaisData?.map((semanal) => (
+                            <SemanalCard key={semanal._id} conquista={semanal}/>
+                        ))
+                        }
+                        {conquistasData?.map((conquista) => (
+                            <ConquistaCard key={conquista._id} conquista={conquista}/>
+                        ))}
+                    </div> 
+                }
+                {
+                    (conquistasData?.length || semanaisData?.length) === 0 && <h1 className="conquistas">Você não possui conquistas!</h1>
+                }
+                
             </div>
             
             <ModalPopup trigger={buttonPopup} setTrigger={setButtonPopup}>

@@ -1,39 +1,27 @@
-import { useNavigate, useParams } from "react-router-dom"
-import Header from "../Header/Header"
-import { imgDefault } from "../utils/constants"
-import './Rankings.css'
 import { useEffect, useState } from "react"
-import Spinner from "../Spinner/Spinner"
-import { get } from "../../api"
+import { useNavigate } from "react-router-dom"
+import { get } from "../api"
+import { imgDefault } from "../components/utils/constants"
+import Header from "../components/Header/Header"
 
-const Rankings = () => {
+function RankingSemanal() {
 
-    const { id } = useParams();
-    const[comp, setComp] = useState(null)
-    const[data, setData] = useState(null)
-    const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
-    const[data2, setData2] = useState(null)
-    const[error2, setError2] = useState(null)
-    const[isFetching2, setIsFetching2] = useState(false)
-    const navigate = useNavigate()
-    const [users, setUsers] = useState(null)
     const user = JSON.parse(localStorage.getItem('user'))
-  
+    const navigate = useNavigate()
+    const[data, setData] = useState(null)
+    const[isFetching, setIsFetching] = useState(false)
+    const[error, setError] = useState(null)
+    const [users, setUsers] = useState(null)
+
     useEffect(() => {
         if(!user) {
-        navigate('/login')
+          navigate('/login')
         }
-
+    
     }, [user, navigate])
 
-
     useEffect(() => {
-        get(`api/ranking/getPontuacao/${id}`, setData, setError, setIsFetching)
-    }, [])
-
-    useEffect(() => {
-        get(`api/competicoes/${id}`, setData2, setError2, setIsFetching2)
+        get("api/ranking/semanal", setData, setError, setIsFetching)
     }, [])
 
     useEffect(() => {
@@ -43,20 +31,10 @@ const Rankings = () => {
       
     }, [data])
 
-    useEffect(() => {
-        if(data2) {
-            setComp(`${data2.name} ${data2.ano}`)
-        }
-    }, [data2])
-    
-    if(isFetching) {
-      return <Spinner />
-    }
-
     return (
         <>
           <Header />
-          <div className='ranking-top'>Ranking {comp}</div>
+          <div className='ranking-top'>Ranking Semanal</div>
           <section className='ranking'>
             <div className='ranking-cabecalho'>
               <div className='ranking-col-1'>Posição</div>
@@ -105,7 +83,7 @@ const Rankings = () => {
           <p className='texto'>Errar o placar mas acertar o número de gols de um dos times: <b>2 pontos</b></p>
           <p className='texto'>Errar completamente o placar: <b>0 pontos</b></p>
         </>
-      )
+    )
 }
 
-export default Rankings
+export default RankingSemanal

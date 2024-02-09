@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import Header from "../components/Header/Header"
 import { useEffect, useState } from "react"
-import { get, post, put } from "../api"
+import { get, post } from "../api"
 import Cards from "../components/Cards"
 import ModalPopup from "../components/ModalPopup"
 import { toast } from "react-toastify"
@@ -17,11 +17,15 @@ function Comps() {
     const navigate = useNavigate()
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
-    const[sigla, setSigla] = useState('')
+    const[ano, setAno] = useState('')
     const[name, setName] = useState('')
     const[img, setImg] = useState('')
+    const[campeonato, setCampeonato] = useState(null)
     const[isFetching, setIsFetching] = useState(false)
     const[buttonPopup, setButtonPopup] = useState(false);
+    const[campData, setCampData] = useState(null)
+    const[campError, setCampError] = useState(null)
+    const[campIsFetching, setCampIsFetching] = useState(false)
     
 
     useEffect(() => {
@@ -40,6 +44,10 @@ function Comps() {
         get("api/competicoes", setData, setError, setIsFetching)
     }, [])
 
+    useEffect(() => {
+        get("api/campeonatos", setCampData, setCampError, setCampIsFetching)
+    }, [])
+
     if(isFetching) {
         return <Spinner />
     }
@@ -50,22 +58,33 @@ function Comps() {
         setButtonPopup(false)
         
         const body = {
-            name, sigla, img
+            name, ano, campeonato, img,
         }
 
         try{
-            if(!name || !sigla) {
+            if(!name || !ano || !campeonato) {
                 toast.error("Preencha todos os campos")
             } else {
                 post('api/competicoes', body, setData)
-                
+                setAno('')
+                setImg('')
+                setName('')
+                setCampeonato('')
             }
         } catch (error) {
             console.error('Erro ao editar o usuário', error)
         } 
     }
 
-    
+    function organizaCampeonato(value) {
+        setCampeonato(value)
+        campData.forEach(e => {
+            if(e._id == value) {
+                setName(e.name)
+            }
+        });
+        
+    }
 
     return (
         <>
@@ -78,28 +97,30 @@ function Comps() {
         <div className='lista-comps'>
                     { 
                     data?.map((comp) => (
-                        <Cards key={comp._id} competicao={comp} setComp={setData}/>
+                        comp.ativa === true &&
+                        <Cards key={comp._id} competicao={comp} setComp={setData} campeonato={campeonato}/>
                     ))
                     }           
         </div>
 
         <ModalPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
                 <form className='formulario' onSubmit={(event) => criarComp(event)}> 
+                    <div className="lista-suspensa">
+                        <label>Campeonato</label>
+                        <select required={true} value={campeonato} onChange={evento => organizaCampeonato(evento.target.value)} >
+                            <option />
+                            {campData?.map(campeonato => {
+                                return <option key={campeonato?._id} value={campeonato?._id}>{campeonato?.name}</option>
+                            })}    
+                        </select>
+                    </div>
                     <Campo 
                         required
-                        label="Nome"
+                        label="Ano"
                         type='size-input1'
-                        placeholder="Nome da competição"
-                        valor={name}
-                        aoAlterado={valor => setName(valor)}
-                    />
-                    <Campo 
-                        required
-                        label="Sigla"
-                        type='size-input1'
-                        placeholder="Sigla da Competição"
-                        valor={sigla}
-                        aoAlterado={valor => setSigla(valor)}
+                        placeholder="Ano da Competição"
+                        valor={ano}
+                        aoAlterado={valor => setAno(valor)}
                     />
                     <ListaSuspensaImg 
                         required={false} 

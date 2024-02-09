@@ -23,7 +23,7 @@ function CardsRanking({competicao}) {
             </div>
             <div className="rodape">
                 <h2>{competicao.name}</h2>
-                <h5>{competicao.sigla}</h5>
+                <h5>{competicao.ano}</h5>
                 <div className="botao">
                     <Link to={`/getPontuacao/${competicao._id}`}>
                         <button className='btn btn-block3'>
