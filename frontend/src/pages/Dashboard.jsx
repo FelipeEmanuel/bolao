@@ -195,7 +195,7 @@ function Dashboard() {
               }
               <Pagination 
                         gamesPerPage={gamesPerPagePalpites} 
-                        totalGames={usuario?.palpites?.length} 
+                        totalGames={data?.palpites?.length} 
                         paginate={paginatePalpites}
               />
               
