@@ -39,12 +39,22 @@ const getPartidas = asyncHandler(async (req, res) => {
             } 
         }
     ]);
-
-    const jogosDisponiveis = getDate()
     
-    const gamesDisponiveis = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
-
+    const gamesDisponiveis = await Game.find({ativo: true})
+    
     const gamesTodos = await Game.find()
+
+    let jogos = []
+
+    user.forEach(u => {
+        u.palpites.forEach(palpite => {
+            /*if(palpite.jogoObj.ativo == true) {
+                jogos.push(palpite)
+            }*/
+        })
+        
+    });
+
     res.status(200).json({ gamesDisponiveis, gamesTodos, user });
 })
 
@@ -108,9 +118,24 @@ const setPalpite = asyncHandler(async (req, res) => {
 })
 
 const getUserPalpites = asyncHandler(async (req, res) => {
+    const hoje = getDate();
+    const dataLimite = getDate().add(7, 'days');
+    
+    const gamesDisponiveis = await Game.find({dataLimite: {$gte: hoje, $lte: dataLimite}, ativo: true})
+    
+    const gamesTodos = await Game.find({ativo: true})
+
     const userPalpites = await Palpite.find({user: req.user.id}).populate('jogo')
 
-    res.status(200).json(userPalpites)
+    let palpites = []
+
+    userPalpites.forEach(palpite => {
+        if(palpite.jogo.ativo == true) {
+            palpites.push(palpite)
+        }
+    });
+
+    res.status(200).json({gamesDisponiveis, gamesTodos, palpites})
 })
 
 

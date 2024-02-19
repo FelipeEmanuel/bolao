@@ -45,13 +45,16 @@ export const get = (url, setData, setError, setIsFetching) => {
         });
 }
 
-export const put = (url, body, setData) => {
+export const put = (url, body, setData, setError, aux) => {
     api.put(url, body)
         .then(response => {
             setData(response?.data);
+            if(aux) {
+                aux();
+            } 
         })
         .catch((error) => {
-            console.log(error);
+            setError(error?.response?.data);
         })
 }
 

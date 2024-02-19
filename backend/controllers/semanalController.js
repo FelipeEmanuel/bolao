@@ -8,9 +8,11 @@ const Conquista = require('../models/conquistasModel')
 const Campeonato = require('../models/campeonatoModel')
 
 const setJogos = asyncHandler(async (req, res) => {
-    const jogosDisponiveis = getDate()
+
+    const hoje = getDate();
+    const dataLimite = hoje.add(7, 'days');
     
-    const gamesDisponiveis = await Game.find({dataLimite: {$gte: jogosDisponiveis}})
+    const gamesDisponiveis = await Game.find({dataLimite: {$gte: hoje, $lte: dataLimite}})
 
     gamesDisponiveis.forEach(g => {
         if(g.ativo == false) {
@@ -228,19 +230,19 @@ const criarConquistaSemanal = asyncHandler(async (req, res) => {
     res.status(200).json(instancia)
 })
 
-cron.schedule("00 01 * * 1", function () {
+cron.schedule("00 05 * * 1", function () {
     const encerrar = encerrarSemana();
 }, {
     timezone: "America/Sao_Paulo"
 })
 
-cron.schedule("00 02 * * 1", function () {
+cron.schedule("06 00 * * 1", function () {
     const set = setJogos();
 }, {
     timezone: "America/Sao_Paulo"
 })
 
-cron.schedule("00 * * * *", function () {
+cron.schedule("*/30 * * * *", function () {
     const pont = pontuacaoSemana();
 }, {
     timezone: "America/Sao_Paulo"

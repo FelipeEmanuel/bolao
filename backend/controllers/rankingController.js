@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const cron = require('node-cron')
-const User = require('../models/userModel')
 const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const Ranking = require('../models/rankingModel')
@@ -136,7 +135,7 @@ const criarRanking = asyncHandler(async (req, res) => {
 
 })
 
-cron.schedule("00 * * * *", function () {
+cron.schedule("01 * * * *", function () {
     const pont = setPontuacao();
 }, {
     timezone: "America/Sao_Paulo"

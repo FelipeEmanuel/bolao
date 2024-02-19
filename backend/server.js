@@ -23,6 +23,7 @@ app.use('/api/competicoes', require('./routes/competicaoRoutes'))
 app.use('/api/campeonatos', require('./routes/campeonatoRoutes'))
 app.use('/api/conquistas', require('./routes/conquistasRoutes'))
 app.use('/api/semanal', require('./routes/semanalRoutes'))
+app.use('/api/stats', require('./routes/statsRoutes'))
 
 app.use(errorHandler)
 

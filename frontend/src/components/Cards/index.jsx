@@ -29,7 +29,7 @@ function Cards({competicao, setComp, camp}) {
         }
         
         try{
-            put(`api/competicoes/${competicao?._id}`, body, setData) 
+            put(`api/competicoes/${competicao?._id}`, body, setData, setError) 
         } catch (error) {
             console.error('Erro ao editar o usuário', error)
         }
@@ -51,7 +51,7 @@ function Cards({competicao, setComp, camp}) {
         setStatusPopup(false)
 
         const body = {}
-        put(`api/competicoes/encerrar/${competicao?._id}`, body, setData)
+        put(`api/competicoes/encerrar/${competicao?._id}`, body, setData, setError)
     }
 
     return (

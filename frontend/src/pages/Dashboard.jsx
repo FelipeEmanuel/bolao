@@ -37,75 +37,75 @@ function Dashboard() {
   const [qtdNaoPalpitou, setQtdNaoPalpitou] = useState(0);
 
   useEffect(() => {
-    get("api/palpites", setData, setError, setIsFetching)
+    get("api/palpites/userPalpites", setData, setError, setIsFetching)
   }, [palpitou])
 
+  useEffect(() => {
+    get('/api/users/me', setUsuario, setError, setIsFetching)
+  })
+
   useEffect(() => { 
+    console.log(data)
     if(data) {
-      data?.user?.forEach(u => {   
-          u.palpites.forEach(p => {
-            p.pontuacao = 0;
-            data?.gamesTodos?.forEach(g => {
-              if(p.jogo === g._id) {
-                p.jogoObj = g;
-                if(p.palpite1 === g.placar1 && p.palpite2 === g.placar2){
-                  if(g.gameType === 2) {
-                    p.pontuacao = p.pontuacao + 10;
-                  } else {
-                    p.pontuacao = p.pontuacao + 5;
-                  }   
-                } else if((p.palpite1 > p.palpite2 && g.placar1 > g.placar2) || (p.palpite1 < p.palpite2 && g.placar1 < g.placar2)) {  
-                  if(g.gameType === 2) {
-                    p.pontuacao = p.pontuacao + 6;
-                  } else {
-                    p.pontuacao = p.pontuacao + 3;
-                  }
-                  if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
-                    if(g.gameType === 2) {
-                      p.pontuacao = p.pontuacao + 2;
-                    } else {
-                      p.pontuacao = p.pontuacao + 1;
-                    }              
-                  } 
-                } else if(g.placar1 !== "" && g.placar2 !== "" && p.palpite1 === p.palpite2 && g.placar1 === g.placar2) {
-                  if(g.gameType === 2) {
-                    p.pontuacao = p.pontuacao + 6;
-                  } else {
-                    p.pontuacao = p.pontuacao + 3;
-                  }
-                } else if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
-                  if(g.gameType === 2) {
-                    p.pontuacao = p.pontuacao + 2;
-                  } else {
-                    p.pontuacao = p.pontuacao + 1;
-                  }  
+      data?.palpites?.forEach(p => {   
+        p.pontuacao = 0;
+        data?.gamesTodos?.forEach(g => {
+          if(p.jogo._id === g._id) {
+            if(p.palpite1 === g.placar1 && p.palpite2 === g.placar2){
+              if(g.gameType === 2) {
+                p.pontuacao = p.pontuacao + 10;
+              } else {
+                p.pontuacao = p.pontuacao + 5;
+              }   
+            } else if((p.palpite1 > p.palpite2 && g.placar1 > g.placar2) || (p.palpite1 < p.palpite2 && g.placar1 < g.placar2)) {  
+              if(g.gameType === 2) {
+                p.pontuacao = p.pontuacao + 6;
+              } else {
+                p.pontuacao = p.pontuacao + 3;
+              }
+              if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
+                if(g.gameType === 2) {
+                  p.pontuacao = p.pontuacao + 2;
                 } else {
-                  p.pontuacao = p.pontuacao + 0;
-                }
+                  p.pontuacao = p.pontuacao + 1;
+                }              
+              } 
+            } else if(g.placar1 !== "" && g.placar2 !== "" && p.palpite1 === p.palpite2 && g.placar1 === g.placar2) {
+              if(g.gameType === 2) {
+                p.pontuacao = p.pontuacao + 6;
+              } else {
+                p.pontuacao = p.pontuacao + 3;
+              }
+            } else if(p.palpite1 === g.placar1 || p.palpite2 === g.placar2) {
+              if(g.gameType === 2) {
+                p.pontuacao = p.pontuacao + 2;
+              } else {
+                p.pontuacao = p.pontuacao + 1;
               }  
-              
-            });
-          });
+            } else {
+              p.pontuacao = p.pontuacao + 0;
+            }
+          }  
+          
+        });
+          
       });
 
       
-      data?.user?.forEach(u => {
-        u.palpites.forEach(p => {
-          data?.gamesDisponiveis?.forEach(g => {
-            if(p.jogo === g._id) {
-              g.palpite1 = p.palpite1;
-              g.palpite2 = p.palpite2;
-            }
-          })
+      data?.palpites?.forEach(p => {
+        data?.gamesDisponiveis?.forEach(g => {
+          if(p.jogo._id === g._id) {
+            g.palpite1 = p.palpite1;
+            g.palpite2 = p.palpite2;
+          }
         })
       })          
       
-      setUsuario(data?.user[0])
       setGames(data?.gamesDisponiveis)
 
       let qtdPalpitesUser = 0
       data?.gamesDisponiveis.forEach(gd => {
-        data?.user[0].palpites.forEach(up => {
+        data?.palpites?.forEach(up => {
           if(gd._id == up.jogo) {
             qtdPalpitesUser+=1;
           } 
@@ -140,7 +140,7 @@ function Dashboard() {
   // Get current games
   const indexOfLastGamePalpites = currentPagePalpites * gamesPerPagePalpites;
   const indexOfFirstGamePalpites = indexOfLastGamePalpites - gamesPerPagePalpites;
-  const currentPagesPalpites = usuario?.palpites?.sort(ordenarJogos).reverse().slice(indexOfFirstGamePalpites, indexOfLastGamePalpites);
+  const currentPagesPalpites = data?.palpites?.sort(ordenarJogos).reverse().slice(indexOfFirstGamePalpites, indexOfLastGamePalpites);
 
   // Change page
   const paginatePalpites = pageNumber => setCurrentPagePalpites(pageNumber);
@@ -151,7 +151,7 @@ function Dashboard() {
     <>
       <Header />
       <section>
-       <h1>Bem-vindo, {data?.user[0].name}!</h1>
+       <h1>Bem-vindo, {usuario?.name}!</h1>
         <br/>
         <h3>Você pode palpitar até 5 minutos antes do início do jogo!</h3>
         <h3 className='alerta'>INSTRUÇÕES:</h3>
@@ -187,7 +187,7 @@ function Dashboard() {
           }     
         </section>
         <section className='contentpalpites'>
-          <h2>Seus palpites</h2>
+          <h2>Seus palpites da semana!</h2>
           {currentPagesPalpites?.length > 0 && 
             <div className='palpite'>
               {currentPagesPalpites?.map((palpite) =>(
@@ -204,7 +204,7 @@ function Dashboard() {
           }
           {
             currentPagesPalpites?.length === 0 &&
-            <h3>Você ainda não fez palpites.</h3>
+            <h3>Você ainda não fez palpites essa semana.</h3>
           }   
           
         </section>

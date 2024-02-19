@@ -41,14 +41,16 @@ function PalpiteItem({jogo, competicao, palpitou}) {
             event.preventDefault();          
         }}   
 
-
     return (
         <form onSubmit={aoPalpitar}>
             <div className='palpite'>
-                <div>
-                    <h3>{jogo.infoGroup} - {jogo.infoCamp}</h3>
-                    {jogo.infoJogo}
+                <div className='palpite-info'>    
+                    {jogo.gameType === 2 ? 
+                        <div className='x2'>X2 PONTOS!</div> : 
+                    ''}
                 </div>
+                <h3>{jogo.infoGroup} - {jogo.infoCamp}</h3>
+                {jogo.infoJogo}
                     <div className='times'>
                         <div className='time1'>
                             <img 

@@ -6,7 +6,7 @@ import Header from '../components/Header/Header'
 import { get } from '../api'
 import CardsRanking from '../components/CardsRanking'
 
-function Ranking() {
+function RankingInativos() {
 
   const user = JSON.parse(localStorage.getItem('user'))
   const navigate = useNavigate()
@@ -67,4 +67,4 @@ function Ranking() {
   )
 }
 
-export default Ranking
+export default RankingInativos

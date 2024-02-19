@@ -9,6 +9,22 @@
     justify-content: center;
 }
 
+.palpite-info {
+    display: flex;
+    position: relative;
+    width: 100%; 
+}
+
+.x2 {
+    color: #FF0000;
+    border: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
 .times {
     display: flex;
     flex-direction: row;

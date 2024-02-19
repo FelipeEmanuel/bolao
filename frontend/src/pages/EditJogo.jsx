@@ -86,8 +86,7 @@ const EditJogo = () => {
         }
         
         try{
-            put(`api/games/${id}`, body)
-        //setJogoAdicionado(true)
+            put(`api/games/${id}`, body, setData, setError)
             navigate('/admin') 
         } catch (error) {
             console.error('Erro ao editar o jogo', error)

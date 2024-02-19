@@ -15,7 +15,7 @@ const Formulario = () => {
     const[dataCompeticao, setDataCompeticao] = useState(null)
     const[errorCompeticao, setErrorCompeticao] = useState(null)
     const[isFetchingCompeticao, setIsFetchingCompeticao] = useState(false)
-    const[competicao, setCompeticao] = useState(null)
+    const[competicao, setCompeticao] = useState('')
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
     const[dataLimite, setDataLimite] = useState('')
@@ -67,11 +67,29 @@ const Formulario = () => {
         });
     }
 
+    function nameImg1(valor) {
+        escudos.forEach(e => {
+            if(e.img == valor) {
+                setTime1(e.text)
+            }
+        });
+        setIsocodetime1(valor);
+    }
+
+    function nameImg2(valor) {
+        escudos.forEach(e => {
+            if(e.img == valor) {
+                setTime2(e.text)
+            }
+        });
+        setIsocodetime2(valor);
+    }
+
     return (
         <section className='formulario-container'>
             <form className='formulario' onSubmit={adicionarJogo}>
                 <h2>Preencha os dados para adicionar um novo jogo!</h2>
-                <div className='side-input'>
+                {/* <div className='side-input'>
                     <Campo 
                         required
                         label="Time 1"
@@ -88,21 +106,21 @@ const Formulario = () => {
                         valor={time2}
                         aoAlterado={valor => setTime2(valor)}
                     />
-                </div>
+                </div> */}
                 <div className='side-input'>
                     <ListaSuspensaImg 
                         required 
-                        label="Escudo do Time 1" 
+                        label="Nome do Time 1" 
                         itens={escudos}
                         valor={isocodetime1}
-                        aoAlterado={valor => setIsocodetime1(valor)}
+                        aoAlterado={valor => nameImg1(valor)}
                     />
                     <ListaSuspensaImg 
                         required 
-                        label="Escudo do Time 2" 
+                        label="Nome do Time 2" 
                         itens={escudos}
                         valor={isocodetime2}
-                        aoAlterado={valor => setIsocodetime2(valor)}
+                        aoAlterado={valor => nameImg2(valor)}
                     />
                 </div>
                 <div className='side-input'>
@@ -141,7 +159,7 @@ const Formulario = () => {
                 />
                 <Campo 
                     required
-                    label="Info do Jogo (Ex: SÁB 26/11/2022 AL JANOUB 07:00)"
+                    label="Info do Jogo (Ex: SÁB 26/11/2022 07:00)"
                     placeholder="Informação sobre o jogo"
                     valor={infoJogo}
                     aoAlterado={valor => setInfoJogo(valor)}

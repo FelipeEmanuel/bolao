@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { get } from "../api"
 import { imgDefault } from "../components/utils/constants"
 import Header from "../components/Header/Header"
@@ -58,8 +58,17 @@ function RankingSemanal() {
                             width: '1.5em',
                             height: '1.5em'
                         }}>
-                      </img> 
-                      <span>{ u?.user?.name }</span>
+                      </img>
+                      {
+                        u?.user?._id.toString() === user._id ? 
+                        (<Link to='/perfil'>
+                          <span>{ u?.user?.name }</span>
+                        </Link>
+                        ) : 
+                        (<Link to={`/user/${u?.user?._id}`}>
+                          <span>{ u?.user?.name }</span>
+                        </Link>)
+                      } 
                     </div>
                     <div className='ranking-col-1'>{ u.pontuacao }</div>
                     <div className='ranking-col-1'>{ u.cravadas }</div>
