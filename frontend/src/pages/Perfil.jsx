@@ -143,20 +143,20 @@ function Perfil() {
                         </div>  
                 </div>
                 {
-                    (conquistasData?.userConquistas?.length > 0 || conquistasData?.userSemanais?.length > 0) &&
                     <div className="conquistas">
                         <h1>Suas conquistas!</h1>
-                        {conquistasData?.userSemanais?.map((semanal) => (
+                        {conquistasData?.userSemanais?.length > 0 && conquistasData?.userSemanais?.map((semanal) => (
                             <SemanalCard key={semanal._id} conquista={semanal}/>
                         ))
                         }
-                        {conquistasData?.userConquistas?.map((conquista) => (
+                        {conquistasData?.userConquistas?.length > 0 && conquistasData?.userConquistas?.map((conquista) => (
                             <ConquistaCard key={conquista._id} conquista={conquista}/>
                         ))}
+                        {(conquistasData?.userConquistas?.length || conquistasData?.userSemanais?.length === 0) && <h1 className="conquistas">Você não possui conquistas!</h1>}
                     </div> 
                 }
                 {
-                    (conquistasData?.userConquistas?.length || conquistasData?.userSemanais?.length) === 0 && <h1 className="conquistas">Você não possui conquistas!</h1>
+                   
                 }
                 
             </div>

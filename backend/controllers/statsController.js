@@ -12,8 +12,10 @@ const getStats = asyncHandler(async (req, res) => {
 })
 
 const setStats = asyncHandler(async (req, res) => {
+    let user2 = req.body
+    obj = {user: user2.user}
 
-    const userStats = await Stats.create({user: req?.user?.id})
+    const userStats = await Stats.create(obj)
 
     res.status(200).json(userStats)
 })
