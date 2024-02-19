@@ -236,7 +236,7 @@ cron.schedule("00 05 * * 1", function () {
     timezone: "America/Sao_Paulo"
 })
 
-cron.schedule("06 00 * * 1", function () {
+cron.schedule("00 06 * * 1", function () {
     const set = setJogos();
 }, {
     timezone: "America/Sao_Paulo"

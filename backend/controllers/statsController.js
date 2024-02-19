@@ -58,7 +58,7 @@ const updateStats = asyncHandler(async (req, res) => {
     //res.status(200).json(stats)
 })
 
-cron.schedule("03 * * * *", function () {
+cron.schedule("*/15 * * * *", function () {
     const uptStats = updateStats();
 }, {
     timezone: "America/Sao_Paulo"
