@@ -22,11 +22,11 @@ export function ordenarRanking( a, b ) {
 }
 
 export function ordenarJogos(a, b) {
-  if( a.jogo < b.jogo) {
+  if( a.jogo._id < b.jogo._id) {
     return -1;
   }
 
-  if (a.jogo > b.jogo) {
+  if (a.jogo._id > b.jogo._id) {
     return 1;
   }
 

@@ -10,7 +10,7 @@ const Campeonato = require('../models/campeonatoModel')
 const setJogos = asyncHandler(async (req, res) => {
 
     const hoje = getDate();
-    const dataLimite = hoje.add(7, 'days');
+    const dataLimite = getDate().add(7, 'days');
     
     const gamesDisponiveis = await Game.find({dataLimite: {$gte: hoje, $lte: dataLimite}})
 

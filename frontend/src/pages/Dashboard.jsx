@@ -45,7 +45,6 @@ function Dashboard() {
   })
 
   useEffect(() => { 
-    console.log(data)
     if(data) {
       data?.palpites?.forEach(p => {   
         p.pontuacao = 0;
@@ -106,7 +105,7 @@ function Dashboard() {
       let qtdPalpitesUser = 0
       data?.gamesDisponiveis.forEach(gd => {
         data?.palpites?.forEach(up => {
-          if(gd._id == up.jogo) {
+          if(gd._id == up.jogo._id) {
             qtdPalpitesUser+=1;
           } 
         })
