@@ -32,3 +32,15 @@ export function ordenarJogos(a, b) {
 
   return 0;
 }
+
+export function ordenarListaJogos(a, b) {
+  if( a.dataLimite < b.dataLimite) {
+    return -1;
+  }
+
+  if (a.dataLimite > b.dataLimite) {
+    return 1;
+  }
+
+  return 0;
+}

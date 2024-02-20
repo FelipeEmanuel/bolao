@@ -4,44 +4,41 @@ import Spinner from '../components/Spinner/Spinner'
 import useApi from '../hooks/useApi'
 import ListaJogos from '../components/ListaJogos'
 import Pagination from '../components/Pagination'
-import { ordenarJogos } from '../components/utils'
+import { ordenarJogos, ordenarListaJogos } from '../components/utils'
 import Header from '../components/Header/Header'
+import { get } from '../api'
 
 
 function Admin() {
 
-    const {data, isFetching} = useApi("/api/palpites")
+    const [data, setData] = useState(null)
+    const [error, setError] = useState(null)
+    const [isFetching, setIsFetching] = useState(false)
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user'))
-    const [games, setGames] = useState(null)
     const [currentPage, setCurrentPage] = useState(1);
     const [gamesPerPage] = useState(15);
 
-    
-
     useEffect(() => {
         if(!user) {
-          navigate('/login')
+            navigate('/login')
         }
-
-        /*if(user.role != "admin") {
-            navigate('/')
-        }*/
     
     }, [user, navigate])
 
     useEffect(() => {
-        setGames(data?.gamesTodos.sort(ordenarJogos).reverse())
+        get("api/games", setData, setError, setIsFetching)
     }, [data])
 
     if(isFetching) {
         return <Spinner/>
     }
 
+
     // Get current games
     const indexOfLastGame = currentPage * gamesPerPage;
     const indexOfFirstGame = indexOfLastGame - gamesPerPage;
-    const currentPages = games?.slice(indexOfFirstGame, indexOfLastGame);
+    const currentPages = data?.sort(ordenarListaJogos).reverse().slice(indexOfFirstGame, indexOfLastGame);
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -66,13 +63,13 @@ function Admin() {
                     }           
                     <Pagination 
                         gamesPerPage={gamesPerPage} 
-                        totalGames={games?.length} 
+                        totalGames={data?.length} 
                         paginate={paginate}
                     />
                 </div>
             }
             {
-                games?.length === 0 && <h3>Não há jogos cadastrados</h3>
+                data?.length === 0 && <h3>Não há jogos cadastrados</h3>
             }
             
         </section>

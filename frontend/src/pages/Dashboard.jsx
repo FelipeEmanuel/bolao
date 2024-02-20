@@ -5,7 +5,7 @@ import PalpiteItem from '../components/PalpiteItem'
 import { useState } from 'react'
 import '../components/PalpiteItem/palpiteItem.css'
 import { get } from '../api'
-import {ordenarJogos} from '../components/utils'
+import {ordenarJogos, ordenarListaJogos} from '../components/utils'
 import ListaPalpites from '../components/ListaPalpites/index.jsx'
 import Header from '../components/Header/Header.jsx'
 import Pagination from '../components/Pagination/index.jsx'
@@ -119,7 +119,7 @@ function Dashboard() {
     }
   }, [data])
 
-  
+  console.log(games)
 
   if(isFetching) {
     return <Spinner/>
@@ -128,7 +128,7 @@ function Dashboard() {
   // Get current games
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
-  const currentPages = games?.slice(indexOfFirstGame, indexOfLastGame);
+  const currentPages = games?.sort(ordenarListaJogos).slice(indexOfFirstGame, indexOfLastGame);
 
 
   // Change page
