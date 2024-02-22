@@ -135,7 +135,7 @@ const criarRanking = asyncHandler(async (req, res) => {
 
 })
 
-cron.schedule("01 * * * *", function () {
+cron.schedule("*/15 * * * *", function () {
     const pont = setPontuacao();
 }, {
     timezone: "America/Sao_Paulo"
