@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {FaUser} from 'react-icons/fa'
 import {register} from '../features/auth/authService'
-import Spinner from '../components/Spinner/Spinner'
 import Header from '../components/Header/Header'
 
 function Register() {
@@ -61,10 +60,6 @@ function Register() {
       
     }
   }
-
-  /*if (isLoading) {
-    return <Spinner />
-  }*/
   
   return (
     <>

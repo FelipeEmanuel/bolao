@@ -15,10 +15,10 @@ function UserProfile() {
     const user = JSON.parse(localStorage.getItem('user'))
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[conquistasData, setConquistasData] = useState(null)
     const[conquistaserror, setConquistasError] = useState(null)
-    const[conquistasisFetching, setConquistasIsFetching] = useState(false)
+    const[conquistasIsFetching, setConquistasIsFetching] = useState(true)
 
     useEffect(() => {
         
@@ -39,6 +39,10 @@ function UserProfile() {
     useEffect(() => {
         get(`api/conquistas/${id}`, setConquistasData, setConquistasError, setConquistasIsFetching)
     }, [])
+
+    if(isFetching || conquistasIsFetching) {
+        <Spinner />
+    }
 
     let pctC = ((conquistasData?.userStats[0]?.cravadasTotal/conquistasData?.userStats[0].jogosTotal)*100).toFixed(2);
 

@@ -21,11 +21,11 @@ function Comps() {
     const[name, setName] = useState('')
     const[img, setImg] = useState('')
     const[campeonato, setCampeonato] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[buttonPopup, setButtonPopup] = useState(false);
     const[campData, setCampData] = useState(null)
     const[campError, setCampError] = useState(null)
-    const[campIsFetching, setCampIsFetching] = useState(false)
+    const[campIsFetching, setCampIsFetching] = useState(true)
     
 
     useEffect(() => {
@@ -48,7 +48,7 @@ function Comps() {
         get("api/campeonatos", setCampData, setCampError, setCampIsFetching)
     }, [])
 
-    if(isFetching) {
+    if(isFetching || campIsFetching) {
         return <Spinner />
     }
 

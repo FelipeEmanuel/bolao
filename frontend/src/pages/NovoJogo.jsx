@@ -10,7 +10,6 @@ function NovoJogo() {
     const [users, setUsers] = useState(null)
 
     const user = JSON.parse(localStorage.getItem('user'))
-    //const {user} = useSelector((state) => state.auth)
 
     useEffect(() => {
         if(!user) {

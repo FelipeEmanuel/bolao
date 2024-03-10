@@ -8,13 +8,14 @@ import { toast } from 'react-toastify'
 import { get, post } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { escudos } from '../utils/constants'
+import Spinner from '../Spinner/Spinner'
 
 
 const Formulario = () => {
 
     const[dataCompeticao, setDataCompeticao] = useState(null)
     const[errorCompeticao, setErrorCompeticao] = useState(null)
-    const[isFetchingCompeticao, setIsFetchingCompeticao] = useState(false)
+    const[isFetchingCompeticao, setIsFetchingCompeticao] = useState(true)
     const[competicao, setCompeticao] = useState('')
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
@@ -83,6 +84,10 @@ const Formulario = () => {
             }
         });
         setIsocodetime2(valor);
+    }
+
+    if(isFetchingCompeticao) {
+        <Spinner/>
     }
 
     return (

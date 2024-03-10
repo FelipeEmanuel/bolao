@@ -55,10 +55,6 @@ function Login() {
     
   }
 
-  /*if (isFetching) {
-    return <Spinner />
-  }*/
-
   return (
     <>
       <Header />

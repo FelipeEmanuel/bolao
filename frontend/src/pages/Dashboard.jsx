@@ -25,7 +25,9 @@ function Dashboard() {
 
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
-  const [isFetching, setIsFetching] = useState(false)
+  const [isFetching, setIsFetching] = useState(true)
+  const [errorUser, setErrorUser] = useState(null)
+  const [isFetchingUser, setIsFetchingUser] = useState(true)
   const [usuario, setUsuario] = useState(null)
   const [games, setGames] = useState(null)
   const [palpitou, setPalpitou] = useState(null)
@@ -41,7 +43,7 @@ function Dashboard() {
   }, [palpitou])
 
   useEffect(() => {
-    get('/api/users/me', setUsuario, setError, setIsFetching)
+    get('/api/users/me', setUsuario, setErrorUser, setIsFetchingUser)
   })
 
   useEffect(() => { 
@@ -119,9 +121,8 @@ function Dashboard() {
     }
   }, [data])
 
-  console.log(games)
 
-  if(isFetching) {
+  if(isFetching || isFetchingUser) {
     return <Spinner/>
   } 
 

@@ -13,7 +13,7 @@ function Admin() {
 
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
-    const [isFetching, setIsFetching] = useState(false)
+    const [isFetching, setIsFetching] = useState(true)
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user'))
     const [currentPage, setCurrentPage] = useState(1);

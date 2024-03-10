@@ -18,7 +18,7 @@ const EditJogo = () => {
 
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[time1, setTime1] = useState('')
     const[time2, setTime2] = useState('')
     const[dataLimite, setDataLimite] = useState('')
@@ -51,11 +51,7 @@ const EditJogo = () => {
         fetchData();
     }, [id]);
 
-    useEffect(() => {
-        
-        if(isFetching) {
-            return <Spinner/>
-        } 
+    useEffect(() => { 
 
         if(data) {
             setTime1(data?.time1);
@@ -94,6 +90,10 @@ const EditJogo = () => {
           
         
     };
+
+    /*if (isFetching) {
+        <Spinner />
+    }*/
 
     return (
         <>

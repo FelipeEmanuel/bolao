@@ -3,13 +3,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { get } from "../api"
 import { imgDefault } from "../components/utils/constants"
 import Header from "../components/Header/Header"
+import Spinner from "../components/Spinner/Spinner"
 
 function RankingSemanal() {
 
     const user = JSON.parse(localStorage.getItem('user'))
     const navigate = useNavigate()
     const[data, setData] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[error, setError] = useState(null)
     const [users, setUsers] = useState(null)
 
@@ -30,6 +31,10 @@ function RankingSemanal() {
         }
       
     }, [data])
+
+    if(isFetching) {
+      <Spinner/>
+    }
 
     return (
         <>

@@ -20,13 +20,13 @@ function Perfil() {
     const[buttonPopup, setButtonPopup] = useState(false);
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[email, setEmail] = useState('')
     const[name, setName] = useState('')
     const[imgPerfil, setImgPerfil] = useState('')
     const[conquistasData, setConquistasData] = useState(null)
     const[conquistaserror, setConquistasError] = useState(null)
-    const[conquistasisFetching, setConquistasIsFetching] = useState(false)
+    const[conquistasIsFetching, setConquistasIsFetching] = useState(true)
 
     useEffect(() => {
         
@@ -45,10 +45,6 @@ function Perfil() {
     }, [])
 
     useEffect(() => {
-
-        if(isFetching) {
-            return <Spinner/>
-        } 
 
         if(data) {
             setImgPerfil(data?.imgPerfil);
@@ -82,8 +78,9 @@ function Perfil() {
 
     };
 
-    console.log(conquistasData?.userStats)
-
+    if(isFetching || conquistasIsFetching) {
+        <Spinner/>
+    }
     let pctC = ((conquistasData?.userStats[0]?.cravadasTotal/conquistasData?.userStats[0].jogosTotal)*100).toFixed(2);
 
     return (

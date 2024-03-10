@@ -12,7 +12,7 @@ function RankingInativos() {
   const navigate = useNavigate()
   const[comps, setComps] = useState(null)
   const[data, setData] = useState(null)
-  const[isFetching, setIsFetching] = useState(false)
+  const[isFetching, setIsFetching] = useState(true)
   const[error, setError] = useState(null)
   const[up, setUp] = useState(0)
 

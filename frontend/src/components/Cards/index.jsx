@@ -7,6 +7,7 @@ import ModalPopup from '../ModalPopup';
 import ListaSuspensaImg from '../ListaSuspensaImg';
 import Campo from '../Campo';
 import Botao from '../Botao';
+import Spinner from '../Spinner/Spinner';
 
 function Cards({competicao, setComp, camp}) {
 
@@ -14,7 +15,7 @@ function Cards({competicao, setComp, camp}) {
     const[statusPopup, setStatusPopup] = useState(false);
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[ano, setAno] = useState(competicao?.sigla)
     const[img, setImg] = useState(competicao?.img)
 
@@ -52,6 +53,10 @@ function Cards({competicao, setComp, camp}) {
 
         const body = {}
         put(`api/competicoes/encerrar/${competicao?._id}`, body, setData, setError)
+    }
+
+    if (isFetching) {
+        <Spinner/>
     }
 
     return (

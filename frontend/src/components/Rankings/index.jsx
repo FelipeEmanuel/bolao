@@ -12,10 +12,10 @@ const Rankings = () => {
     const[comp, setComp] = useState(null)
     const[data, setData] = useState(null)
     const[error, setError] = useState(null)
-    const[isFetching, setIsFetching] = useState(false)
+    const[isFetching, setIsFetching] = useState(true)
     const[data2, setData2] = useState(null)
     const[error2, setError2] = useState(null)
-    const[isFetching2, setIsFetching2] = useState(false)
+    const[isFetching2, setIsFetching2] = useState(true)
     const navigate = useNavigate()
     const [users, setUsers] = useState(null)
     const user = JSON.parse(localStorage.getItem('user'))
@@ -49,7 +49,7 @@ const Rankings = () => {
         }
     }, [data2])
     
-    if(isFetching) {
+    if(isFetching || isFetching2) {
       return <Spinner />
     }
 
