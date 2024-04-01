@@ -79,7 +79,7 @@ function Comps() {
     function organizaCampeonato(value) {
         setCampeonato(value)
         campData.forEach(e => {
-            if(e._id == value) {
+            if(e._id === value) {
                 setName(e.name)
             }
         });
