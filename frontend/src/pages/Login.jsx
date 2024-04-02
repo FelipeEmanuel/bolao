@@ -34,24 +34,28 @@ function Login() {
   }
 
   const onSubmit = (e) => {
-    e.preventDefault()
-
+    e.preventDefault();
+    
     const userData = {
       email,
       password,
-    }
+    };
 
-    login(userData).then(response => {
-      if(response.data) {
-        localStorage.setItem('user', JSON.stringify(response.data))
-        alert('Login efetuado com sucesso!')
-        navigate('/')
-      }
-    })
-    .catch((error) => {
-        console.log(error);
+    login(userData)
+      .then((response) => {
+        if(response.data) {
+          alert('Login efetuado com sucesso!')
+          localStorage.setItem("user", JSON.stringify(response.data));
+          navigate("/");
+        } else {
+          alert('Dados incorretos!')
+        }
+      })
+      .catch((error) => {
         alert('Dados incorretos!')
-    })
+      });
+  };
+   
     
   }
 
