@@ -54,11 +54,11 @@ const loginUser = asyncHandler(async(req, res) => {
     const { email, password } = req.body
     // Check for user email
     const user = await User.findOne({ email })
-    const stats = await Stats.findOne({user: user.id})
 
     if (user && (await bcrypt.compare(password, user.password))) {
+        const stats = await Stats.findOne({user: user.id})
         if(!stats) {
-            const userStats = await Stats.create({user: user.id})
+            await Stats.create({user: user.id})
         }
         
         res.status(201).json({
