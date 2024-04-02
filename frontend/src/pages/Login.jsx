@@ -54,8 +54,6 @@ function Login() {
       .catch((error) => {
         alert('Dados incorretos!')
       });
-  };
-   
     
   }
 
