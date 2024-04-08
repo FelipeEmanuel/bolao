@@ -138,7 +138,15 @@ const getUserPalpites = asyncHandler(async (req, res) => {
     res.status(200).json({gamesDisponiveis, gamesTodos, palpites})
 })
 
+const userPalpitesById = asyncHandler(async (req, res) => {
+   const user = req.params.id
+   
+   const palpites = await Palpite.find({user: user}).populate("jogo", "time1 time2")
+
+   res.status(200).json(palpites)
+})
+
 
 module.exports = {
-    setPalpite, getPartidas, getUserPalpites
+    setPalpite, getPartidas, getUserPalpites, userPalpitesById
 }

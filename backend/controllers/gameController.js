@@ -3,7 +3,7 @@ const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 
 const getGames = asyncHandler(async (req, res) => {
-    const games = await Game.find()
+    const games = await Game.find().sort({'createdAt': -1}).limit(100)
 
     res.status(200).json(games)
 })
