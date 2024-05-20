@@ -147,16 +147,27 @@ const getMe = asyncHandler(async(req, res) => {
 
 const forgotPassword = asyncHandler(async (req, res) => {
 
-    const {email} = req.body
-
+    const { email, password } = req.body
+    // Check for user email
     const user = await User.findOne({ email })
+
     
     if(!user) {
         res.status(400)
         throw new Error('Email não existe')
+    } else {
+        const newSenha = password
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(newSenha, salt)
+
+        const updatedUser = await User.findByIdAndUpdate(user._id, {password: hashedPassword}, {
+            new: true,
+        })
+
+        res.status(200).json(updatedUser)
     }
     
-    const client = nodemailer.createTransport({
+    /*const client = nodemailer.createTransport({
         service: "Gmail",
         auth: {
             user: process.env.EMAIL,
@@ -182,7 +193,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         }
     )
     //client.verify().then(console.log).catch(console.error);
-    res.status(200).json('ok')
+    res.status(200).json('ok')*/
 })
 
 const generateToken = (id) => {

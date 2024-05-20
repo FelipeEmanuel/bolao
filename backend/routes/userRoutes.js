@@ -14,9 +14,9 @@ const { protect, isAdmin } = require('../middleware/authMiddleware')
 router.post('/', registerUser)
 router.post('/login', loginUser)
 router.get('/me', protect, getMe)
-router.put('/:id', updateUser)
+//router.put('/:id', updateUser)
 router.delete('/:id', deleteUser)
-router.post('/novasenha', forgotPassword)
+router.put('/novasenha', forgotPassword)
 router.get('/user/:id', protect, getUserById)
 
 module.exports = router

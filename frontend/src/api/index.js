@@ -1,4 +1,5 @@
 import axios from "axios";
+const API_URL = '/api/users/'
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL_API,
@@ -43,6 +44,10 @@ export const get = (url, setData, setError, setIsFetching) => {
         .finally(() => {
             setIsFetching(false);
         });
+}
+
+export const novoPut = (url, body) => {
+    return api.put(url, body);  
 }
 
 export const put = (url, body, setData, setError, aux) => {

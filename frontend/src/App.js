@@ -15,6 +15,7 @@ import Rankings from './components/Rankings'
 import RankingInativos from './pages/RankingInativos'
 import RankingSemanal from './pages/RankingSemanal'
 import UserProfile from './pages/UserProfile'
+import NovaSenha from './pages/NovaSenha'
 
 function App() {
  
@@ -37,6 +38,7 @@ function App() {
             <Route path='/ranking/inativos' element={<RankingInativos />}/>
             <Route path='/ranking/semanal' element={<RankingSemanal />}/>
             <Route path='/user/:id' element={<UserProfile />}/>
+            <Route path='/novasenha' element={<NovaSenha/>}/>
           </Routes>
         </div>
       </Router>
