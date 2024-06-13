@@ -154,7 +154,7 @@ h3 {
   flex-basis: 70%;
   justify-content: center;
   display: flex;
-  alignItems: center;
+  align-items: center;
   gap: 10px;
 }
  
