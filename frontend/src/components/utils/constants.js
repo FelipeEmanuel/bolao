@@ -126,6 +126,22 @@ import suica from '../../images/suica.png';
 import tcheca from '../../images/tcheca.png';
 import turquia from '../../images/turquia.png';
 import ucrania from '../../images/ucrania.png';
+import argentina from '../../images/argentina.png';
+import bolivia from '../../images/bolivia.png';
+import brasil from '../../images/brasil.png';
+import canada from '../../images/canada.png';
+import chile from '../../images/chile.png';
+import colombia from '../../images/colombia.png';
+import costarica from '../../images/costarica.png';
+import equador from '../../images/equador.png';
+import jamaica from '../../images/jamaica.png';
+import mexico from '../../images/mexico.png';
+import panama from '../../images/panama.png';
+import paraguai from '../../images/paraguai.png';
+import peru from '../../images/peru.png';
+import uruguai from '../../images/uruguai.png';
+import eua from '../../images/usa.png';
+import venezuela from '../../images/venezuela.png';
 
 
 export const imgDefault =
@@ -134,37 +150,75 @@ export const imgDefault =
 export const escudos = [
   { img: albania, text: "Albânia"},
   { img: alemanha, text: "Alemanha"},
+  { img: argentina, text: "Argentina"},
   { img: athleticopr, text: "Athletico-PR" },
   { img: atleticogo, text: "Atlético-GO" },
   { img: atleticomg, text: "Atlético-MG" },
+  { img: austria, text: "Áustria"},
   { img: bahia, text: "Bahia" },
+  { img: belgica, text: "Bélgica"},
   { img: bolivar, text: "Bolivar" },
+  { img: bolivia, text: "Bolívia"},
   { img: botafogo, text: "Botafogo-RJ" },
+  { img: brasil, text: "Brasil"},
+  { img: canada, text: "Canadá"},
+  { img: chile, text: "Chile"},
   { img: colocolo, text: "Colo-Colo" },
+  { img: colombia, text: "Colômbia"},
   { img: corinthians, text: "Corinthians" },
+  { img: costarica, text: "Costa Rica"},
   { img: crb, text: "CRB"},
   { img: criciuma, text: "Criciúma" },
+  { img: croacia, text: "Croácia"},
   { img: cruzeiro, text: "Cruzeiro" },
   { img: cuiaba, text: "Cuiabá" },
+  { img: dinamarca, text: "Dinamarca"},
+  { img: equador, text: "Equador"},
+  { img: escocia, text: "Escócia"},
+  { img: eslovaquia, text: "Eslováquia"},
+  { img: eslovenia, text: "Eslovênia"},
+  { img: espanha, text: "Espanha"},
+  { img: eua, text: "Estados Unidos"},
   { img: flamengo, text: "Flamengo" },
   { img: fluminense, text: "Fluminense" },
   { img: fortaleza, text: "Fortaleza" },
+  { img: franca, text: "França"},
+  { img: georgia, text: "Geórgia"},
   { img: goias, text: "Goiás"},
   { img: gremio, text: "Grêmio" },
+  { img: holanda, text: "Holanda"},
+  { img: hungria, text: "Hungria"},
+  { img: inglaterra, text: "Inglaterra"},
   { img: internacional, text: "Internacional" },
+  { img: italia, text: "Itália"},
+  { img: jamaica, text: "Jamaica"},
   { img: junior, text: "Junior Barranquilla" },
   { img: juventude, text: "Juventude" },
+  { img: mexico, text: "México"},
   { img: nacionaluru, text: "Nacional-URU" },
   { img: operariopr, text: "Operário-PR"},
   { img: palmeiras, text: "Palmeiras" },
+  { img: panama, text: "Panamá"},
+  { img: paraguai, text: "Paraguai"},
   { img: penarol, text: "Peñarol" },
+  { img: peru, text: "Peru"},
+  { img: polonia, text: "Polônia"},
+  { img: portugal, text: "Portugal"},
   { img: bragantino, text: "RB Bragantino" },
+  { img: tcheca, text: "República Tcheca"},
   { img: riverplate, text: "River Plate" },
+  { img: romenia, text: "Romênia"},
   { img: sanlorenzo, text: "San Lorenzo" },  
   { img: saopaulo, text: "São Paulo" },
+  { img: servia, text: "Sérvia"},
+  { img: suica, text: "Suíça"},
   { img: talleres, text: "Talleres" },
-  { img: thestrongest, text: "The Strongest" }, 
+  { img: thestrongest, text: "The Strongest" },
+  { img: turquia, text: "Turquia"},
+  { img: ucrania, text: "Ucrânia"}, 
+  { img: uruguai, text: "Uruguai"},
   { img: vasco, text: "Vasco" },
+  { img: venezuela, text: "Venezuela"},
   { img: vitoria, text: "Vitória" },
   { img: ypiranga, text: "Ypiranga-RS"},
 ];
