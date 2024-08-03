@@ -1,36 +1,32 @@
 {
-  "name": "bolao",
-  "version": "1.0.0",
+  "name": "bolao-backendv2",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "nodemon backend/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Felipe Emanuel",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bolao-backendv2": "file:",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
-    "country-flag-icons": "^1.5.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.4",
-    "moment-timezone": "^0.5.39",
-    "mongoose": "^6.7.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
+    "mongoose": "^8.4.1",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.8.0",
-    "react-popup-alert": "^2.0.0",
-    "react-scripts": "^5.0.1"
+    "nodemailer": "^6.9.13"
   },
   "devDependencies": {
-    "concurrently": "^7.5.0",
-    "nodemon": "^2.0.20"
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.3"
   }
 }
