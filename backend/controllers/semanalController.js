@@ -26,13 +26,10 @@ const setJogos = asyncHandler(async (req, res) => {
         }
     })
 
-    res.status(200).json('ok')
+    //res.status(200).json('ok')
 })
 
 const setSemanais = asyncHandler(async (req, res) => {
-
-  //const hoje = getDate();
-  //const dataLimite = getDate().add(7, 'days');
   
   const gamesDisponiveis = await Game.find({ativo: true})
 
@@ -45,7 +42,7 @@ const setSemanais = asyncHandler(async (req, res) => {
     ])  
   })
 
-  res.status(200).json('ok')
+  //res.status(200).json('ok')
 })
 
 async function getSemanaisPorCategoria(categoria) {
@@ -173,8 +170,6 @@ const pontuacaoSemana = asyncHandler(async (req, res) => {
     const gamesEsports = await getGamesPorCategoria('Esports', true, true);
     const palpitesEsports = await getPalpitesPorCategoria('Esports');
     const semanaisEsports = await getSemanaisPorCategoria('Esports');
-
-    console.log(gamesFutebol)
 
     await semanaisFutebol.forEach(s => {
         let pontuacao = 0;
@@ -314,7 +309,7 @@ const pontuacaoSemana = asyncHandler(async (req, res) => {
         setPontuacaoUser(s.user, pontuacao2, cravadas2, jogos2, s.campeonato._id)   
     })
 
-    res.status(200).json({semanaisFutebol, semanaisEsports});
+    //res.status(200).json({semanaisFutebol, semanaisEsports});
 });
 
 const encerrarSemana = asyncHandler(async (req, res) => {
@@ -485,7 +480,7 @@ const encerrarSemana = asyncHandler(async (req, res) => {
         ])
     })
 
-    res.status(200).json('ok')
+    //res.status(200).json('ok')
 })
 
 const criarSemanal = asyncHandler(async (req, res) => {
@@ -514,29 +509,29 @@ const criarConquistaSemanal = asyncHandler(async (req, res) => {
     res.status(200).json(instancia)
 })
 
-/*cron.schedule("00 05 * * 1", function () {
+cron.schedule("00 05 * * 1", function () {
     const encerrar = encerrarSemana();
 }, {
     timezone: "America/Sao_Paulo"
-})*/
+})
 
-/*cron.schedule("00 00 * * 1", function () {
+cron.schedule("00 22 * * 7", function () {
     const set = setJogos();
 }, {
     timezone: "America/Sao_Paulo"
-})*/
+})
 
-/*cron.schedule("00 06 * * 1", function () {
+cron.schedule("00 06 * * 1", function () {
   const semana = setSemanais();
 }, {
   timezone: "America/Sao_Paulo"
-})*/
+})
 
-//cron.schedule("*/15 * * * *", function () {
-//    const pont = pontuacaoSemana();
-//}, {
-//    timezone: "America/Sao_Paulo"
-//})
+cron.schedule("*/10 * * * *", function () {
+    const pont = pontuacaoSemana();
+}, {
+    timezone: "America/Sao_Paulo"
+})
 
 module.exports = {
     setJogos, pontuacaoSemana, encerrarSemana, criarSemanal, criarConquistaSemanal, setSemanais

@@ -210,7 +210,7 @@ const setPontuacao = asyncHandler(async (req, res) => {
         setPontuacaoUser(i.user, pontuacao, cravadas, i.competicao, jogos)
     })
 
-    res.status(200).json(instancias);
+    //res.status(200).json(instancias);
       
 }) 
 
@@ -287,11 +287,11 @@ const hallTitulos = asyncHandler(async (req, res) => {
 
 })
 
-//cron.schedule("*/15 * * * *", function () {
-//    const pont = setPontuacao();
-//}, {
-//    timezone: "America/Sao_Paulo"
-//})
+cron.schedule("*/10 * * * *", function () {
+    const pont = setPontuacao();
+}, {
+    timezone: "America/Sao_Paulo"
+})
 
 module.exports = {
     getRanking, setPontuacao, criarRanking, getRankingSemanal, hallTitulos
