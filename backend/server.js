@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
@@ -24,6 +23,7 @@ app.use('/api/campeonatos', require('./routes/campeonatoRoutes'))
 app.use('/api/conquistas', require('./routes/conquistasRoutes'))
 app.use('/api/semanal', require('./routes/semanalRoutes'))
 app.use('/api/stats', require('./routes/statsRoutes'))
+app.use('/api/times', require('./routes/timesRoutes'))
 
 app.use(errorHandler)
 
