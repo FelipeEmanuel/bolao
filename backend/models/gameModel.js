@@ -14,7 +14,9 @@ const gameSchema = mongoose.Schema({
     infoJogo: {type:String, required: true},
     infoGroup: {type:String, required: true},
     gameType: {type: Number, required: true},
-    ativo: {type: Boolean, default: false}
+    ativo: {type: Boolean, default: false},
+    semanal: {type: Boolean, default: false},
+    modelo: {type: Number, default: 0}
 },{
     timestamps: true
 })
