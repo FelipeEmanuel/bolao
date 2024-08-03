@@ -4,11 +4,63 @@ const Game = require('../models/gameModel')
 const Palpite = require('../models/palpiteModel')
 const Ranking = require('../models/rankingModel')
 const Conquista = require('../models/conquistasModel')
+const Campeonato = require('../models/campeonatoModel')
+
+const getCompeticoesPorCategoria = async (categoria, apenasAtivas = false) => {
+    const match = {
+      'campeonato.categoria': categoria
+    };
+  
+    if (apenasAtivas) {
+      match.ativa = true;
+    }
+  
+    return await Competicao.aggregate([
+      {
+        $lookup: {
+          from: 'campeonatos', // Nome da coleção de campeonatos
+          localField: 'campeonato', // Campo na coleção Competicao
+          foreignField: '_id', // Campo na coleção Campeonato
+          as: 'campeonato'
+        }
+      },
+      {
+        $unwind: '$campeonato' // Deconstrói o array resultante de campeonatos
+      },
+      {
+        $match: match // Aplica o filtro construído dinamicamente
+      },
+      {
+        $project: {
+          name: 1, // Inclua outros campos da coleção Competicao que você deseja retornar
+          ano: 1,
+          ativa: 1,
+          img: 1,
+          'campeonato.categoria': 1,
+          'campeonato.cor': 1
+        }
+      }
+    ]);
+};
 
 const getCompeticao = asyncHandler(async (req, res) => {
-    const Competicoes = await Competicao.find()
+    const competicoesFutebol = await getCompeticoesPorCategoria('Futebol');
 
-    res.status(200).json(Competicoes)
+    const competicoesEsports = await getCompeticoesPorCategoria('Esports');
+
+    const campeonatosFutebol = await Campeonato.find({categoria: 'Futebol'})
+
+    const campeonatosEsports = await Campeonato.find({categoria: 'Esports'})
+
+    res.status(200).json({competicoesFutebol, competicoesEsports, campeonatosFutebol, campeonatosEsports})
+})
+
+const getCompeticoesAtivas = asyncHandler(async (req, res) => {
+    const competicoesFutebol = await getCompeticoesPorCategoria('Futebol', true);
+
+    const competicoesEsports = await getCompeticoesPorCategoria('Esports', true);
+
+    res.status(200).json({competicoesFutebol, competicoesEsports})
 })
 
 const getCompeticaoById = asyncHandler(async (req, res) => {
@@ -26,7 +78,7 @@ const getCompeticaoById = asyncHandler(async (req, res) => {
 const setCompeticoes = asyncHandler(async (req, res) => {
     const {name, ano, campeonato, img, encerrado} = req.body
 
-    if (!name || !ano) {
+    if (!name || !ano || !campeonato) {
         res.status(400)
         throw new Error('Please add a text field!')
     }
@@ -176,5 +228,5 @@ const encerrarCompeticao = asyncHandler(async (req, res) => {
 
 
 module.exports = {
-    getCompeticao, getCompeticaoById, setCompeticoes, updateCompeticao, deleteCompeticao, encerrarCompeticao
+    getCompeticao, getCompeticaoById, setCompeticoes, updateCompeticao, deleteCompeticao, encerrarCompeticao, getCompeticoesAtivas, getCompeticoesPorCategoria
 }
